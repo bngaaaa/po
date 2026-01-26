@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Ujayy | Optimized Portfolio</title>
+    <title>About Ujayy | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700&display=swap');
@@ -19,6 +19,7 @@
             cursor: auto;
         }
 
+        /* Reset cursor for touch devices */
         @media (hover: none) and (pointer: coarse) {
             * { cursor: auto !important; }
             .custom-cursor { display: none !important; }
@@ -55,7 +56,7 @@
         
         body.unlocked { overflow: auto; }
 
-        /* CUSTOM CURSOR (OPTIMIZED) */
+        /* --- CUSTOM CURSOR --- */
         .custom-cursor {
             position: fixed;
             top: 0; left: 0;
@@ -109,7 +110,7 @@
             transition: width 0.1s;
         }
 
-        /* FUTURISTIC OVERLAY */
+        /* --- FUTURISTIC OVERLAY & HUD --- */
         .futuristic-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -135,14 +136,6 @@
             background: radial-gradient(circle, rgba(0, 243, 255, 0) 0%, rgba(0, 243, 255, 0) 80%, rgba(0,0,0,0.4) 100%);
         }
         
-        .vignette {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.8) 100%);
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
-        }
-        
         .hud-corners { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
         
         .corner {
@@ -162,13 +155,40 @@
             font-family: 'Orbitron', sans-serif;
             color: var(--neon-cyan);
             font-size: 10px;
-            opacity: 0.6;
+            opacity: 0.8; /* Increased opacity slightly */
             letter-spacing: 2px;
             text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .hud-text-top { top: 30px; right: 80px; }
-        .hud-text-bottom { bottom: 30px; left: 80px; }
+        
+        /* Visitor Counter Style (UPDATED TO BE MORE VISIBLE) */
+        .hud-text-bottom { 
+            bottom: 30px; 
+            left: 30px; 
+            background: rgba(0,0,0,0.6); /* Added bg for readability */
+            padding: 5px 15px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,0,153,0.3);
+        }
+
+        .visitor-counter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .visitor-count {
+            font-weight: 900; /* Extra bold */
+            font-size: 14px; /* Bigger font */
+            color: var(--neon-pink) !important; /* Neon Pink color */
+            text-shadow: 0 0 10px var(--neon-pink); /* Glow effect */
+            min-width: 30px; /* Prevent layout shift */
+            text-align: center;
+        }
         
         .flicker-overlay {
             position: absolute;
@@ -186,7 +206,7 @@
             80% { opacity: 0.04; } 100% { opacity: 0.01; }
         }
 
-        /* GLITCH EFFECT (OPTIMIZED) */
+        /* --- GLITCH EFFECT --- */
         .glitch { position: relative; color: var(--secondary-color); }
 
         .glitch::before, .glitch::after {
@@ -223,7 +243,7 @@
             80% { clip: rect(55px, 9999px, 15px, 0); } 100% { clip: rect(10px, 9999px, 75px, 0); }
         }
 
-        /* UNLOCK GATE ANIMATION */
+        /* --- UNLOCK GATE ANIMATION --- */
         .gate-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -360,7 +380,7 @@
             100% { transform: translate(-50%, -50%) scale(80); opacity: 0; border-width: 0px; }
         }
 
-        /* ORIGINAL SITE STYLES */
+        /* --- ORIGINAL SITE STYLES --- */
         .animated-bg {
             position: fixed;
             top: 0; left: 0;
@@ -394,8 +414,8 @@
             border-radius: 50%;
             pointer-events: none;
             opacity: 0;
-            animation: float 20s infinite; /* Diperlambat */
-            transition: none; /* Hapus transisi mouse move */
+            animation: float 20s infinite;
+            transition: none;
         }
         
         @keyframes float {
@@ -415,8 +435,8 @@
         .shape {
             position: absolute;
             opacity: 0.03;
-            animation: floatShape 30s infinite ease-in-out; /* Diperlambat */
-            transition: none; /* Hapus parallax mouse */
+            animation: floatShape 30s infinite ease-in-out;
+            transition: none;
         }
         
         @keyframes floatShape { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
@@ -483,7 +503,7 @@
             background: linear-gradient(135deg, var(--primary-color) 0%, #111 100%);
             overflow: hidden;
             padding-top: 80px;
-            perspective: 1000px;
+            perspective: 1000px; /* Penting untuk efek 3D tilt */
         }
         
         .cyber-grid {
@@ -494,7 +514,7 @@
             background-size: 50px 50px;
             transform: rotateX(60deg);
             z-index: -1;
-            animation: gridMove 40s linear infinite; /* Diperlambat */
+            animation: gridMove 40s linear infinite;
             mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
         }
 
@@ -507,7 +527,7 @@
             top: -50%; left: -50%;
             background: radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
                         radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%);
-            animation: heroGradient 30s ease infinite; /* Diperlambat */
+            animation: heroGradient 30s ease infinite;
             z-index: -1;
         }
         
@@ -519,6 +539,7 @@
             padding: 0 20px;
             position: relative;
             z-index: 2;
+            transform-style: preserve-3d; /* Agar elemen anak ikut 3D */
         }
         
         .hero-subtitle {
@@ -542,6 +563,7 @@
             animation: fadeInUp 0.8s ease 0.2s forwards;
         }
         
+        /* --- ANIMASI JUDUL NAMA (AHMAD FAUZI) --- */
         .hero-title-gradient {
             background: linear-gradient(135deg, var(--secondary-color) 0%, var(--gray-medium) 100%);
             background-clip: text;
@@ -549,18 +571,41 @@
             color: transparent;
             position: relative;
             display: inline-block;
+            
+            /* Animasi Float & Hover Transition */
+            animation: floatTitle 4s ease-in-out infinite;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.3s ease;
         }
-        
+
+        .hero-title-gradient:hover {
+            transform: scale(1.1) rotateX(10deg) rotateY(5deg);
+            text-shadow: 0px 10px 30px rgba(0, 243, 255, 0.5);
+            cursor: default;
+        }
+
+        @keyframes floatTitle {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- ANIMASI TYPING TEXT NEON --- */
         .typing-text {
             font-size: 20px;
             margin-bottom: 40px;
             min-height: 30px;
-            color: var(--gray-medium);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.4s forwards;
+            color: var(--neon-cyan); /* Warna Cyan Neon */
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.7), 0 0 20px rgba(0, 243, 255, 0.5); /* Efek Glow */
+            animation: neonPulse 2s infinite alternate, fadeInUp 0.8s ease 0.4s forwards;
+            font-weight: 600;
+        }
+
+        @keyframes neonPulse {
+            0% { opacity: 0.8; text-shadow: 0 0 10px rgba(0, 243, 255, 0.7); }
+            100% { opacity: 1; text-shadow: 0 0 20px rgba(0, 243, 255, 1), 0 0 30px rgba(0, 243, 255, 0.8); }
         }
         
-        .typing-text::after { content: '|'; animation: blink 1s infinite; }
+        .typing-text::after { content: '|'; animation: blink 1s infinite; color: var(--secondary-color); }
         
         @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
         
@@ -573,6 +618,7 @@
             animation: fadeInUp 0.8s ease 0.6s forwards;
         }
         
+        /* --- TOMBOL DENGAN EFEK KILAU (SHINE) --- */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -585,19 +631,25 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
-            overflow: hidden;
+            overflow: hidden; /* Penting untuk efek shine */
+            z-index: 1;
         }
         
-        .btn::before {
+        /* Efek Kilau (Shine) */
+        .btn::after {
             content: '';
             position: absolute;
             top: 0; left: -100%;
             width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            transition: 0.5s;
+            transform: skewX(-25deg);
+            z-index: -1;
         }
-        
-        .btn:hover::before { left: 100%; }
+
+        .btn:hover::after {
+            left: 100%;
+        }
         
         .btn-primary {
             background-color: var(--secondary-color);
@@ -965,7 +1017,7 @@
             background: var(--gradient-1);
             border-radius: 10px;
             width: 0;
-            transition: width 1.5s ease-out; /* Transisi lebih cepat */
+            transition: width 1.5s ease-out;
             position: relative;
             overflow: hidden;
         }
@@ -1061,6 +1113,7 @@
             white-space: normal;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             cursor: pointer;
+            position: relative;
         }
         
         /* OPTIMIZED HOVER: Simpel translateY */
@@ -1105,13 +1158,53 @@
         
         .project-card:hover .project-img::after { opacity: 0.2; }
         
-        .project-content { padding: 15px; }
+        .project-content { padding: 15px; position: relative; }
+        
+        /* --- LIKE BUTTON STYLE --- */
+        .like-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-color);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .like-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        .like-btn.liked {
+            color: var(--neon-pink);
+            border-color: var(--neon-pink);
+            background: rgba(255, 0, 153, 0.1);
+            animation: likeBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes likeBounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
         
         .project-content h3 {
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 10px;
             line-height: 1.3;
+            padding-right: 40px; /* Space for like button */
         }
         
         .project-content p {
@@ -1169,7 +1262,7 @@
         
         .project-link:hover i { transform: translateX(3px); }
         
-        /* MODAL STYLES */
+        /* --- MODAL STYLES --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -1486,6 +1579,12 @@
             .footer-logo { margin-right: 0; }
             .hud-corners { display: none; }
             .scanlines { opacity: 0.3; }
+            
+            /* Visitor Counter Mobile Adjustment */
+            .hud-text-bottom { 
+                bottom: 60px; /* Naikin dikit biar gak ketutup home bar */
+                left: 20px; 
+            }
         }
         
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -1508,10 +1607,10 @@
         <div class="scroll-progress-bar" id="scrollProgressBar"></div>
     </div>
 
-    <!-- FUTURISTIC OVERLAY -->
+    <!-- FUTURISTIC OVERLAY (NO VIGNETTE) -->
     <div class="futuristic-overlay">
         <div class="scanlines"></div>
-        <div class="vignette"></div>
+        <!-- NO VIGNETTE DIV HERE -->
         <div class="flicker-overlay"></div>
         <div class="hud-corners">
             <div class="corner corner-tl"></div>
@@ -1519,7 +1618,15 @@
             <div class="corner corner-bl"></div>
             <div class="corner corner-br"></div>
             <div class="hud-text hud-text-top">SYS.READY // V.3.0</div>
-            <div class="hud-text hud-text-bottom">ENCRYPTED</div>
+            
+            <!-- VISITOR COUNTER SECTION (UPDATED & VISIBLE) -->
+            <div class="hud-text hud-text-bottom">
+                <div class="visitor-counter">
+                    <i class="fas fa-eye" style="color: var(--neon-pink);"></i>
+                    <span>VIEWS:</span>
+                    <span id="visitorCount" class="visitor-count">Loading...</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1792,10 +1899,14 @@
             
             <div class="horizontal-scroll-container" id="projectsScrollContainer">
                 <div class="projects-slider" id="projectsSlider">
-                    <div class="project-card">
+                    <!-- Project 1 -->
+                    <div class="project-card" data-id="proj-1">
                         <div class="project-img">
                             <img src="https://z-cdn-media.chatglm.cn/files/70ff918e-cfee-4730-a64c-ad85e89f812f.jpg?auth_key=1869374406-f7491389bdb842109ad1ab36d7cd8c09-0-4b6dba5492d4ea6c7c1fd8f4f8c85ccb" alt="Snake Rush Game Screenshot">
                         </div>
+                        <!-- LIKE BUTTON -->
+                        <button class="like-btn"><i class="far fa-heart"></i></button>
+                        
                         <div class="project-content">
                             <h3>Cheat Inject & Module Game</h3>
                             <p>Advanced game modification with enhanced UI, custom aiming system, and resource tracking features for improved gameplay experience in Snake Rush.</p>
@@ -1808,10 +1919,14 @@
                         </div>
                     </div>
                     
-                    <div class="project-card">
+                    <!-- Project 2 -->
+                    <div class="project-card" data-id="proj-2">
                         <div class="project-img">
                             <img src="https://z-cdn-media.chatglm.cn/files/74ef1a18-b6d8-47fb-848a-ef2b29b6a204.jpg?auth_key=1867383998-a690377424af412592c49868cc4d4177-0-9a38c9e26a7ed6ca7499bbfc78842592" alt="AI Web Dashboard">
                         </div>
+                        <!-- LIKE BUTTON -->
+                        <button class="like-btn"><i class="far fa-heart"></i></button>
+                        
                         <div class="project-content">
                             <h3>AI Integration</h3>
                             <p>Responsive web application with clean HTML structure, modern CSS styling, and interactive components for optimal user experience.</p>
@@ -1824,10 +1939,14 @@
                         </div>
                     </div>
                     
-                    <div class="project-card">
+                    <!-- Project 3 -->
+                    <div class="project-card" data-id="proj-3">
                         <div class="project-img">
                             <img src="https://z-cdn-media.chatglm.cn/files/03764c83-4881-4345-b300-d0393ab12fdc.jpg?auth_key=1867383998-bc4f2cb90aa14171ac293dcb0890cb1e-0-eeb20d2ef5f988691b49314c370ef895" alt="Code Scripting Editor">
                         </div>
+                        <!-- LIKE BUTTON -->
+                        <button class="like-btn"><i class="far fa-heart"></i></button>
+                        
                         <div class="project-content">
                             <h3>Scripting & Debugging</h3>
                             <p>Comprehensive game scripting solution with memory manipulation, function definitions, and advanced debugging capabilities for game modification.</p>
@@ -1840,10 +1959,14 @@
                         </div>
                     </div>
                     
-                    <div class="project-card">
+                    <!-- Project 4 -->
+                    <div class="project-card" data-id="proj-4">
                         <div class="project-img">
                             <img src="https://z-cdn-media.chatglm.cn/files/96f01762-cb63-43cf-ac7b-c6086a433195.jpg?auth_key=1867383998-6f37cfb75dac426d9d1a6ba6644f8d51-0-6b6bfc7d0c1d696b071fcee345dbfb1e" alt="Modern Web Interface">
                         </div>
+                        <!-- LIKE BUTTON -->
+                        <button class="like-btn"><i class="far fa-heart"></i></button>
+                        
                         <div class="project-content">
                             <h3>Modern Web & Interface Design</h3>
                             <p>Modern dark-themed portfolio website showcasing skills in web development, game mod development, and automation technologies with interactive elements.</p>
@@ -1949,6 +2072,77 @@
     </footer>
 
     <script>
+        // --- 1. VISITOR COUNTER LOGIC (UPDATED & VISIBLE) ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const visitorElement = document.getElementById('visitorCount');
+            
+            // Namespace unik biar gak bentrok: ujay-myid-portfolio
+            const apiKey = 'ujay-myid-portfolio'; 
+
+            fetch(`https://api.countapi.xyz/hit/${apiKey}/visits`)
+                .then(response => response.json())
+                .then(data => {
+                    // Animasi angka counting up
+                    animateValue(visitorElement, 0, data.value, 2000);
+                })
+                .catch(err => {
+                    console.error("Visitor counter error:", err);
+                    visitorElement.innerText = "0"; // Fallback
+                });
+        });
+
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // --- 2. LIKE BUTTON LOGIC (UPDATED) ---
+        const likeButtons = document.querySelectorAll('.like-btn');
+
+        likeButtons.forEach(btn => {
+            // Ambil ID project dari parent terdekat
+            const projectCard = btn.closest('.project-card');
+            const projectId = projectCard.getAttribute('data-id');
+            const icon = btn.querySelector('i');
+
+            // Cek status like di localStorage saat load
+            if (localStorage.getItem(`liked_${projectId}`) === 'true') {
+                btn.classList.add('liked');
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+            }
+
+            // Event listener klik
+            btn.addEventListener('click', function(e) {
+                // Mencegah modal project terbuka saat klik tombol like
+                e.stopPropagation();
+
+                // Toggle class visual
+                btn.classList.toggle('liked');
+                
+                // Ubah icon (outline vs solid)
+                if (btn.classList.contains('liked')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    localStorage.setItem(`liked_${projectId}`, 'true');
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    localStorage.setItem(`liked_${projectId}`, 'false');
+                }
+            });
+        });
+
+        // --- 3. ORIGINAL SCRIPTS ---
+
         // CUSTOM CROSSHAIR CURSOR LOGIC
         const cursor = document.getElementById('customCursor');
         
@@ -2012,8 +2206,7 @@
             scrollProgressBar.style.width = scrolled + "%";
         };
 
-        // HIDDEN LINK LOGIC (JavaScript Redirect)
-        // Mencegah URL asli muncul di href/status bar browser
+        // HIDDEN LINK LOGIC
         const hiddenLinks = document.querySelectorAll('.btn-hidden-link');
 
         hiddenLinks.forEach(link => {
@@ -2021,11 +2214,9 @@
                 e.preventDefault();
                 const targetUrl = this.getAttribute('data-link');
                 if (targetUrl) {
-                    // Jika link adalah mailto, gunakan window.location.href agar lebih kompatibel dengan email client
                     if (targetUrl.startsWith('mailto:')) {
                         window.location.href = targetUrl;
                     } else {
-                        // Untuk link biasa (Tele, IG, dll), buka di tab baru
                         window.open(targetUrl, '_blank');
                     }
                 }
@@ -2041,6 +2232,9 @@
 
         projectCards.forEach(card => {
             card.addEventListener('click', function() {
+                // Jangan buka modal jika yang diklik adalah tombol like
+                if (event.target.closest('.like-btn')) return;
+
                 const title = card.querySelector('h3').innerText;
                 const desc = card.querySelector('p').innerText;
 
@@ -2212,6 +2406,33 @@
                 if (particlesContainer.children.length === 0) { createParticles(); }
             }
         });
+
+        // --- 3D TILT EFFECT FOR HERO SECTION (NEW ANIMATION) ---
+        const heroContent = document.querySelector('.hero-content');
+        const heroSection = document.querySelector('.hero');
+
+        if (heroContent && heroSection) {
+            heroSection.addEventListener('mousemove', (e) => {
+                // Calculate position relative to center of screen
+                const x = (window.innerWidth / 2 - e.pageX) / 25;
+                const y = (window.innerHeight / 2 - e.pageY) / 25;
+
+                // Apply 3D rotation
+                heroContent.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+            });
+
+            // Reset position when mouse leaves
+            heroSection.addEventListener('mouseleave', () => {
+                heroContent.style.transform = `rotateY(0deg) rotateX(0deg)`;
+                // Add transition for smooth return
+                heroContent.style.transition = 'transform 0.5s ease';
+            });
+
+            // Remove transition when mouse enters again for instant response
+            heroSection.addEventListener('mouseenter', () => {
+                heroContent.style.transition = 'none';
+            });
+        }
     </script>
 </body>
 </html>
