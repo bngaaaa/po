@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Ujayy</title>
+    <title>About Ujayy | Optimized Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700&display=swap');
@@ -12,16 +12,13 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* HIDE DEFAULT CURSOR ON DESKTOP */
             cursor: none; 
         }
         
-        /* Show default cursor for inputs/textareas so typing is easy */
-        input, textarea, select {
+        input, textarea, select, button {
             cursor: auto;
         }
 
-        /* Hide custom cursor on touch devices (mobile) */
         @media (hover: none) and (pointer: coarse) {
             * { cursor: auto !important; }
             .custom-cursor { display: none !important; }
@@ -58,29 +55,23 @@
         
         body.unlocked { overflow: auto; }
 
-        /* =========================================
-           CUSTOM CROSSHAIR CURSOR (NEW)
-           ========================================= */
+        /* CUSTOM CURSOR (OPTIMIZED) */
         .custom-cursor {
             position: fixed;
             top: 0; left: 0;
             width: 30px; height: 30px;
             border: 2px solid var(--neon-cyan);
             border-radius: 50%;
-            pointer-events: none; /* Important: let clicks pass through */
+            pointer-events: none;
             z-index: 99999;
             transform: translate(-50%, -50%);
-            transition: width 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        height 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                        border-color 0.2s ease,
-                        background 0.2s ease;
+            transition: width 0.1s, height 0.1s, border-color 0.1s;
             mix-blend-mode: difference;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Center Dot */
         .custom-cursor::after {
             content: '';
             width: 4px; height: 4px;
@@ -88,7 +79,6 @@
             border-radius: 50%;
         }
 
-        /* Active State (Clicked / Shooting) */
         .custom-cursor.active {
             width: 20px;
             height: 20px;
@@ -96,7 +86,6 @@
             background: rgba(255, 0, 153, 0.2);
         }
 
-        /* Hover State (Over Links/Buttons) */
         .custom-cursor.hovering {
             width: 40px;
             height: 40px;
@@ -104,7 +93,6 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* SCROLL PROGRESS BAR */
         .scroll-progress-container {
             position: fixed;
             top: 0; left: 0;
@@ -121,9 +109,7 @@
             transition: width 0.1s;
         }
 
-        /* =========================================
-           FUTURISTIC OVERLAY
-           ========================================= */
+        /* FUTURISTIC OVERLAY */
         .futuristic-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -138,8 +124,7 @@
             width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
             background-size: 100% 4px;
-            animation: scanlineMove 10s linear infinite;
-            opacity: 0.6;
+            opacity: 0.4;
         }
 
         .scanlines::after {
@@ -149,8 +134,6 @@
             width: 100%; height: 100%;
             background: radial-gradient(circle, rgba(0, 243, 255, 0) 0%, rgba(0, 243, 255, 0) 80%, rgba(0,0,0,0.4) 100%);
         }
-        
-        @keyframes scanlineMove { 0% { background-position: 0 0; } 100% { background-position: 0 100%; } }
         
         .vignette {
             position: absolute;
@@ -167,7 +150,6 @@
             width: 40px; height: 40px;
             border: 2px solid var(--neon-cyan);
             opacity: 0.5;
-            transition: all 0.3s ease;
         }
         
         .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; border-top-left-radius: 5px; }
@@ -204,7 +186,7 @@
             80% { opacity: 0.04; } 100% { opacity: 0.01; }
         }
 
-        /* GLITCH EFFECT */
+        /* GLITCH EFFECT (OPTIMIZED) */
         .glitch { position: relative; color: var(--secondary-color); }
 
         .glitch::before, .glitch::after {
@@ -241,9 +223,7 @@
             80% { clip: rect(55px, 9999px, 15px, 0); } 100% { clip: rect(10px, 9999px, 75px, 0); }
         }
 
-        /* =========================================
-           UNLOCK GATE ANIMATION
-           ========================================= */
+        /* UNLOCK GATE ANIMATION */
         .gate-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -380,10 +360,7 @@
             100% { transform: translate(-50%, -50%) scale(80); opacity: 0; border-width: 0px; }
         }
 
-        /* =========================================
-           ORIGINAL SITE STYLES
-           ========================================= */
-        
+        /* ORIGINAL SITE STYLES */
         .animated-bg {
             position: fixed;
             top: 0; left: 0;
@@ -399,7 +376,7 @@
             top: -50%; left: -50%;
             background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
             background-size: 50px 50px;
-            animation: bgMove 20s linear infinite;
+            animation: bgMove 40s linear infinite;
         }
         
         @keyframes bgMove { 0% { transform: translate(0, 0); } 100% { transform: translate(50px, 50px); } }
@@ -417,8 +394,8 @@
             border-radius: 50%;
             pointer-events: none;
             opacity: 0;
-            animation: float 15s infinite;
-            transition: transform 0.1s ease-out;
+            animation: float 20s infinite; /* Diperlambat */
+            transition: none; /* Hapus transisi mouse move */
         }
         
         @keyframes float {
@@ -438,8 +415,8 @@
         .shape {
             position: absolute;
             opacity: 0.03;
-            animation: floatShape 20s infinite ease-in-out;
-            transition: transform 0.1s ease-out;
+            animation: floatShape 30s infinite ease-in-out; /* Diperlambat */
+            transition: none; /* Hapus parallax mouse */
         }
         
         @keyframes floatShape { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
@@ -517,7 +494,7 @@
             background-size: 50px 50px;
             transform: rotateX(60deg);
             z-index: -1;
-            animation: gridMove 20s linear infinite;
+            animation: gridMove 40s linear infinite; /* Diperlambat */
             mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
         }
 
@@ -530,7 +507,7 @@
             top: -50%; left: -50%;
             background: radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
                         radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%);
-            animation: heroGradient 15s ease infinite;
+            animation: heroGradient 30s ease infinite; /* Diperlambat */
             z-index: -1;
         }
         
@@ -573,18 +550,6 @@
             position: relative;
             display: inline-block;
         }
-        
-        .hero-title-gradient::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: translateX(-100%);
-            animation: shimmer 3s infinite;
-        }
-        
-        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
         
         .typing-text {
             font-size: 20px;
@@ -687,15 +652,6 @@
             margin-bottom: 20px;
             position: relative;
             overflow: hidden;
-        }
-        
-        .section-badge::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shimmer 3s infinite;
         }
         
         .section-title {
@@ -893,25 +849,14 @@
             overflow: hidden;
         }
         
-        .skill-tab::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s ease;
+        .skill-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        
-        .skill-tab:hover::before { left: 100%; }
         
         .skill-tab.active {
             background-color: var(--secondary-color);
             color: var(--primary-color);
-        }
-        
-        .skill-tab:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .skills-container { position: relative; margin-top: 20px; }
@@ -935,8 +880,6 @@
             display: inline-block;
             vertical-align: top;
             white-space: normal;
-            transform-style: preserve-3d;
-            will-change: transform;
         }
         
         .skill-card::before {
@@ -960,9 +903,10 @@
         
         .skill-card:hover::before { opacity: 0.1; }
         
+        /* OPTIMIZED HOVER: Simpel translateY */
         .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             background-color: rgba(255, 255, 255, 0.08);
         }
         
@@ -981,21 +925,6 @@
             position: relative;
             overflow: hidden;
         }
-        
-        .skill-icon::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-            opacity: 0;
-        }
-        
-        .skill-card:hover .skill-icon::after { opacity: 1; animation: shine 0.5s ease; }
-        
-        @keyframes shine { 0% { transform: rotate(45deg) translateY(-100%); } 100% { transform: rotate(45deg) translateY(100%); } }
         
         .skill-card:nth-child(2) .skill-icon { background: var(--gradient-2); }
         .skill-card:nth-child(3) .skill-icon { background: var(--gradient-3); }
@@ -1036,21 +965,10 @@
             background: var(--gradient-1);
             border-radius: 10px;
             width: 0;
-            transition: width 2s ease-in-out;
+            transition: width 1.5s ease-out; /* Transisi lebih cepat */
             position: relative;
             overflow: hidden;
         }
-        
-        .skill-progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: progressShine 2s infinite;
-        }
-        
-        @keyframes progressShine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
         
         .skill-card:nth-child(2) .skill-progress-bar { background: var(--gradient-2); }
         .skill-card:nth-child(3) .skill-progress-bar { background: var(--gradient-3); }
@@ -1142,12 +1060,14 @@
             vertical-align: top;
             white-space: normal;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transform-style: preserve-3d;
+            cursor: pointer;
         }
         
+        /* OPTIMIZED HOVER: Simpel translateY */
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            border-color: var(--neon-cyan);
         }
         
         .project-img {
@@ -1249,6 +1169,92 @@
         
         .project-link:hover i { transform: translateX(3px); }
         
+        /* MODAL STYLES */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 100000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #111;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.15);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--gray-medium);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 10;
+        }
+
+        .close-modal:hover {
+            color: var(--neon-pink);
+        }
+
+        .modal-body h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--neon-cyan);
+        }
+
+        .modal-body p {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn {
+            display: inline-block;
+            background: var(--gradient-1);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
         .contact-content { text-align: center; }
         .contact-text { margin-bottom: 40px; }
         
@@ -1427,7 +1433,7 @@
             text-align: center;
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255,255,255,0.05);
             color: var(--gray-medium);
             font-size: 13px;
             line-height: 1.5;
@@ -1438,6 +1444,7 @@
             flex-direction: column;
             gap: 4px;
             cursor: pointer;
+            z-index: 1002;
         }
         
         .menu-toggle span {
@@ -1456,16 +1463,17 @@
                 position: fixed;
                 top: 0; right: -100%;
                 height: 100vh; width: 80%;
-                background-color: #0a0a0a;
+                background-color: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(10px);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 transition: var(--transition);
-                z-index: 999;
+                z-index: 1001;
                 border-left: 1px solid rgba(255,255,255,0.1);
             }
             .nav-links.active { right: 0; }
-            .menu-toggle { display: flex; z-index: 1001; }
+            .menu-toggle { display: flex; }
             .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
             .menu-toggle.active span:nth-child(2) { opacity: 0; }
             .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
@@ -1561,13 +1569,16 @@
     <section class="hero" id="home">
         <div class="cyber-grid"></div>
         <div class="hero-content">
-            <div class="hero-subtitle">Hello, I'm</div>
+            <div class="hero-subtitle">Hello, I'm Ahmad Fauzi (Ujay)</div>
             <h1><span class="hero-title-gradient glitch" data-text="Ahmad Fauzi">Ahmad Fauzi</span></h1>
             <div class="typing-text" id="typingText"></div>
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary">View My Work <i class="fas fa-arrow-right"></i></a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch <i class="fas fa-envelope"></i></a>
-                <a href="https://click-for.joinn.workers.dev" target="_blank" class="btn btn-accent">Join All Group & Channel <i class="fab fa-telegram"></i></a>
+                <!-- HIDDEN LINK HERO -->
+                <a href="#" class="btn btn-accent btn-hidden-link" data-link="https://click-for.joinn.workers.dev">
+                    Join All Group & Channel <i class="fab fa-telegram"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -1605,7 +1616,7 @@
                 </div>
                 
                 <div class="about-img">
-                    <img src="https://z-cdn-media.chatglm.cn/files/54c1ef04-7cbb-4c03-8f17-30a149e8f790.jpg?auth_key=1867350947-5ac9aa34760f4424becf9617002702a6-0-ba90ebb2bb30a5785031d1bf852ab593" alt="Developer Scene">
+                    <img src="https://z-cdn-media.chatglm.cn/files/54c1ef04-7cbb-4c03-8f17-30a149e8f790.jpg?auth_key=1867350947-5ac9aa34760f4424becf9617002702a6-0-ba90ebb2bb30a5785031d1bf852ab593" alt="Ahmad Fauzi Profile Picture">
                 </div>
             </div>
         </div>
@@ -1783,7 +1794,7 @@
                 <div class="projects-slider" id="projectsSlider">
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/70ff918e-cfee-4730-a64c-ad85e89f812f.jpg?auth_key=1869374406-f7491389bdb842109ad1ab36d7cd8c09-0-4b6dba5492d4ea6c7c1fd8f4f8c85ccb" alt="Snake Rush - Throne Hall Gameplay">
+                            <img src="https://z-cdn-media.chatglm.cn/files/70ff918e-cfee-4730-a64c-ad85e89f812f.jpg?auth_key=1869374406-f7491389bdb842109ad1ab36d7cd8c09-0-4b6dba5492d4ea6c7c1fd8f4f8c85ccb" alt="Snake Rush Game Screenshot">
                         </div>
                         <div class="project-content">
                             <h3>Cheat Inject & Module Game</h3>
@@ -1793,29 +1804,29 @@
                                 <span class="project-tag">UI Enhancement</span>
                                 <span class="project-tag">Scripting</span>
                             </div>
-                            <a href="#" class="project-link">‎ <i class="fas fa-arrow-right"></i></a>
+                            <a href="javascript:void(0)" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                     
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/74ef1a18-b6d8-47fb-848a-ef2b29b6a204.jpg?auth_key=1867383998-a690377424af412592c49868cc4d4177-0-9a38c9e26a7ed6ca7499bbfc78842592" alt="Web Development">
+                            <img src="https://z-cdn-media.chatglm.cn/files/74ef1a18-b6d8-47fb-848a-ef2b29b6a204.jpg?auth_key=1867383998-a690377424af412592c49868cc4d4177-0-9a38c9e26a7ed6ca7499bbfc78842592" alt="AI Web Dashboard">
                         </div>
                         <div class="project-content">
-                            <h3>Ai Intergration</h3>
+                            <h3>AI Integration</h3>
                             <p>Responsive web application with clean HTML structure, modern CSS styling, and interactive components for optimal user experience.</p>
                             <div class="project-tags">
                                 <span class="project-tag">HTML</span>
                                 <span class="project-tag">CSS</span>
                                 <span class="project-tag">Frontend</span>
                             </div>
-                            <a href="#" class="project-link">‎ <i class="fas fa-arrow-right"></i></a>
+                            <a href="javascript:void(0)" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                     
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/03764c83-4881-4345-b300-d0393ab12fdc.jpg?auth_key=1867383998-bc4f2cb90aa14171ac293dcb0890cb1e-0-eeb20d2ef5f988691b49314c370ef895" alt="Game Script Development">
+                            <img src="https://z-cdn-media.chatglm.cn/files/03764c83-4881-4345-b300-d0393ab12fdc.jpg?auth_key=1867383998-bc4f2cb90aa14171ac293dcb0890cb1e-0-eeb20d2ef5f988691b49314c370ef895" alt="Code Scripting Editor">
                         </div>
                         <div class="project-content">
                             <h3>Scripting & Debugging</h3>
@@ -1825,23 +1836,23 @@
                                 <span class="project-tag">Debugging</span>
                                 <span class="project-tag">Memory</span>
                             </div>
-                            <a href="#" class="project-link">‎ <i class="fas fa-arrow-right"></i></a>
+                            <a href="javascript:void(0)" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                     
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/96f01762-cb63-43cf-ac7b-c6086a433195.jpg?auth_key=1867383998-6f37cfb75dac426d9d1a6ba6644f8d51-0-6b6bfc7d0c1d696b071fcee345dbfb1e" alt="Skills Portfolio">
+                            <img src="https://z-cdn-media.chatglm.cn/files/96f01762-cb63-43cf-ac7b-c6086a433195.jpg?auth_key=1867383998-6f37cfb75dac426d9d1a6ba6644f8d51-0-6b6bfc7d0c1d696b071fcee345dbfb1e" alt="Modern Web Interface">
                         </div>
                         <div class="project-content">
-                            <h3>Design Web Modern & Interface</h3>
+                            <h3>Modern Web & Interface Design</h3>
                             <p>Modern dark-themed portfolio website showcasing skills in web development, game mod development, and automation technologies with interactive elements.</p>
                             <div class="project-tags">
                                 <span class="project-tag">Portfolio</span>
                                 <span class="project-tag">Web Design</span>
                                 <span class="project-tag">UI/UX</span>
                             </div>
-                            <a href="#" class="project-link">‎ <i class="fas fa-arrow-right"></i></a>
+                            <a href="javascript:void(0)" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1853,6 +1864,18 @@
             </div>
         </div>
     </section>
+
+    <!-- PROJECT MODAL STRUCTURE -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <div class="modal-body">
+                <h3 id="modalTitle">Project Title</h3>
+                <p id="modalDesc">Project description goes here...</p>
+                <a href="#" class="modal-btn" onclick="document.getElementById('projectModal').classList.remove('open')">Close Details</a>
+            </div>
+        </div>
+    </div>
 
     <section class="section contact" id="contact">
         <div class="container">
@@ -1866,22 +1889,20 @@
                     <p>I'm always excited to work on new challenges and innovative ideas. Whether you need a custom solution, consultation, or just want to chat about technology, feel free to reach out!</p>
                 </div>
                 
+                <!-- HIDDEN LINKS CONTACT -->
                 <div class="contact-buttons">
-                    <a href="https://wa.me/62895635429123" target="_blank" class="contact-btn">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
-                    <a href="https://t.me/aroncr" target="_blank" class="contact-btn">
+                    <a href="#" class="contact-btn btn-hidden-link" data-link="https://t.me/aroncr">
                         <i class="fab fa-telegram"></i> Telegram
                     </a>
-                    <a href="https://instagram.com/aocnsrc" target="_blank" class="contact-btn">
+                    <a href="#" class="contact-btn btn-hidden-link" data-link="https://instagram.com/aocnsrc">
                         <i class="fab fa-instagram"></i> Instagram
                     </a>
-                    <a href="mailto:af5137351@gmail.com" target="_blank" class="contact-btn">
+                    <a href="#" class="contact-btn btn-hidden-link" data-link="mailto:af5137351@gmail.com">
                         <i class="fas fa-envelope"></i> Email
                     </a>
                 </div>
                 
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" action="mailto:af5137351@gmail.com" method="post" enctype="text/plain">
                     <div class="form-group">
                         <label for="name">Your Name</label>
                         <input type="text" id="name" name="name" required>
@@ -1914,11 +1935,11 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">Ujay</div>
+                <!-- HIDDEN LINKS FOOTER -->
                 <div class="social-links">
-                    <a href="https://wa.me/62895635429123" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://t.me/aroncr" target="_blank"><i class="fab fa-telegram"></i></a>
-                    <a href="https://instagram.com/aocnsrc" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="mailto:af5137351@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+                    <a href="#" class="btn-hidden-link" data-link="https://t.me/aroncr" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="btn-hidden-link" data-link="https://instagram.com/aocnsrc" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="btn-hidden-link" data-link="mailto:af5137351@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -1931,14 +1952,12 @@
         // CUSTOM CROSSHAIR CURSOR LOGIC
         const cursor = document.getElementById('customCursor');
         
-        // Only create cursor if device has fine pointer (mouse)
         if (window.matchMedia("(pointer: fine)").matches) {
             document.addEventListener('mousemove', (e) => {
                 cursor.style.left = e.clientX + 'px';
                 cursor.style.top = e.clientY + 'px';
             });
 
-            // Hover Effect for interactive elements
             const interactiveElements = document.querySelectorAll('a, button, .skill-tab, .project-card, input, textarea, select');
             
             interactiveElements.forEach(el => {
@@ -1946,7 +1965,6 @@
                 el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
             });
 
-            // Click Effect (Shrink cursor)
             document.addEventListener('mousedown', () => cursor.classList.add('active'));
             document.addEventListener('mouseup', () => cursor.classList.remove('active'));
         }
@@ -1994,49 +2012,59 @@
             scrollProgressBar.style.width = scrolled + "%";
         };
 
-        // MOUSE PARALLAX LOGIC
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth - e.pageX * 2) / 100;
-            const y = (window.innerHeight - e.pageY * 2) / 100;
+        // HIDDEN LINK LOGIC (JavaScript Redirect)
+        // Mencegah URL asli muncul di href/status bar browser
+        const hiddenLinks = document.querySelectorAll('.btn-hidden-link');
 
-            const shapes = document.querySelectorAll('.shape');
-            shapes.forEach((shape, index) => {
-                const speed = (index +1) * 2;
-                shape.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-            });
-
-            const particles = document.querySelectorAll('.particle');
-            particles.forEach((particle, index) => {
-                if (index % 2 === 0) {
-                    particle.style.transform = `translateX(${x * 5}px)`;
+        hiddenLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetUrl = this.getAttribute('data-link');
+                if (targetUrl) {
+                    // Jika link adalah mailto, gunakan window.location.href agar lebih kompatibel dengan email client
+                    if (targetUrl.startsWith('mailto:')) {
+                        window.location.href = targetUrl;
+                    } else {
+                        // Untuk link biasa (Tele, IG, dll), buka di tab baru
+                        window.open(targetUrl, '_blank');
+                    }
                 }
             });
         });
 
-        // 3D CARD TILT LOGIC
-        const tiltCards = document.querySelectorAll('.skill-card, .project-card');
-        
-        tiltCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const xRotation = -((y - rect.height / 2) / 20);
-                const yRotation = (x - rect.width / 2) / 20;
-                
-                card.style.transform = `perspective(1000px) scale(1.02) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) scale(1) rotateX(0) rotateY(0)';
+        // PROJECT MODAL LOGIC
+        const modal = document.getElementById('projectModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const closeModal = document.getElementById('closeModal');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const title = card.querySelector('h3').innerText;
+                const desc = card.querySelector('p').innerText;
+
+                modalTitle.innerText = title;
+                modalDesc.innerHTML = `${desc}<br><br><strong>Status:</strong> Completed<br><strong>Role:</strong> Lead Developer<br><br>This is a placeholder for detailed project requirements, tech stack details, and live demo links. In a production environment, this data could be fetched dynamically from a JSON file or database.`;
+
+                modal.classList.add('open');
             });
         });
 
-        // ORIGINAL SCRIPT LOGIC
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('open');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('open');
+            }
+        });
+
+        // PARTICLE GENERATION (REDUCED COUNT)
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 20;
+            const particleCount = 10; 
             const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#38f9d7'];
             
             for (let i = 0; i < particleCount; i++) {
@@ -2048,7 +2076,7 @@
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.bottom = '-10px';
                 particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.animationDuration = Math.random() * 15 + 10 + 's';
+                particle.style.animationDuration = Math.random() * 20 + 15 + 's';
                 particle.style.animationDelay = Math.random() * 5 + 's';
                 particlesContainer.appendChild(particle);
             }
@@ -2105,11 +2133,13 @@
         
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+                if(this.getAttribute('href') !== '#' && !this.closest('.modal-body')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+                    }
                 }
             });
         });
@@ -2168,41 +2198,6 @@
         }, { threshold: 0.3 });
         
         skillsObserver.observe(skillsSection);
-        
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const service = document.getElementById('service').value;
-            const message = document.getElementById('message').value;
-            const serviceSelect = document.getElementById('service');
-            const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
-            
-            let whatsappMessage = `*Pesan Baru dari Website*\n\nNama: ${name}\nEmail: ${email}\n`;
-            if (service && service !== "") { whatsappMessage += `Layanan: ${serviceName}\n`; }
-            whatsappMessage += `Pesan: ${message}`;
-            
-            const phoneNumber = '62895635429123';
-            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-            
-            const loadingMessage = document.createElement('div');
-            loadingMessage.style.cssText = `position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(59, 130, 246, 0.9); color: white; padding: 20px 30px; border-radius: 10px; font-weight: 600; z-index: 10000; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);`;
-            loadingMessage.textContent = 'Mengirim pesan...';
-            document.body.appendChild(loadingMessage);
-            
-            setTimeout(() => {
-                window.open(whatsappURL, '_blank');
-                document.body.removeChild(loadingMessage);
-                
-                const successMessage = document.createElement('div');
-                successMessage.style.cssText = `position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(16, 185, 129, 0.9); color: white; padding: 20px 30px; border-radius: 10px; font-weight: 600; z-index: 10000; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); animation: fadeInOut 3s ease-in-out;`;
-                successMessage.textContent = 'Pesan berhasil dikirim! WhatsApp terbuka...';
-                document.body.appendChild(successMessage);
-                
-                setTimeout(() => { document.body.removeChild(successMessage); }, 3000);
-                this.reset();
-            }, 1000);
-        });
         
         const style = document.createElement('style');
         style.textContent = `@keyframes fadeInOut { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } }`;
