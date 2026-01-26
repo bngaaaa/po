@@ -109,7 +109,7 @@
             transition: width 0.1s;
         }
 
-        /* FUTURISTIC OVERLAY */
+        /* FUTURISTIC OVERLAY (VIGNETTE REMOVED) */
         .futuristic-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -135,14 +135,8 @@
             background: radial-gradient(circle, rgba(0, 243, 255, 0) 0%, rgba(0, 243, 255, 0) 80%, rgba(0,0,0,0.4) 100%);
         }
         
-        .vignette {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.8) 100%);
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
-        }
-        
+        /* VIGNETTE CSS CLASS REMOVED TO IMPROVE PERFORMANCE */
+
         .hud-corners { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
         
         .corner {
@@ -1508,10 +1502,10 @@
         <div class="scroll-progress-bar" id="scrollProgressBar"></div>
     </div>
 
-    <!-- FUTURISTIC OVERLAY -->
+    <!-- FUTURISTIC OVERLAY (NO VIGNETTE) -->
     <div class="futuristic-overlay">
         <div class="scanlines"></div>
-        <div class="vignette"></div>
+        <!-- VIGNETTE DIV REMOVED -->
         <div class="flicker-overlay"></div>
         <div class="hud-corners">
             <div class="corner corner-tl"></div>
