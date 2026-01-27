@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Ujayy | Portfolio</title>
+    <title>About Ujayy | Optimized Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700&display=swap');
@@ -47,7 +47,6 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            /* BACKGROUND POLOS (Plain Gradient) */
             background: linear-gradient(135deg, var(--primary-color) 0%, #111 100%);
             color: var(--secondary-color);
             line-height: 1.6;
@@ -55,7 +54,7 @@
             min-height: 100vh;
         }
 
-        /* CUSTOM CROSSHAIR CURSOR (OPTIMIZED) */
+        /* CUSTOM CROSSHAIR CURSOR */
         .custom-cursor {
             position: fixed;
             top: 0; left: 0;
@@ -109,7 +108,7 @@
             transition: width 0.1s;
         }
 
-        /* FUTURISTIC OVERLAY (MINIMAL - ONLY SCANLINES IF DESIRED, BUT KEEPS IT CLEAN) */
+        /* FUTURISTIC OVERLAY */
         .futuristic-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -124,7 +123,7 @@
             width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
             background-size: 100% 4px;
-            opacity: 0.2; /* Reduced opacity for cleaner look */
+            opacity: 0.2;
         }
 
         .scanlines::after {
@@ -140,7 +139,7 @@
             position: absolute;
             width: 40px; height: 40px;
             border: 2px solid var(--neon-cyan);
-            opacity: 0.3; /* Reduced opacity */
+            opacity: 0.3;
         }
         
         .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; border-top-left-radius:5px; }
@@ -153,7 +152,7 @@
             font-family: 'Orbitron', sans-serif;
             color: var(--neon-cyan);
             font-size: 10px;
-            opacity: 0.4; /* Reduced opacity */
+            opacity: 0.4;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -167,7 +166,7 @@
             width: 100%; height: 100%;
             background: rgba(255, 255, 255, 0.01);
             opacity: 0;
-            animation: flicker 6s infinite; /* Slower flicker */
+            animation: flicker 6s infinite;
             pointer-events: none;
         }
         
@@ -177,7 +176,7 @@
             80% { opacity: 0.02; } 100% { opacity: 0.01; }
         }
 
-        /* GLITCH EFFECT (OPTIMIZED) */
+        /* GLITCH EFFECT */
         .glitch { position: relative; color: var(--secondary-color); }
 
         .glitch::before, .glitch::after {
@@ -219,13 +218,17 @@
             top: 0; left: 0;
             width: 100%; padding: 20px 0;
             z-index: 1000;
-            transition: var(--transition);
-            background-color: rgba(10, 10, 10, 0.8); /* Slight transparency */
+            transition: var(--transition), top 0.4s ease-in-out; /* Added top transition for hide effect */
+            background-color: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(5px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        /* Background change when scrolled but visible */
         header.scrolled { padding: 15px 0; background-color: rgba(10, 10, 10, 0.95); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); }
+        
+        /* Class untuk header yang di-hide (diatur via JS) */
+        header.nav-up { top: -100px; } 
         
         nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
@@ -251,22 +254,20 @@
             overflow: hidden;
         }
         
-        /* NAV LINE ANIMATION (FIXED WIDTH & CENTERED) */
+        /* NAV LINE ANIMATION */
         .nav-links a::before {
             content: '';
             position: absolute;
-            bottom: 0; left: 50%; /* Centered */
-            width: 30px; /* Fixed width so all lines are aligned */
+            bottom: 0; left: 50%;
+            width: 30px;
             height: 2px;
             background: var(--gradient-1);
-            transform: translateX(-50%) scaleX(0); /* Hidden initially */
+            transform: translateX(-50%) scaleX(0);
             transform-origin: center;
             transition: transform 0.3s ease;
         }
         
-        .nav-links a:hover::before { 
-            transform: translateX(-50%) scaleX(1); /* Visible on hover */
-        }
+        .nav-links a:hover::before { transform: translateX(-50%) scaleX(1); }
         
         .hero {
             height: 100vh;
@@ -274,7 +275,6 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            /* Background removed here because it's on Body now */
             overflow: hidden;
             padding-top: 80px;
             perspective: 1000px;
@@ -580,8 +580,8 @@
             flex-shrink: 0;
             margin: 0 auto;
             position: relative;
-            box-shadow: 0 0 0 4px rgba(255,255,255,0.1), 0 20px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 0 4px rgba(255,255, 255, 0.1), 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255,255, 255, 0.1);
             transition: var(--transition);
         }
         
@@ -1264,7 +1264,7 @@
         <div class="scroll-progress-bar" id="scrollProgressBar"></div>
     </div>
 
-    <!-- FUTURISTIC OVERLAY (MINIMAL) -->
+    <!-- FUTURISTIC OVERLAY -->
     <div class="futuristic-overlay">
         <div class="scanlines"></div>
         <div class="flicker-overlay"></div>
@@ -1278,7 +1278,16 @@
         </div>
     </div>
 
-    <!-- REMOVED: CYBER GRID, PARTICLES, GEOMETRIC SHAPES FOR CLEAN LOOK -->
+    <div class="animated-bg"></div>
+    
+    <div class="particles" id="particles"></div>
+    
+    <div class="geometric-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
     
     <header id="header">
         <nav>
@@ -1306,7 +1315,6 @@
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary">View My Work <i class="fas fa-arrow-right"></i></a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch <i class="fas fa-envelope"></i></a>
-                <!-- HIDDEN LINK HERO -->
                 <a href="#" class="btn btn-accent btn-hidden-link" data-link="https://click-for.joinn.workers.dev">
                     Join All Group & Channel <i class="fab fa-telegram"></i>
                 </a>
@@ -1616,7 +1624,6 @@
                     <p>I'm always excited to work on new challenges and innovative ideas. Whether you need a custom solution, consultation, or just want to chat about technology, feel free to reach out!</p>
                 </div>
                 
-                <!-- HIDDEN LINKS CONTACT -->
                 <div class="contact-buttons">
                     <a href="#" class="contact-btn btn-hidden-link" data-link="https://t.me/aroncr">
                         <i class="fab fa-telegram"></i> Telegram
@@ -1662,7 +1669,6 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">Ujay</div>
-                <!-- HIDDEN LINKS FOOTER -->
                 <div class="social-links">
                     <a href="#" class="btn-hidden-link" data-link="https://t.me/aroncr" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
                     <a href="#" class="btn-hidden-link" data-link="https://instagram.com/aocnsrc" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -1696,16 +1702,43 @@
             document.addEventListener('mouseup', () => cursor.classList.remove('active'));
         }
 
-        // SCROLL PROGRESS BAR LOGIC
-        window.onscroll = function() {
-            const scrollProgressBar = document.getElementById("scrollProgressBar");
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        // AUTO-HIDE HEADER ON SCROLL DOWN, SHOW ON SCROLL UP
+        let lastScrollTop = 0;
+        const header = document.getElementById("header");
+        const scrollProgressBar = document.getElementById("scrollProgressBar");
+        const delta = 5; // Sensitivitas scroll
+        
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Progress Bar Logic
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
+            const scrolled = (scrollTop / height) * 100;
             scrollProgressBar.style.width = scrolled + "%";
-        };
 
-        // HIDDEN LINK LOGIC (JavaScript Redirect)
+            // Make sure they scroll more than delta
+            if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
+
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scroll Down -> Hide Header
+                header.classList.add("nav-up");
+            } else {
+                // Scroll Up -> Show Header
+                header.classList.remove("nav-up");
+            }
+
+            // Safety check untuk paling atas (selalu muncul)
+            if (scrollTop <= 0) {
+                header.classList.remove("nav-up");
+                header.classList.remove('scrolled');
+            } else {
+                header.classList.add('scrolled');
+            }
+
+            lastScrollTop = scrollTop;
+        });
+
+        // HIDDEN LINK LOGIC
         const hiddenLinks = document.querySelectorAll('.btn-hidden-link');
 
         hiddenLinks.forEach(link => {
@@ -1751,6 +1784,7 @@
             }
         });
         
+        // TYPING ANIMATION
         const typingTexts = ['Full Stack Developer', 'Game Mod Specialist', 'AI Enthusiast', 'Bot Developer', 'Problem Solver'];
         let textIndex = 0;
         let charIndex = 0;
@@ -1777,6 +1811,7 @@
         
         setTimeout(typeText, 1000);
         
+        // MOBILE MENU TOGGLE
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         
@@ -1792,12 +1827,6 @@
             });
         });
         
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) { header.classList.add('scrolled'); }
-            else { header.classList.remove('scrolled'); }
-        });
-        
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 if(this.getAttribute('href') !== '#' && !this.closest('.modal-body')) {
@@ -1811,6 +1840,7 @@
             });
         });
         
+        // SKILLS SLIDER CONTROLS
         const skillsSlider = document.getElementById('skillsSlider');
         const skillsScrollContainer = document.getElementById('skillsScrollContainer');
         const skillsPrevBtn = document.getElementById('skillsPrevBtn');
@@ -1819,6 +1849,7 @@
         skillsPrevBtn.addEventListener('click', function() { skillsScrollContainer.scrollBy({ left: -300, behavior: 'smooth' }); });
         skillsNextBtn.addEventListener('click', function() { skillsScrollContainer.scrollBy({ left: 300, behavior: 'smooth' }); });
         
+        // PROJECTS SLIDER CONTROLS
         const projectsSlider = document.getElementById('projectsSlider');
         const projectsScrollContainer = document.getElementById('projectsScrollContainer');
         const projectsPrevBtn = document.getElementById('projectsPrevBtn');
@@ -1827,6 +1858,7 @@
         projectsPrevBtn.addEventListener('click', function() { projectsScrollContainer.scrollBy({ left: -300, behavior: 'smooth' }); });
         projectsNextBtn.addEventListener('click', function() { projectsScrollContainer.scrollBy({ left: 300, behavior: 'smooth' }); });
         
+        // SKILLS TABS FILTERING
         const skillTabs = document.querySelectorAll('.skill-tab');
         const skillCards = document.querySelectorAll('.skill-card');
         
@@ -1845,6 +1877,7 @@
             });
         });
         
+        // SKILL BARS ANIMATION
         const skillProgressBars = document.querySelectorAll('.skill-progress-bar');
         
         function animateSkillBars() {
@@ -1866,9 +1899,23 @@
         
         skillsObserver.observe(skillsSection);
         
+        // ADDITIONAL CSS FOR ANIMATIONS DYNAMICALLY
         const style = document.createElement('style');
         style.textContent = `@keyframes fadeInOut { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } }`;
         document.head.appendChild(style);
+        
+        // PARTICLES RESIZE LOGIC
+        window.addEventListener('resize', function() {
+            const particlesContainer = document.getElementById('particles');
+            if (window.innerWidth <= 768) {
+                particlesContainer.style.display = 'none';
+            } else {
+                particlesContainer.style.display = 'block';
+                if (particlesContainer.children.length === 0) { 
+                    // createParticles(); 
+                }
+            }
+        });
     </script>
 </body>
 </html>
