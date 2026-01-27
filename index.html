@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Ujayy | Optimized Portfolio</title>
+    <title>About Ujayy | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700&display=swap');
@@ -47,15 +47,15 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--primary-color);
+            /* BACKGROUND POLOS (Plain Gradient) */
+            background: linear-gradient(135deg, var(--primary-color) 0%, #111 100%);
             color: var(--secondary-color);
             line-height: 1.6;
-            overflow: hidden;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
-        
-        body.unlocked { overflow: auto; }
 
-        /* CUSTOM CURSOR (OPTIMIZED) */
+        /* CUSTOM CROSSHAIR CURSOR (OPTIMIZED) */
         .custom-cursor {
             position: fixed;
             top: 0; left: 0;
@@ -109,7 +109,7 @@
             transition: width 0.1s;
         }
 
-        /* FUTURISTIC OVERLAY (VIGNETTE REMOVED) */
+        /* FUTURISTIC OVERLAY (MINIMAL - ONLY SCANLINES IF DESIRED, BUT KEEPS IT CLEAN) */
         .futuristic-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -124,7 +124,7 @@
             width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
             background-size: 100% 4px;
-            opacity: 0.4;
+            opacity: 0.2; /* Reduced opacity for cleaner look */
         }
 
         .scanlines::after {
@@ -132,31 +132,28 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(0, 243, 255, 0) 0%, rgba(0, 243, 255, 0) 80%, rgba(0,0,0,0.4) 100%);
         }
         
-        /* VIGNETTE CSS CLASS REMOVED TO IMPROVE PERFORMANCE */
-
         .hud-corners { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
         
         .corner {
             position: absolute;
             width: 40px; height: 40px;
             border: 2px solid var(--neon-cyan);
-            opacity: 0.5;
+            opacity: 0.3; /* Reduced opacity */
         }
         
-        .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; border-top-left-radius: 5px; }
-        .corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; border-top-right-radius: 5px; }
-        .corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; border-bottom-left-radius: 5px; }
-        .corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; border-bottom-right-radius: 5px; }
+        .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; border-top-left-radius:5px; }
+        .corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; border-top-right-radius:5px; }
+        .corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; border-bottom-left-radius:5px; }
+        .corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; border-bottom-right-radius:5px; }
         
         .hud-text {
             position: absolute;
             font-family: 'Orbitron', sans-serif;
             color: var(--neon-cyan);
             font-size: 10px;
-            opacity: 0.6;
+            opacity: 0.4; /* Reduced opacity */
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -168,16 +165,16 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.01);
             opacity: 0;
-            animation: flicker 4s infinite;
+            animation: flicker 6s infinite; /* Slower flicker */
             pointer-events: none;
         }
         
         @keyframes flicker {
-            0% { opacity: 0.01; } 5% { opacity: 0.05; } 10% { opacity: 0.01; }
-            15% { opacity: 0.06; } 20% { opacity: 0.01; } 50% { opacity: 0.01; }
-            80% { opacity: 0.04; } 100% { opacity: 0.01; }
+            0% { opacity: 0.01; } 5% { opacity: 0.03; } 10% { opacity: 0.01; }
+            15% { opacity: 0.04; } 20% { opacity: 0.01; } 50% { opacity: 0.01; }
+            80% { opacity: 0.02; } 100% { opacity: 0.01; }
         }
 
         /* GLITCH EFFECT (OPTIMIZED) */
@@ -216,209 +213,6 @@
             40% { clip: rect(80px, 9999px, 20px, 0); } 60% { clip: rect(30px, 9999px, 90px, 0); }
             80% { clip: rect(55px, 9999px, 15px, 0); } 100% { clip: rect(10px, 9999px, 75px, 0); }
         }
-
-        /* UNLOCK GATE ANIMATION */
-        .gate-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 9999;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-        }
-        
-        .gate-overlay.hidden { display: none; }
-        
-        .door {
-            position: absolute;
-            top: 0; height: 100%;
-            width: 50%;
-            background-color: #0f0f0f;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-            z-index: 2;
-            background-image: repeating-linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111), repeating-linear-gradient(45deg, #111 25%, #0f0f0f 25%, #0f0f0f 75%, #111 75%, #111);
-            background-position: 0 0, 10px 10px;
-            background-size: 20px 20px;
-        }
-        
-        .door.left { left: 0; transform-origin: left; }
-        .door.right { right: 0; transform-origin: right; }
-        
-        .gate-overlay.open .door.left { transform: translateX(-100%) rotateY(-45deg); }
-        .gate-overlay.open .door.right { transform: translateX(100%) rotateY(45deg); }
-        
-        .gate-content {
-            position: relative;
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            transition: opacity 0.3s ease;
-        }
-        
-        .gate-overlay.open .gate-content { opacity: 0; pointer-events: none; }
-        
-        .lock-container {
-            width: 100px; height: 100px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            box-shadow: 0 0 30px rgba(102, 126, 234, 0.2);
-            transition: all 0.3s ease;
-            animation: pulse-lock 2s infinite;
-        }
-        
-        .lock-container:hover {
-            transform: scale(1.1);
-            border-color: #667eea;
-            box-shadow: 0 0 50px rgba(102, 126, 234, 0.6);
-        }
-        
-        .lock-container:active { transform: scale(0.95); }
-        
-        .lock-icon {
-            font-size: 40px;
-            color: var(--secondary-color);
-            margin-bottom: 5px;
-            transition: color 0.3s;
-        }
-        
-        .lock-container:hover .lock-icon { color: #667eea; }
-        
-        .unlock-text {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gray-medium);
-            margin-top: 5px;
-        }
-        
-        @keyframes pulse-lock {
-            0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(102, 126, 234, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
-        }
-        
-        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
-
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
-        }
-
-        .unlock-flash {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: white;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 10;
-            transition: opacity 0.4s ease-out;
-        }
-
-        .unlock-flash.active { opacity:1; transition: opacity 0s; }
-        .unlock-flash.fade-out { opacity: 0; transition: opacity 0.5s ease-out; }
-
-        .unlock-shockwave {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 10px; height: 10px;
-            border: 10px solid var(--neon-cyan);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 1;
-            pointer-events: none;
-            z-index: 5;
-            box-shadow: 0 0 50px var(--neon-cyan);
-        }
-
-        .unlock-shockwave.active { animation: shockwaveExpand 0.8s ease-out forwards; }
-
-        @keyframes shockwaveExpand {
-            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; border-width: 20px; }
-            100% { transform: translate(-50%, -50%) scale(80); opacity: 0; border-width: 0px; }
-        }
-
-        /* ORIGINAL SITE STYLES */
-        .animated-bg {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .animated-bg::before {
-            content: '';
-            position: absolute;
-            width: 200%; height: 200%;
-            top: -50%; left: -50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: bgMove 40s linear infinite;
-        }
-        
-        @keyframes bgMove { 0% { transform: translate(0, 0); } 100% { transform: translate(50px, 50px); } }
-        
-        .particles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-            animation: float 20s infinite; /* Diperlambat */
-            transition: none; /* Hapus transisi mouse move */
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 0.3; } 90% { opacity: 0.3; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
-        }
-        
-        .geometric-shapes {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-        
-        .shape {
-            position: absolute;
-            opacity: 0.03;
-            animation: floatShape 30s infinite ease-in-out; /* Diperlambat */
-            transition: none; /* Hapus parallax mouse */
-        }
-        
-        @keyframes floatShape { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
-        
-        .shape-1 { width: 80px; height: 80px; background: var(--gradient-1); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); top: 10%; left: 10%; animation-delay: 0s; }
-        .shape-2 { width: 60px; height: 60px; background: var(--gradient-2); border-radius: 50%; top: 70%; left: 80%; animation-delay: 2s; }
-        .shape-3 { width: 100px; height: 100px; background: var(--gradient-3); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); top: 40%; left: 70%; animation-delay: 4s; }
-        .shape-4 { width: 40px; height: 40px; background: var(--gradient-4); top: 20%; left: 60%; animation-delay: 6s; }
         
         header {
             position: fixed;
@@ -426,11 +220,12 @@
             width: 100%; padding: 20px 0;
             z-index: 1000;
             transition: var(--transition);
-            background-color: var(--primary-color);
+            background-color: rgba(10, 10, 10, 0.8); /* Slight transparency */
+            backdrop-filter: blur(5px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        header.scrolled { padding: 15px 0; background-color: var(--primary-color); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); }
+        header.scrolled { padding: 15px 0; background-color: rgba(10, 10, 10, 0.95); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); }
         
         nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
@@ -456,17 +251,22 @@
             overflow: hidden;
         }
         
+        /* NAV LINE ANIMATION (FIXED WIDTH & CENTERED) */
         .nav-links a::before {
             content: '';
             position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 2px;
+            bottom: 0; left: 50%; /* Centered */
+            width: 30px; /* Fixed width so all lines are aligned */
+            height: 2px;
             background: var(--gradient-1);
-            transform: translateX(-100%);
+            transform: translateX(-50%) scaleX(0); /* Hidden initially */
+            transform-origin: center;
             transition: transform 0.3s ease;
         }
         
-        .nav-links a:hover::before { transform: translateX(0); }
+        .nav-links a:hover::before { 
+            transform: translateX(-50%) scaleX(1); /* Visible on hover */
+        }
         
         .hero {
             height: 100vh;
@@ -474,25 +274,11 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #111 100%);
+            /* Background removed here because it's on Body now */
             overflow: hidden;
             padding-top: 80px;
             perspective: 1000px;
         }
-        
-        .cyber-grid {
-            position: absolute;
-            bottom: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background-image: linear-gradient(rgba(0, 243, 255, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.3) 1px, transparent 1px);
-            background-size: 50px 50px;
-            transform: rotateX(60deg);
-            z-index: -1;
-            animation: gridMove 40s linear infinite; /* Diperlambat */
-            mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
-        }
-
-        @keyframes gridMove { 0% { transform: rotateX(60deg) translateY(0); } 100% { transform: rotateX(60deg) translateY(50px); } }
 
         .hero::before {
             content: '';
@@ -501,7 +287,7 @@
             top: -50%; left: -50%;
             background: radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
                         radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%);
-            animation: heroGradient 30s ease infinite; /* Diperlambat */
+            animation: heroGradient 30s ease infinite;
             z-index: -1;
         }
         
@@ -630,8 +416,7 @@
         .btn i { margin-left: 8px; transition: var(--transition); }
         .btn:hover i { transform: translateX(3px); }
         
-        .section { padding: 80px 0; position: relative; }
-        .section:nth-child(even) { background-color: var(--gray-dark); }
+        .section { padding: 80px 0; position: relative; background: transparent; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
         .section-badge {
@@ -897,7 +682,6 @@
         
         .skill-card:hover::before { opacity: 0.1; }
         
-        /* OPTIMIZED HOVER: Simpel translateY */
         .skill-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
@@ -959,7 +743,7 @@
             background: var(--gradient-1);
             border-radius: 10px;
             width: 0;
-            transition: width 1.5s ease-out; /* Transisi lebih cepat */
+            transition: width 1.5s ease-out;
             position: relative;
             overflow: hidden;
         }
@@ -1057,7 +841,6 @@
             cursor: pointer;
         }
         
-        /* OPTIMIZED HOVER: Simpel translateY */
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
@@ -1123,7 +906,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-bottom: 12px;
+            margin-bottom: 0px;
         }
         
         .project-tag {
@@ -1141,27 +924,6 @@
             background-color: rgba(255, 255, 255, 0.15);
             transform: translateY(-2px);
         }
-        
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-        }
-        
-        .project-link:hover { color: var(--gray-medium); }
-        
-        .project-link i {
-            margin-left: 6px;
-            transition: var(--transition);
-        }
-        
-        .project-link:hover i { transform: translateX(3px); }
         
         /* MODAL STYLES */
         .modal-overlay {
@@ -1368,7 +1130,7 @@
         
         footer {
             padding: 40px 0 20px;
-            background-color: var(--primary-color);
+            background-color: transparent;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
         }
@@ -1479,7 +1241,7 @@
             .footer-content { flex-direction: column; gap: 15px; }
             .footer-logo { margin-right: 0; }
             .hud-corners { display: none; }
-            .scanlines { opacity: 0.3; }
+            .scanlines { opacity: 0.2; }
         }
         
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -1502,10 +1264,9 @@
         <div class="scroll-progress-bar" id="scrollProgressBar"></div>
     </div>
 
-    <!-- FUTURISTIC OVERLAY (NO VIGNETTE) -->
+    <!-- FUTURISTIC OVERLAY (MINIMAL) -->
     <div class="futuristic-overlay">
         <div class="scanlines"></div>
-        <!-- VIGNETTE DIV REMOVED -->
         <div class="flicker-overlay"></div>
         <div class="hud-corners">
             <div class="corner corner-tl"></div>
@@ -1517,30 +1278,7 @@
         </div>
     </div>
 
-    <!-- GATE OVERLAY -->
-    <div class="gate-overlay" id="gateOverlay">
-        <div class="unlock-flash" id="unlockFlash"></div>
-        <div class="unlock-shockwave" id="unlockShockwave"></div>
-        <div class="door left"></div>
-        <div class="door right"></div>
-        <div class="gate-content">
-            <div class="lock-container" id="unlockBtn">
-                <i class="fas fa-lock lock-icon"></i>
-                <p class="unlock-text">Tap to Unlock</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="animated-bg"></div>
-    
-    <div class="particles" id="particles"></div>
-    
-    <div class="geometric-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-        <div class="shape shape-4"></div>
-    </div>
+    <!-- REMOVED: CYBER GRID, PARTICLES, GEOMETRIC SHAPES FOR CLEAN LOOK -->
     
     <header id="header">
         <nav>
@@ -1561,7 +1299,6 @@
     </header>
 
     <section class="hero" id="home">
-        <div class="cyber-grid"></div>
         <div class="hero-content">
             <div class="hero-subtitle">Hello, I'm Ahmad Fauzi (Ujay)</div>
             <h1><span class="hero-title-gradient glitch" data-text="Ahmad Fauzi">Ahmad Fauzi</span></h1>
@@ -1798,7 +1535,6 @@
                                 <span class="project-tag">UI Enhancement</span>
                                 <span class="project-tag">Scripting</span>
                             </div>
-                            <a href="javascript:void(0)" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                     
@@ -1814,7 +1550,6 @@
                                 <span class="project-tag">CSS</span>
                                 <span class="project-tag">Frontend</span>
                             </div>
-                            <a href="javascript:void(0)" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                     
@@ -1830,7 +1565,6 @@
                                 <span class="project-tag">Debugging</span>
                                 <span class="project-tag">Memory</span>
                             </div>
-                            <a href="javascript:void(0)" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                     
@@ -1846,7 +1580,6 @@
                                 <span class="project-tag">Web Design</span>
                                 <span class="project-tag">UI/UX</span>
                             </div>
-                            <a href="javascript:void(0)" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1963,40 +1696,6 @@
             document.addEventListener('mouseup', () => cursor.classList.remove('active'));
         }
 
-        // UNLOCK GATE ANIMATION LOGIC
-        const gateOverlay = document.getElementById('gateOverlay');
-        const unlockBtn = document.getElementById('unlockBtn');
-        const body = document.body;
-        const unlockFlash = document.getElementById('unlockFlash');
-        const unlockShockwave = document.getElementById('unlockShockwave');
-        
-        unlockBtn.addEventListener('click', function() {
-            unlockFlash.classList.add('active');
-            unlockShockwave.classList.add('active');
-            body.classList.add('shake');
-            gateOverlay.classList.add('open');
-            
-            const lockIcon = unlockBtn.querySelector('.lock-icon');
-            if(lockIcon) {
-                lockIcon.classList.remove('fa-lock');
-                lockIcon.classList.add('fa-lock-open');
-            }
-
-            setTimeout(() => {
-                unlockFlash.classList.remove('active');
-                unlockFlash.classList.add('fade-out');
-            }, 100);
-
-            setTimeout(() => {
-                body.classList.remove('shake');
-            }, 500);
-            
-            setTimeout(() => {
-                gateOverlay.classList.add('hidden');
-                body.classList.add('unlocked');
-            }, 800);
-        });
-
         // SCROLL PROGRESS BAR LOGIC
         window.onscroll = function() {
             const scrollProgressBar = document.getElementById("scrollProgressBar");
@@ -2007,7 +1706,6 @@
         };
 
         // HIDDEN LINK LOGIC (JavaScript Redirect)
-        // Mencegah URL asli muncul di href/status bar browser
         const hiddenLinks = document.querySelectorAll('.btn-hidden-link');
 
         hiddenLinks.forEach(link => {
@@ -2015,11 +1713,9 @@
                 e.preventDefault();
                 const targetUrl = this.getAttribute('data-link');
                 if (targetUrl) {
-                    // Jika link adalah mailto, gunakan window.location.href agar lebih kompatibel dengan email client
                     if (targetUrl.startsWith('mailto:')) {
                         window.location.href = targetUrl;
                     } else {
-                        // Untuk link biasa (Tele, IG, dll), buka di tab baru
                         window.open(targetUrl, '_blank');
                     }
                 }
@@ -2054,29 +1750,6 @@
                 modal.classList.remove('open');
             }
         });
-
-        // PARTICLE GENERATION (REDUCED COUNT)
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 10; 
-            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#38f9d7'];
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                const size = Math.random() * 6 + 3;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.bottom = '-10px';
-                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.animationDuration = Math.random() * 20 + 15 + 's';
-                particle.style.animationDelay = Math.random() * 5 + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        if (window.innerWidth > 768) { createParticles(); }
         
         const typingTexts = ['Full Stack Developer', 'Game Mod Specialist', 'AI Enthusiast', 'Bot Developer', 'Problem Solver'];
         let textIndex = 0;
@@ -2196,16 +1869,6 @@
         const style = document.createElement('style');
         style.textContent = `@keyframes fadeInOut { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } }`;
         document.head.appendChild(style);
-        
-        window.addEventListener('resize', function() {
-            const particlesContainer = document.getElementById('particles');
-            if (window.innerWidth <= 768) {
-                particlesContainer.style.display = 'none';
-            } else {
-                particlesContainer.style.display = 'block';
-                if (particlesContainer.children.length === 0) { createParticles(); }
-            }
-        });
     </script>
 </body>
 </html>
