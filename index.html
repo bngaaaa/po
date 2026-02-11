@@ -242,7 +242,7 @@
             z-index: 10;
         }
         
-        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links { display: flex; list-style: none; gap: 30px; align-items: center; }
         
         .nav-links a {
             color: var(--secondary-color);
@@ -254,6 +254,12 @@
             overflow: hidden;
         }
         
+        /* Style khusus untuk link store di nav agar sedikit beda */
+        .nav-link-store {
+            color: var(--neon-cyan) !important;
+            font-weight: 700 !important;
+        }
+
         /* NAV LINE ANIMATION */
         .nav-links a::before {
             content: '';
@@ -1297,6 +1303,12 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <!-- STORE LINK ADDED IN NAVIGATION -->
+                <li>
+                    <a href="#" class="btn-hidden-link nav-link-store" data-link="https://ujayy.vercel.app/">
+                        Store <i class="fas fa-shopping-bag"></i>
+                    </a>
+                </li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="menu-toggle" id="menuToggle">
@@ -1315,6 +1327,10 @@
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary">View My Work <i class="fas fa-arrow-right"></i></a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch <i class="fas fa-envelope"></i></a>
+                <!-- STORE BUTTON ADDED IN HERO -->
+                <a href="#" class="btn btn-accent btn-hidden-link" data-link="https://ujayy.vercel.app/">
+                    Visit My Store <i class="fas fa-shopping-bag"></i>
+                </a>
                 <a href="#" class="btn btn-accent btn-hidden-link" data-link="https://click-for.joinn.workers.dev">
                     Join All Group & Channel <i class="fab fa-telegram"></i>
                 </a>
@@ -1738,7 +1754,7 @@
             lastScrollTop = scrollTop;
         });
 
-        // HIDDEN LINK LOGIC
+        // HIDDEN LINK LOGIC (Ini yang bikin link aslinya ga keliatan di href)
         const hiddenLinks = document.querySelectorAll('.btn-hidden-link');
 
         hiddenLinks.forEach(link => {
