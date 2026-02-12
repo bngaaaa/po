@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>UjayyStore - Premium Services</title>
+    <title>UjayyStore</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- RESET & VARIABLES (COMPRESSED) --- */
-        :root{--bg-dark:#000;--bg-card:#111;--bg-input:#1a1a1a;--primary:#fff;--primary-hover:#e5e5e5;--accent:#fff;--text-main:#fff;--text-muted:#888;--border:#333;--radius:12px;--shadow:0 4px 15px rgba(0,0,0,0.5);--danger:#fff;}
+        /* --- RESET & VARIABLES --- */
+        :root{
+            --bg-dark:#0a0a0a; 
+            --bg-card:#111; 
+            --bg-input:#1a1a1a; 
+            --primary:#fff; 
+            --primary-hover:#e5e5e5; 
+            --accent:#fff; 
+            --text-main:#fff; 
+            --text-muted:#888; 
+            --border:#333; 
+            --radius:12px; 
+            --shadow:0 4px 15px rgba(0,0,0,0.5); 
+            --danger:#fff;
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+        }
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-tap-highlight-color:transparent;}
-        body{background-color:var(--bg-dark);color:var(--text-main);line-height:1.5;padding-bottom:60px;overflow-x:hidden;user-select:none;}
+        body{background-color:var(--bg-dark);color:var(--text-main);line-height:1.5;padding-bottom:80px;overflow-x:hidden;user-select:none;}
         
         /* --- UTILITIES --- */
         .container{max-width:900px;margin:0 auto;padding:0 15px;position:relative;z-index:2;}
@@ -21,38 +35,62 @@
         .hidden{display:none!important;}
         .flex-center{display:flex;justify-content:center;align-items:center;}
         
+        /* --- ANIMATION UTILS --- */
+        .fade-in-up { animation: fadeInUp 0.5s var(--ease) forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        .scale-in { animation: scaleIn 0.3s var(--ease) forwards; opacity: 0; transform: scale(0.9); }
+        @keyframes scaleIn { to { opacity: 1; transform: scale(1); } }
+
+        .pulse-glow { animation: pulseWhite 2s infinite; }
+        @keyframes pulseWhite {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); border-color: rgba(255,255,255,0.8); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); border-color: #fff; }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); border-color: #fff; }
+        }
+        
         /* --- HEADER --- */
-        header{background-color:rgba(0,0,0,0.95);backdrop-filter:blur(10px);padding:15px 0;box-shadow:var(--shadow);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);}
-        .logo{font-size:1.6rem;font-weight:800;letter-spacing:-0.5px;text-transform:uppercase;color:#fff;}
+        header{background-color:rgba(10,10,10,0.9);backdrop-filter:blur(12px);padding:15px 0;box-shadow:0 4px 20px rgba(0,0,0,0.6);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);transition: 0.3s;}
+        .logo{font-size:1.7rem;font-weight:800;letter-spacing:-0.5px;text-transform:uppercase;color:#fff;text-shadow: 0 0 10px rgba(255,255,255,0.3);}
         .logo span{opacity:0.5;}
         
-        /* --- NAVIGATION --- */
-        .nav-tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:25px 0;background:var(--bg-card);padding:8px;border-radius:var(--radius);border:1px solid var(--border);}
-        .tab-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:10px 18px;cursor:pointer;font-weight:600;font-size:0.85rem;transition:0.3s;border-radius:8px;flex:1;min-width:110px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;}
-        .tab-btn i{font-size:1rem;}
-        .tab-btn:hover{color:#fff;border-color:#fff;}
-        .tab-btn.active{background:var(--primary);color:#000;border-color:var(--primary);box-shadow:0 0 15px rgba(255,255,255,0.2);font-weight:800;}
+        /* --- NAVIGATION (UPDATED TO GRID 3 COLUMNS) --- */
+        .nav-tabs{display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 25px 0; background:var(--bg-card); padding:12px; border-radius:var(--radius); border:1px solid var(--border); box-shadow: inset 0 0 20px rgba(0,0,0,0.5);}
+        
+        .tab-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:12px 5px;cursor:pointer;font-weight:600;font-size:0.85rem;transition:0.3s;border-radius:var(--radius);text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;position:relative;overflow:hidden;}
+        .tab-btn i{font-size:1rem;transition:0.3s;}
+        .tab-btn:hover{color:#fff;background:rgba(255,255,255,0.05);}
+        .tab-btn.active{background:var(--primary);color:#000;border-color:var(--primary);box-shadow:0 0 15px rgba(255,255,255,0.3);font-weight:800;}
+        .tab-btn.active i{transform: rotate(360deg);}
         
         /* --- SECTIONS --- */
-        .section-card{background:var(--bg-card);padding:25px;border-radius:var(--radius);border:1px solid var(--border);animation:slideUp 0.4s ease;margin-bottom:20px;}
-        @keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+        .section-card{background:var(--bg-card);padding:25px;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transform-origin: center top;}
         
-        h2{margin-bottom:20px;font-size:1.4rem;border-bottom:1px solid var(--border);padding-bottom:10px;display:flex;justify-content:space-between;align-items:center;color:#fff;}
-        h2 span{font-size:0.8rem;font-weight:400;color:var(--text-muted);}
+        h2{margin-bottom:25px;font-size:1.4rem;border-bottom:1px solid var(--border);padding-bottom:15px;display:flex;justify-content:space-between;align-items:center;color:#fff;position:relative;}
+        h2::after{content:'';position:absolute;bottom:-1px;left:0;width:50px;height:2px;background:#fff;}
+        h2 span{font-size:0.8rem;font-weight:400;color:var(--text-muted);background:#222;padding:4px 10px;border-radius:4px;}
         h3{margin-bottom:15px;font-size:1.1rem;color:var(--text-main);font-weight:600;}
         
         /* --- BRANDS --- */
         .brand-toggle{display:flex;gap:15px;margin-bottom:25px;}
-        .brand-btn{flex:1;padding:15px;background:var(--bg-input);border:1px solid var(--border);color:var(--text-muted);border-radius:var(--radius);cursor:pointer;font-weight:700;transition:0.3s;font-size:0.9rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}
-        .brand-btn i{font-size:1.2rem;}
-        .brand-btn.active{border-color:var(--primary);color:#fff;background:#222;}
+        .brand-btn{flex:1;padding:15px;background:var(--bg-input);border:1px solid var(--border);color:var(--text-muted);border-radius:var(--radius);cursor:pointer;font-weight:700;transition:0.4s;position:relative;overflow:hidden;font-size:0.9rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}
+        .brand-btn::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);transform: translateX(-100%);transition: 0.5s;}
+        .brand-btn:hover::before{transform: translateX(100%);}
+        .brand-btn i{font-size:1.2rem;transition:0.3s;}
+        .brand-btn.active{border-color:var(--primary);color:#fff;background:#222;transform: translateY(-3px);box-shadow: 0 5px 15px rgba(0,0,0,0.3);}
+        .brand-btn.active i{color:#fff; text-shadow: 0 0 8px #fff;}
         
         /* --- PRICING --- */
         .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px;margin-bottom:25px;}
-        .price-card{background:var(--bg-input);padding:18px 10px;border-radius:var(--radius);cursor:pointer;border:1px solid var(--border);text-align:center;transition:0.2s;position:relative;overflow:hidden;}
-        .price-card:hover{background:#222;border-color:#666;}
-        .price-card.selected{border-color:var(--primary);background:#1a1a1a;}
-        .price-card.selected::after{content:"✔";position:absolute;top:5px;right:8px;color:#fff;font-size:0.8rem;font-weight:bold;}
+        .price-card{background:var(--bg-input);padding:18px 10px;border-radius:var(--radius);cursor:pointer;border:1px solid var(--border);text-align:center;transition:0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);position:relative;overflow:hidden;}
+        .price-card:hover{background:#222;border-color:#666;transform: translateY(-5px);}
+        .price-card.selected{border-color:var(--primary);background:linear-gradient(145deg, #1a1a1a, #111); color: #fff; transform: scale(1.02);}
+        .price-card.selected .duration{color:#fff;}
+        
+        .check-icon-anim { position:absolute; top:8px; right:8px; width:20px; height:20px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; transform: scale(0); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .check-icon-anim i { color:#000; font-size:10px; }
+        .price-card.selected .check-icon-anim { transform: scale(1); }
+        
         .duration{font-weight:800;font-size:1.1rem;display:block;margin-bottom:5px;color:white;}
         .price{color:var(--accent);font-weight:600;font-size:0.95rem;}
         .price-usd{color:var(--text-muted);font-size:0.8rem;display:block;margin-top:3px;}
@@ -61,74 +99,115 @@
         .game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px;max-height:450px;overflow-y:auto;padding-right:5px;}
         .game-grid::-webkit-scrollbar{width:6px;}
         .game-grid::-webkit-scrollbar-thumb{background:#333;border-radius:3px;}
-        .game-item{background:var(--bg-input);padding:12px;border-radius:10px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:0.2s;border:1px solid var(--border);}
-        .game-item:hover{border-color:#fff;background:#222;}
-        .status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;box-shadow:0 0 8px currentColor;}
-        .dot-green{background-color:#fff;color:#fff;box-shadow:0 0 8px rgba(255,255,255,0.3);}
-        .dot-yellow{background-color:#888;color:#888;box-shadow:0 0 8px rgba(136,136,136,0.3);}
+        .game-item{background:var(--bg-input);padding:12px;border-radius:10px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:0.3s;border:1px solid var(--border);opacity: 0; animation: fadeInRight 0.5s var(--ease) forwards;}
+        .game-item:hover{border-color:#fff;background:#222;transform: translateX(5px); padding-left: 17px;}
+        @keyframes fadeInRight { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        
+        .status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;box-shadow:0 0 8px currentColor;transition: 0.3s;}
+        .dot-green{background-color:#fff;color:#fff;box-shadow:0 0 8px rgba(255,255,255,0.5);}
+        .dot-yellow{background-color:#888;color:#888;box-shadow:0 0 8px rgba(136,136,136,0.5);}
         .dot-red{background-color:#444;color:#444;border:1px solid #666;box-shadow:none;}
         .game-name{font-size:0.9rem;font-weight:500;}
         
         /* --- JOKGEN --- */
         .map-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:25px;}
-        .map-item{background:var(--bg-input);padding:15px;border-radius:var(--radius);display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);}
-        .map-item:hover{border-color:#888;}
-        .checkbox-wrapper{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
-        .map-price{color:#fff;font-weight:700;}
-        input[type="checkbox"]{accent-color:#fff;width:18px;height:18px;cursor:pointer;}
+        .map-item{background:var(--bg-input);padding:15px;border-radius:var(--radius);display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);transition: 0.3s;}
+        .map-item:hover{border-color:#fff; background: #222;}
         
-        .note-box{background:#1a1a1a;border-left:4px solid #666;padding:15px;margin-bottom:25px;font-size:0.9rem;border-radius:0 var(--radius) var(--radius) 0;}
+        .cb-container { display: flex; align-items: center; cursor: pointer; user-select: none; font-size: 0.9rem; font-weight: 500;}
+        .cb-container input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+        .checkmark { position: relative; height: 22px; width: 22px; background-color: #1a1a1a; border: 2px solid #555; border-radius: 4px; margin-right: 12px; transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; justify-content:center;}
+        .checkmark:after { content: ""; display: none; width: 5px; height: 10px; border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .cb-container:hover .checkmark { border-color: #888; transform: scale(1.1); }
+        .cb-container input:checked ~ .checkmark { background-color: #fff; border-color: #fff; transform: scale(1.1); }
+        .cb-container input:checked ~ .checkmark:after { display: block; }
+        .map-price{color:#fff;font-weight:700;transition: 0.3s;}
+        
+        .note-box{background:linear-gradient(135deg, #1a1a1a, #151515);border-left:4px solid #666;padding:15px;margin-bottom:25px;font-size:0.9rem;border-radius:0 var(--radius) var(--radius) 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);}
         .note-box ul{padding-left:20px;margin-top:8px;}
         .note-box li{margin-bottom:6px;color:#ccc;list-style-type:square;}
         
+        /* --- BUY ACCOUNT --- */
+        .acc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; margin-bottom: 25px; }
+        .acc-item { 
+            background: var(--bg-input); 
+            border: 1px solid var(--border); 
+            color: var(--text-muted); 
+            padding: 18px 10px; 
+            border-radius: var(--radius); 
+            text-align: center; 
+            font-weight: 700; 
+            font-size: 0.9rem;
+            cursor: pointer; 
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .acc-item i { font-size: 1.4rem; opacity: 0.7; transition: 0.3s; }
+        .acc-item:hover { border-color: #fff; color: #fff; transform: translateY(-3px); }
+        .acc-item:hover i { opacity: 1; color: #fff; }
+        .acc-item.selected { background: #fff; color: #000; border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.3); transform: scale(1.05); }
+        .acc-item.selected i { color: #000; opacity: 1; }
+        
         /* --- INPUTS & BUTTONS --- */
-        .input-group{margin-bottom:20px;}
-        label{display:block;margin-bottom:8px;color:var(--text-muted);font-size:0.9rem;font-weight:500;text-transform:uppercase;letter-spacing:0.5px;}
+        .input-group{margin-bottom:20px; position: relative;}
+        label{display:block;margin-bottom:8px;color:var(--text-muted);font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
         select,input[type="text"],input[type="number"]{width:100%;padding:14px;background:var(--bg-input);border:1px solid var(--border);color:white;border-radius:var(--radius);font-size:1rem;outline:none;transition:0.3s;}
-        select:focus,input:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,0.1);}
+        select:focus,input:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,0.1); background: #222;}
         
-        .btn-action{width:100%;padding:16px;background:#fff;color:#000;border:none;border-radius:var(--radius);font-size:1rem;font-weight:800;cursor:pointer;text-transform:uppercase;margin-top:10px;transition:0.3s;display:flex;justify-content:center;align-items:center;gap:10px;letter-spacing:0.5px;}
-        .btn-action:hover{background:#ccc;transform:translateY(-2px);box-shadow:0 5px 20px rgba(255,255,255,0.1);}
+        .btn-action{width:100%;padding:16px;background:#fff;color:#000;border:none;border-radius:var(--radius);font-size:1rem;font-weight:800;cursor:pointer;text-transform:uppercase;margin-top:10px;transition:all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);display:flex;justify-content:center;align-items:center;gap:10px;letter-spacing:1px; position: relative; overflow: hidden;}
+        .btn-action:active{transform: scale(0.96); }
+        .btn-action:hover{background:#f0f0f0;box-shadow:0 10px 25px rgba(255,255,255,0.15); transform: translateY(-3px);}
         
-        .btn-outline{background:transparent;border:1px solid #666;color:#ccc;margin-top:0;margin-bottom:20px;font-weight:600;font-size:0.9rem;padding:12px;display:flex;justify-content:center;align-items:center;gap:8px;}
-        .btn-outline:hover{border-color:#fff;color:#fff;}
+        .btn-outline{background:transparent;border:1px solid #444;color:#ccc;margin-top:0;margin-bottom:20px;font-weight:600;font-size:0.9rem;padding:12px;display:flex;justify-content:center;align-items:center;gap:8px; transition: 0.3s;}
+        .btn-outline:hover{border-color:#fff;color:#fff; background: rgba(255,255,255,0.05);}
         
-        .total-display{background:#1a1a1a;padding:18px 20px;border-radius:var(--radius);margin-top:25px;display:flex;justify-content:space-between;align-items:center;font-size:1.1rem;font-weight:700;border:1px solid var(--border);}
+        .total-display{background:linear-gradient(90deg, #1a1a1a, #111);padding:18px 20px;border-radius:var(--radius);margin-top:25px;display:flex;justify-content:space-between;align-items:center;font-size:1.1rem;font-weight:700;border:1px solid var(--border); box-shadow: inset 0 0 10px rgba(0,0,0,0.5);}
         
         /* --- JOIN GROUPS --- */
         .profile-header{text-align:center;margin-bottom:30px;}
-        .profile-img{width:120px;height:120px;border-radius:50%;border:2px solid #fff;margin-bottom:15px;object-fit:cover;}
+        .profile-img{width:120px;height:120px;border-radius:50%;border:3px solid #fff;margin-bottom:15px;object-fit:cover;box-shadow: 0 0 20px rgba(255,255,255,0.2); transition: 0.5s;}
+        .profile-img:hover{transform: rotate(5deg) scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.4);}
         .group-list{display:flex;flex-direction:column;gap:15px;margin-top:20px;}
-        .group-item{display:flex;align-items:center;background:var(--bg-input);padding:15px;border-radius:var(--radius);border:1px solid var(--border);text-decoration:none;color:#fff;transition:0.3s;}
-        .group-item:hover{border-color:#fff;background:#222;transform:translateX(5px);}
-        .group-icon{font-size:1.5rem;margin-right:15px;width:40px;text-align:center;display:flex;justify-content:center;}
+        .group-item{display:flex;align-items:center;background:var(--bg-input);padding:15px;border-radius:var(--radius);border:1px solid var(--border);text-decoration:none;color:#fff;transition:0.3s; position: relative;}
+        .group-item:hover{border-color:#fff;background:#222;transform:translateX(8px); box-shadow: -5px 0 15px rgba(255,255,255,0.05);}
+        .group-icon{font-size:1.5rem;margin-right:15px;width:40px;text-align:center;display:flex;justify-content:center; transition: 0.3s;}
+        .group-item:hover .group-icon{ transform: scale(1.2); color: #fff;}
         .group-info h4{font-size:1rem;margin-bottom:2px;}
         .group-info p{font-size:0.8rem;color:#888;}
-        .group-arrow{margin-left:auto;color:#666;}
+        .group-arrow{margin-left:auto;color:#666;transition: 0.3s;}
+        .group-item:hover .group-arrow{ color: #fff; transform: translateX(5px);}
         
         /* --- MODAL --- */
-        .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:flex;justify-content:center;align-items:center;z-index:1000;backdrop-filter:blur(5px);padding:15px;}
-        .modal-content{background:var(--bg-card);padding:0;width:100%;max-width:550px;max-height:85vh;overflow:hidden;border-radius:16px;border:1px solid var(--border);box-shadow:0 10px 40px rgba(0,0,0,0.8);display:flex;flex-direction:column;}
+        .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;z-index:1000;backdrop-filter:blur(8px);padding:15px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;}
+        .modal-overlay.active{opacity: 1; pointer-events: all;}
+        
+        .modal-content{background:var(--bg-card);padding:0;width:100%;max-width:550px;max-height:85vh;overflow:hidden;border-radius:16px;border:1px solid var(--border);box-shadow:0 20px 50px rgba(0,0,0,0.8);display:flex;flex-direction:column; transform: scale(0.8) translateY(20px); transition: 0.4s var(--ease);}
+        .modal-overlay.active .modal-content{transform: scale(1) translateY(0);}
+        
         .modal-header{padding:20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg-input);}
         .modal-title{font-size:1.1rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:10px;}
-        .close-modal{background:none;border:none;color:#888;font-size:1.5rem;cursor:pointer;line-height:1;}
-        .close-modal:hover{color:#fff;}
+        .close-modal{background:none;border:none;color:#888;font-size:1.5rem;cursor:pointer;line-height:1;transition: 0.2s;}
+        .close-modal:hover{color:#fff; transform: rotate(90deg);}
         .modal-body{padding:20px;overflow-y:auto;}
         
-        .feature-section{margin-bottom:20px;}
-        .feature-section:last-child{margin-bottom:0;}
-        .feature-cat{display:block;color:#fff;font-size:0.95rem;font-weight:700;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #333;text-transform:uppercase;letter-spacing:0.5px;}
+        .feature-section{margin-bottom:25px; border-bottom: 1px dashed #333; padding-bottom: 15px;}
+        .feature-section:last-child{margin-bottom:0; border-bottom: none;}
+        .feature-cat{display:block;color:#fff;font-size:0.95rem;font-weight:700;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #333;text-transform:uppercase;letter-spacing:0.5px;}
         .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 15px;font-size:0.85rem;color:var(--text-muted);}
-        .feature-item{display:flex;align-items:flex-start;gap:8px;line-height:1.4;}
+        .feature-item{display:flex;align-items:flex-start;gap:8px;line-height:1.4; transition: 0.2s;}
+        .feature-item:hover{color: #fff; transform: translateX(3px);}
         .feature-item::before{content:"•";color:#fff;font-weight:bold;font-size:1.1em;line-height:1;margin-top:1px;}
         
         /* --- TOAST (CUSTOM ALERT) --- */
         #toast-container{position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;}
-        .toast{background:var(--bg-card);color:#fff;padding:12px 20px;border-radius:8px;border-left:4px solid #fff;box-shadow:0 5px 15px rgba(0,0,0,0.5);animation:slideIn 0.3s ease;max-width:300px;font-size:0.9rem;display:flex;align-items:center;gap:10px;}
-        @keyframes slideIn{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+        .toast{background:var(--bg-card);color:#fff;padding:12px 20px;border-radius:8px;border-left:4px solid #fff;box-shadow:0 5px 20px rgba(0,0,0,0.6);display:flex;align-items:center;gap:10px; transform: translateX(120%); transition: transform 0.4s var(--ease); max-width:300px;font-size:0.9rem;}
+        .toast.show{transform: translateX(0);}
         
         /* --- FOOTER --- */
-        footer{text-align:center;margin-top:50px;color:var(--text-muted);font-size:0.8rem;padding-bottom:20px;}
+        footer{text-align:center;margin-top:50px;color:var(--text-muted);font-size:0.8rem;padding-bottom:20px; opacity: 0.6;}
         @media (max-width: 400px){.feature-grid{grid-template-columns:1fr;}}
     </style>
 </head>
@@ -140,61 +219,57 @@
     <div id="toast-container"></div>
 
     <!-- MODAL -->
-    <div id="feature-modal" class="modal-overlay hidden" onclick="closeModal(event)">
-        <div class="modal-content">
+    <div id="feature-modal" class="modal-overlay">
+        <div class="modal-content" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <div class="modal-title" id="modal-title">Fitur Cheat</div>
-                <button class="close-modal" onclick="closeModal(event, true)">&times;</button>
+                <button class="close-modal" onclick="closeModal(true)">&times;</button>
             </div>
             <div class="modal-body" id="modal-body"></div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT (OBFUSCATED LOGIC) -->
+    <!-- JAVASCRIPT -->
     <script>
         // --- ANTI DEBUG & PROTECTION LAYER ---
         (function() {
-            // 1. Disable Right Click & Key shortcuts
             document.addEventListener('contextmenu', event => event.preventDefault());
-            
             document.onkeydown = function(e) {
-                if(e.keyCode == 123) return false; // F12
-                if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
-                if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
-                if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
-                if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
+                if(e.keyCode == 123) return false;
+                if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+                if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+                if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+                if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
             }
-
-            // 2. Infinite Debugger Loop (DevTools Trap)
-            // This will freeze the browser if DevTools is opened
             setInterval(function() {
                 const startTime = new Date().getTime();
                 debugger; 
                 const endTime = new Date().getTime();
                 if (endTime - startTime > 100) {
-                    // Detected DevTools open, optionally reload or clear content
-                    // document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:50px;'>Security Alert</h1>";
+                    // Detected logic here
                 }
             }, 50);
-
-            // 3. Clear Console
             setInterval(function(){
                 console.clear();
-                console.log("%cStop!", "color: red; font-size: 40px; font-weight: bold;");
-                console.log("%cThis is a private feature of UjayyStore.", "color: white; font-size: 14px;");
+                console.log("%cProtected!", "color: white; font-size: 20px; background: red;");
             }, 1000);
         })();
 
-        // --- UI HELPER: TOAST (PENGGANTI ALERT) ---
+        // --- UI HELPER: TOAST ---
         function showToast(msg) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = 'toast';
             toast.innerHTML = `<i class="fa-solid fa-circle-info"></i> <span>${msg}</span>`;
             container.appendChild(toast);
+            
+            // Trigger reflow
+            void toast.offsetWidth; 
+            toast.classList.add('show');
+            
             setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 300);
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
             }, 3000);
         }
 
@@ -243,36 +318,39 @@
         };
 
         let _0xSTATE = {
-            gag: { brand: 'deadly', price: 0, priceStr: '', duration: '' }
+            gag: { brand: 'deadly', price: 0, priceStr: '', duration: '' },
+            acc: { level: null }
         };
 
-        // --- CONTENT INJECTION (HTML STRING) ---
-        // Disembunyikan dalam string agar tidak terbaca saat View Source
+        // --- CONTENT INJECTION ---
         const _0xHTML = `
             <!-- INTRO POPUP -->
-            <div id="intro-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:9999;display:flex;justify-content:center;align-items:center;padding:20px;">
-                <div class="intro-box" style="background:var(--bg-card);width:100%;max-width:600px;max-height:90vh;border-radius:16px;border:1px solid #fff;box-shadow:0 0 50px rgba(255,255,255,0.1);display:flex;flex-direction:column;overflow:hidden;">
-                    <div class="intro-header" style="background:#fff;color:#000;padding:15px 20px;text-align:center;font-weight:800;text-transform:uppercase;letter-spacing:1px;font-size:1.2rem;">
+            <div id="intro-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:9999;display:flex;justify-content:center;align-items:center;padding:20px;">
+                <div class="intro-box scale-in" style="background:var(--bg-card);width:100%;max-width:600px;max-height:90vh;border-radius:16px;border:1px solid #fff;box-shadow:0 0 60px rgba(255,255,255,0.15);display:flex;flex-direction:column;overflow:hidden;">
+                    <div class="intro-header" style="background:#fff;color:#000;padding:20px;text-align:center;font-weight:900;text-transform:uppercase;letter-spacing:2px;font-size:1.3rem;">
                         ⚠️ WARNING / INFORMATION
                     </div>
                     <div class="intro-body" style="padding:25px;overflow-y:auto;color:#ddd;font-size:0.95rem;line-height:1.6;">
-                        <p>Playing with any type of cheats is <strong>only for fun</strong> and <strong>100% your responsibility</strong>. Whatever the brand of the hack or the developer, all leads to a ban.</p>
-                        <p>If you don't want to get banned, just don't play with hacks.</p>
-                        <p>I know these words might upset some liars and scammers, but we don't care.</p>
-                        <p><strong>You have to follow these tips:</strong></p>
-                        <ol class="intro-list" style="padding-left:20px;margin-bottom:15px;">
-                            <li>You have to follow the files channel of the hack and <strong>pin it</strong> to see any update or warning.</li>
-                            <li>Play like a professional: play safely and avoid reports as much as you can.</li>
-                            <li>Never give your key to anyone except the developer or your reseller.</li>
-                            <li>Don't use any files that are not in the files channel.</li>
-                            <li>You have to know that any hack does updates, and that may take a few hours, a day, or more. We always extend the key to compensate for your subscription.</li>
-                            <li>Follow any advice or tip that I post in the files channel and never neglect it.</li>
-                            <li>If there is any internal update, whatever the hack you play with, instantly log out of your account and start testing for 5 games.</li>
-                        </ol>
-                        <p style="text-align:center;color:#fff;font-weight:800;font-size:1.1rem;border-top:1px solid #333;padding-top:15px;margin-top:10px;">NO REFUND POLICY 🚫</p>
+                        <p style="margin-bottom:15px;">Playing with any type of cheats is <strong>only for fun</strong> and <strong>100% your responsibility</strong>. Whatever the brand of the hack or the developer, all leads to a ban.</p>
+                        <p style="margin-bottom:15px;">If you don't want to get banned, just don't play with hacks.</p>
+                        <p style="margin-bottom:20px;">I know these words might upset some liars and scammers, but we don't care.</p>
+                        
+                        <div style="background:#111; padding:15px; border-radius:8px; border-left:3px solid #fff; margin-bottom:20px;">
+                            <strong style="color:#fff; display:block; margin-bottom:10px;">You have to follow these tips:</strong>
+                            <ol style="padding-left:20px;margin-top:10px; color:#aaa;">
+                                <li style="margin-bottom:8px;">Follow the files channel and <strong>pin it</strong>.</li>
+                                <li style="margin-bottom:8px;">Play like a professional: play safely.</li>
+                                <li style="margin-bottom:8px;">Never give your key to anyone.</li>
+                                <li style="margin-bottom:8px;">Don't use any files not in the channel.</li>
+                                <li style="margin-bottom:8px;">Updates take time (hours/days). We extend keys for this.</li>
+                                <li style="margin-bottom:8px;">Follow advice posted in the channel.</li>
+                                <li>Internal update? Log out instantly and test.</li>
+                            </ol>
+                        </div>
+                        <p style="text-align:center;color:#ff3333;font-weight:800;font-size:1.2rem;text-shadow:0 0 10px rgba(255,0,0,0.3);">NO REFUND POLICY 🚫</p>
                     </div>
-                    <div class="intro-footer" style="padding:20px;border-top:1px solid var(--border);text-align:center;background:var(--bg-input);">
-                        <button class="btn-enter" onclick="closeIntro()" style="background:#fff;color:#000;border:none;padding:12px 30px;border-radius:50px;font-weight:bold;font-size:1rem;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:1px;">I Understand, Enter Store</button>
+                    <div class="intro-footer" style="padding:25px;border-top:1px solid var(--border);text-align:center;background:var(--bg-input);">
+                        <button class="btn-enter" onclick="closeIntro()" style="background:#fff;color:#000;border:none;padding:15px 40px;border-radius:50px;font-weight:bold;font-size:1rem;cursor:pointer:0.3s;text-transform:uppercase;letter-spacing:1.5px; box-shadow: 0 5px 20px rgba(255,255,255,0.2); transition:0.3s;">I Understand, Enter</button>
                     </div>
                 </div>
             </div>
@@ -285,16 +363,17 @@
 
             <div class="container">
                 <nav class="nav-tabs">
-                    <button class="tab-btn active" onclick="switchTab('tab-gag')"><i class="fa-solid fa-gamepad"></i> Cheat GaG</button>
-                    <button class="tab-btn" onclick="switchTab('tab-allgames')"><i class="fa-solid fa-layer-group"></i> All Game</button>
-                    <button class="tab-btn" onclick="switchTab('tab-jokgen')"><i class="fa-solid fa-motorcycle"></i> Jokgen</button>
-                    <button class="tab-btn" onclick="switchTab('tab-acc')"><i class="fa-solid fa-id-card"></i> Buy Acc</button>
-                    <button class="tab-btn" onclick="switchTab('tab-rekber')"><i class="fa-solid fa-handshake-simple"></i> Rekber</button>
-                    <button class="tab-btn" onclick="switchTab('tab-groups')"><i class="fa-solid fa-users"></i> Join Groups</button>
+                    <!-- URUTAN SESUAI REQUEST -->
+                    <button class="tab-btn active" onclick="switchTab('tab-gag', this)"><i class="fa-solid fa-gamepad"></i> Buy Cheat Gng</button>
+                    <button class="tab-btn" onclick="switchTab('tab-allgames', this)"><i class="fa-solid fa-layer-group"></i> Cheat All Game</button>
+                    <button class="tab-btn" onclick="switchTab('tab-jokgen', this)"><i class="fa-solid fa-khanda"></i> Jokgen Gng</button>
+                    <button class="tab-btn" onclick="switchTab('tab-acc', this)"><i class="fa-solid fa-id-card"></i> Buy Acc Gng</button>
+                    <button class="tab-btn" onclick="switchTab('tab-rekber', this)"><i class="fa-solid fa-handshake-simple"></i> Rekber</button>
+                    <button class="tab-btn" onclick="switchTab('tab-groups', this)"><i class="fa-solid fa-users"></i> Join All Group</button>
                 </nav>
 
                 <!-- TAB 1: GAG -->
-                <section id="tab-gag" class="section-card">
+                <section id="tab-gag" class="section-card fade-in-up">
                     <h2>Buy Cheat Gold And Glory</h2>
                     <div class="brand-toggle">
                         <button class="brand-btn active" onclick="selectBrand('deadly', this)"><i class="fa-solid fa-skull"></i> 4 𝖉𝖊𝖆𝖉𝖑𝖞♱𝖘𝖎𝖓𝖘</button>
@@ -305,10 +384,22 @@
                         <button class="btn-action btn-outline" onclick="openModal('deadly')"><i class="fa-solid fa-list"></i> Lihat Fitur Lengkap</button>
                         <h3>Pilih Durasi</h3>
                         <div class="pricing-grid">
-                            <div class="price-card" onclick="selectPrice(this, '50.000', '5 DAY')"><span class="duration">5 DAY</span><span class="price">IDR 50k</span><span class="price-usd">($3)</span></div>
-                            <div class="price-card" onclick="selectPrice(this, '75.000', '10 DAY')"><span class="duration">10 DAY</span><span class="price">IDR 75k</span><span class="price-usd">($8)</span></div>
-                            <div class="price-card" onclick="selectPrice(this, '150.000', '1 MONTH')"><span class="duration">1 MONTH</span><span class="price">IDR 150k</span><span class="price-usd">($10)</span></div>
-                            <div class="price-card" onclick="selectPrice(this, '330.000', '1 SEASON')"><span class="duration">1 SEASON</span><span class="price">IDR 330k</span><span class="price-usd">($21)</span></div>
+                            <div class="price-card" onclick="selectPrice(this, '50.000', '5 DAY')">
+                                <div class="check-icon-anim"><i class="fa-solid fa-check"></i></div>
+                                <span class="duration">5 DAY</span><span class="price">IDR 50k</span><span class="price-usd">($3)</span>
+                            </div>
+                            <div class="price-card" onclick="selectPrice(this, '75.000', '10 DAY')">
+                                <div class="check-icon-anim"><i class="fa-solid fa-check"></i></div>
+                                <span class="duration">10 DAY</span><span class="price">IDR 75k</span><span class="price-usd">($8)</span>
+                            </div>
+                            <div class="price-card" onclick="selectPrice(this, '150.000', '1 MONTH')">
+                                <div class="check-icon-anim"><i class="fa-solid fa-check"></i></div>
+                                <span class="duration">1 MONTH</span><span class="price">IDR 150k</span><span class="price-usd">($10)</span>
+                            </div>
+                            <div class="price-card" onclick="selectPrice(this, '330.000', '1 SEASON')">
+                                <div class="check-icon-anim"><i class="fa-solid fa-check"></i></div>
+                                <span class="duration">1 SEASON</span><span class="price">IDR 330k</span><span class="price-usd">($21)</span>
+                            </div>
                         </div>
                     </div>
 
@@ -316,10 +407,22 @@
                         <button class="btn-action btn-outline" onclick="openModal('g3')"><i class="fa-solid fa-list"></i> Lihat Fitur Lengkap</button>
                         <h3>Pilih Durasi</h3>
                         <div class="pricing-grid">
-                            <div class="price-card" onclick="selectPrice(this, '30.000', '3 DAY')"><span class="duration">3 DAY</span><span class="price">IDR 30k</span><span class="price-usd">($2)</span></div>
-                            <div class="price-card" onclick="selectPrice(this, '45.000', '5 DAY')"><span class="duration">5 DAY</span><span class="price">IDR 45k</span><span class="price-usd">($3)</span></div>
-                            <div class="price-card" onclick="selectPrice(this, '75.000', '10 DAY')"><span class="duration">10 DAY</span><span class="price">IDR 75k</span><span class="price-usd">($5)</span></div>
-                            <div class="price-card" onclick="selectPrice(this, '150.000', '1 MONTH')"><span class="duration">1 MONTH</span><span class="price">IDR 150k</span><span class="price-usd">($10)</span></div>
+                            <div class="price-card" onclick="selectPrice(this, '30.000', '3 DAY')">
+                                <div class="check-icon-anim"><i class="fa-solid fa-check"></i></div>
+                                <span class="duration">3 DAY</span><span class="price">IDR 30k</span><span class="price-usd">($2)</span>
+                            </div>
+                            <div class="price-card" onclick="selectPrice(this, '45.000', '5 DAY')">
+                                <div class="check-icon-anim"><i class="fa-solid fa-check"></i></div>
+                                <span class="duration">5 DAY</span><span class="price">IDR 45k</span><span class="price-usd">($3)</span>
+                            </div>
+                            <div class="price-card" onclick="selectPrice(this, '75.000', '10 DAY')">
+                                <div class="check-icon-anim"><i class="fa-solid fa-check"></i></div>
+                                <span class="duration">10 DAY</span><span class="price">IDR 75k</span><span class="price-usd">($5)</span>
+                            </div>
+                            <div class="price-card" onclick="selectPrice(this, '150.000', '1 MONTH')">
+                                <div class="check-icon-anim"><i class="fa-solid fa-check"></i></div>
+                                <span class="duration">1 MONTH</span><span class="price">IDR 150k</span><span class="price-usd">($10)</span>
+                            </div>
                         </div>
                     </div>
 
@@ -345,7 +448,7 @@
                 <section id="tab-jokgen" class="section-card hidden">
                     <h2>Joki Gendong (Gold And Glory)</h2>
                     <div class="note-box">
-                        <strong>Note Penting:</strong>
+                        <strong style="color:#fff;">Note Penting:</strong>
                         <ul>
                             <li>Mati kesalahan buyer? (No Rematch)</li>
                             <li>Mati kesalahan Worker? (FULL 100% REMATCH)</li>
@@ -358,15 +461,27 @@
                     <h3>Pilih Map</h3>
                     <div class="map-list">
                         <div class="map-item">
-                            <label class="checkbox-wrapper"><input type="checkbox" class="jokgen-check" value="9000" data-name="Map Challenge"><span>Map Challenge</span></label>
+                            <label class="cb-container">
+                                <input type="checkbox" class="jokgen-check" value="9000" data-name="Map Challenge">
+                                <span class="checkmark"></span>
+                                <span class="map-name">Map Challenge</span>
+                            </label>
                             <span class="map-price">9k</span>
                         </div>
                         <div class="map-item">
-                            <label class="checkbox-wrapper"><input type="checkbox" class="jokgen-check" value="12000" data-name="Map Inferno"><span>Map Inferno</span></label>
+                            <label class="cb-container">
+                                <input type="checkbox" class="jokgen-check" value="12000" data-name="Map Inferno">
+                                <span class="checkmark"></span>
+                                <span class="map-name">Map Inferno</span>
+                            </label>
                             <span class="map-price">12k</span>
                         </div>
                         <div class="map-item">
-                            <label class="checkbox-wrapper"><input type="checkbox" class="jokgen-check" value="10000" data-name="Map Dcp Challenge"><span>Map Dcp Challenge</span></label>
+                            <label class="cb-container">
+                                <input type="checkbox" class="jokgen-check" value="10000" data-name="Map Dcp Challenge">
+                                <span class="checkmark"></span>
+                                <span class="map-name">Map Dcp Challenge</span>
+                            </label>
                             <span class="map-price">10k</span>
                         </div>
                     </div>
@@ -388,17 +503,51 @@
                 <!-- TAB 4: ACC -->
                 <section id="tab-acc" class="section-card hidden">
                     <h2>Buy Acc Lvl 8 - 17</h2>
-                    <p style="margin-bottom:20px;color:var(--text-muted);">Pilih level akun yang diinginkan, harga akan dikonfirmasi via WhatsApp.</p>
-                    <div class="input-group">
-                        <label>Pilih Level Akun</label>
-                        <select id="acc-level-select">
-                            <option value="" disabled selected>-- Pilih Level --</option>
-                            <option value="Level 8">Level 8</option><option value="Level 9">Level 9</option><option value="Level 10">Level 10</option>
-                            <option value="Level 11">Level 11</option><option value="Level 12">Level 12</option><option value="Level 13">Level 13</option>
-                            <option value="Level 14">Level 14</option><option value="Level 15">Level 15</option><option value="Level 16">Level 16</option>
-                            <option value="Level 17">Level 17</option>
-                        </select>
+                    <p style="margin-bottom:25px;color:var(--text-muted);">Pilih level akun yang diinginkan, harga akan dikonfirmasi via WhatsApp.</p>
+                    
+                    <div class="acc-grid" id="acc-level-container">
+                        <div class="acc-item" onclick="selectAccLevel(this, 'Level 8')">
+                            <i class="fa-solid fa-user-shield"></i>
+                            <span>Level 8</span>
+                        </div>
+                        <div class="acc-item" onclick="selectAccLevel(this, 'Level 9')">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Level 9</span>
+                        </div>
+                        <div class="acc-item" onclick="selectAccLevel(this, 'Level 10')">
+                            <i class="fa-solid fa-star"></i>
+                            <span>Level 10</span>
+                        </div>
+                        <div class="acc-item" onclick="selectAccLevel(this, 'Level 11')">
+                            <i class="fa-solid fa-award"></i>
+                            <span>Level 11</span>
+                        </div>
+                        <div class="acc-item" onclick="selectAccLevel(this, 'Level 12')">
+                            <i class="fa-solid fa-trophy"></i>
+                            <span>Level 12</span>
+                        </div>
+                        <div class="acc-item" onclick="selectAccLevel(this, 'Level 13')">
+                            <i class="fa-solid fa-crown"></i>
+                            <span>Level 13</span>
+                        </div>
+                        <div class="acc-item" onclick="selectAccLevel(this, 'Level 14')">
+                            <i class="fa-solid fa-gem"></i>
+                            <span>Level 14</span>
+                        </div>
+                        <div class="acc-item" onclick="selectAccLevel(this, 'Level 15')">
+                            <i class="fa-solid fa-fire"></i>
+                            <span>Level 15</span>
+                        </div>
+                        <div class="acc-item" onclick="selectAccLevel(this, 'Level 16')">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span>Level 16</span>
+                        </div>
+                        <div class="acc-item" onclick="selectAccLevel(this, 'Level 17')">
+                            <i class="fa-solid fa-dragon"></i>
+                            <span>Level 17</span>
+                        </div>
                     </div>
+
                     <button class="btn-action" onclick="checkoutWa('acc')"><i class="fa-solid fa-cart-shopping"></i> Tanya Harga & Beli</button>
                 </section>
 
@@ -461,7 +610,7 @@
                         </a>
                         <a href="https://t.me/deadlysinsStoree" target="_blank" class="group-item">
                             <div class="group-icon"><i class="fa-solid fa-skull"></i></div>
-                            <div class="group-info"><h4>Channel Telegram 4 Sins</h4><p>Store</p></div>
+                            <div class="group-info"><h4>Channel Telegram 4 Sins</h4><p>Channel</p></div>
                             <div class="group-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                         </a>
                         <a href="https://chat.whatsapp.com/G58EVIQiZlaFxU6pJKoJM9?mode=gi_t" target="_blank" class="group-item">
@@ -472,7 +621,7 @@
                     </div>
                 </section>
             </div>
-            <footer><p>&copy; 2023 UjayyStore. Professional Game Services.</p></footer>
+            <footer><p>&copy; 2026 UjayyStore. All right reserved.</p></footer>
         `;
 
         // --- INJECT HTML ON LOAD ---
@@ -488,35 +637,61 @@
 
         function closeIntro() {
             const el = document.getElementById('intro-overlay');
-            if(el) el.style.display = 'none';
+            el.style.transition = "opacity 0.5s ease";
+            el.style.opacity = "0";
+            setTimeout(() => {
+                el.style.display = 'none';
+            }, 500);
         }
 
-        function switchTab(id) {
-            document.querySelectorAll('section').forEach(el => el.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+        function switchTab(id, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => {
+                sec.classList.add('hidden');
+                sec.classList.remove('fade-in-up'); 
+            });
+
+            const target = document.getElementById(id);
+            target.classList.remove('hidden');
+            void target.offsetWidth;
+            target.classList.add('fade-in-up');
         }
 
         function selectBrand(brand, btn) {
             _0xSTATE.gag.brand = brand;
             _0xSTATE.gag.price = 0;
             document.getElementById('gag-total').innerText = 'Rp 0';
+            
+            document.querySelectorAll('.price-card').forEach(c => {
+                c.classList.remove('selected', 'pulse-glow');
+            });
+
             document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            
+            const deadly = document.getElementById('brand-deadly');
+            const g3 = document.getElementById('brand-g3store');
+            
             if(brand === 'deadly') {
-                document.getElementById('brand-deadly').classList.remove('hidden');
-                document.getElementById('brand-g3store').classList.add('hidden');
+                g3.classList.add('hidden');
+                deadly.classList.remove('hidden');
             } else {
-                document.getElementById('brand-deadly').classList.add('hidden');
-                document.getElementById('brand-g3store').classList.remove('hidden');
+                deadly.classList.add('hidden');
+                g3.classList.remove('hidden');
             }
         }
 
         function selectPrice(el, price, duration) {
             const container = el.parentElement;
-            container.querySelectorAll('.price-card').forEach(c => c.classList.remove('selected'));
-            el.classList.add('selected');
+            container.querySelectorAll('.price-card').forEach(c => {
+                c.classList.remove('selected', 'pulse-glow');
+            });
+            
+            el.classList.add('selected', 'pulse-glow'); 
+            
             _0xSTATE.gag.price = parseInt(price.replace('.',''));
             _0xSTATE.gag.priceStr = price.replace('.', '');
             _0xSTATE.gag.duration = duration;
@@ -527,9 +702,10 @@
             const grid = document.getElementById('game-list-container');
             if(!grid) return;
             let html = '';
-            _0xCONFIG.games.forEach(game => {
+            _0xCONFIG.games.forEach((game, index) => {
                 let c = game.status === 'green' ? 'dot-green' : (game.status === 'yellow' ? 'dot-yellow' : 'dot-red');
-                html += `<div class="game-item" onclick="orderGame('${game.name}')"><div class="status-dot ${c}"></div><span class="game-name">${game.name}</span></div>`;
+                let delay = index * 0.05; 
+                html += `<div class="game-item" onclick="orderGame('${game.name}')" style="animation-delay: ${delay}s"><div class="status-dot ${c}"></div><span class="game-name">${game.name}</span></div>`;
             });
             grid.innerHTML = html;
         }
@@ -564,6 +740,12 @@
                 document.getElementById('rekber-total').innerText = "-";
             }
         }
+        
+        function selectAccLevel(el, level) {
+            document.querySelectorAll('.acc-item').forEach(item => item.classList.remove('selected'));
+            el.classList.add('selected');
+            _0xSTATE.acc.level = level;
+        }
 
         const _featDeadly = `<div class="feature-section"><span class="feature-cat">ESP & ESP Settings</span><div class="feature-grid"><div class="feature-item">Configuration Manager</div><div class="feature-item">Enable Bypass + Anti FC</div><div class="feature-item">Force Exit Match</div><div class="feature-item">Enable Functions</div><div class="feature-item">Draw Box</div><div class="feature-item">Draw Line</div><div class="feature-item">Draw Info Player</div></div></div><div class="feature-section"><span class="feature-cat">Monster ESP</span><div class="feature-grid"><div class="feature-item">Draw Box Monster</div><div class="feature-item">Draw Line Monster</div><div class="feature-item">Show Info</div></div></div><div class="feature-section"><span class="feature-cat">Aimbot & Aim Settings</span><div class="feature-grid"><div class="feature-item">Aim Activation</div><div class="feature-item">Enable Aim Bot</div><div class="feature-item">Silent Aim</div><div class="feature-item">Auto Headshot</div><div class="feature-item">Force Headshot</div><div class="feature-item">Target & Range</div><div class="feature-item">Target Type</div><div class="feature-item">FOV Radius</div><div class="feature-item">Max Range</div><div class="feature-item">Show FOV Circle</div><div class="feature-item">Show Aim Line</div></div></div><div class="feature-section"><span class="feature-cat">Memory Hacks</span><div class="feature-grid"><div class="feature-item">Level 50 (Lobby)</div><div class="feature-item">Multi Damage</div><div class="feature-item">Movement</div><div class="feature-item">No Collision</div><div class="feature-item">Unlimited Jump</div><div class="feature-item">Guncangan Maut</div><div class="feature-item">Crouch Jump</div><div class="feature-item">Speed Settings</div><div class="feature-item">Crouch Speed</div><div class="feature-item">Walk Speed</div></div></div><div class="feature-section"><span class="feature-cat">Other Features</span><div class="feature-grid"><div class="feature-item">Infinite Durability</div><div class="feature-item">Enable Entity Size</div><div class="feature-item">Enable FOV</div><div class="feature-item">Force Skill Enable</div><div class="feature-item">Disable Skill Hold</div><div class="feature-item" style="color:#666;">Unlimited Bag (Maintenance)</div></div></div>`;
 
@@ -573,13 +755,13 @@
             const m = document.getElementById('feature-modal');
             const ttl = document.getElementById('modal-title');
             const bd = document.getElementById('modal-body');
-            m.classList.remove('hidden');
+            m.classList.add('active');
             if(t==='deadly') { ttl.innerHTML=`<i class="fa-solid fa-skull"></i> Fitur: 4 𝖉𝖊𝖆𝖉𝖑𝖞♱𝖘𝖎𝖓𝖘`; bd.innerHTML=_featDeadly; }
             else if(t==='g3') { ttl.innerHTML=`<i class="fa-solid fa-store"></i> Fitur: G3 Store`; bd.innerHTML=_featG3; }
         }
 
-        function closeModal(e, f) {
-            if (f || e.target.id === 'feature-modal') document.getElementById('feature-modal').classList.add('hidden');
+        function closeModal(f) {
+            document.getElementById('feature-modal').classList.remove('active');
         }
 
         function joinAll() {
@@ -595,7 +777,7 @@
             if (type === 'gag') {
                 if(_0xSTATE.gag.price === 0) { showToast("Silakan pilih durasi cheat."); return; }
                 const bName = _0xSTATE.gag.brand === 'deadly' ? '4 𝖉𝖊𝖆𝖉𝖑𝖞♱𝖘𝖎𝖓𝖘' : 'G3 Store';
-                msg = `Halo Admin UjayyStore, saya mau order Cheat Gold And Glory.\n\n*Brand:* ${bName}\n*Durasi:* ${_0xSTATE.gag.duration}\n*Harga:* Rp ${_0xSTATE.gag.priceStr}\n\nMohon diproses!`;
+                msg = `Halo Admin Ujayy, saya mau order Cheat Gold And Glory.\n\n*Brand:* ${bName}\n*Durasi:* ${_0xSTATE.gag.duration}\n*Harga:* Rp ${_0xSTATE.gag.priceStr}\n\nMohon diproses!`;
             } 
             else if (type === 'jokgen') {
                 const tot = calculateJokgen();
@@ -603,11 +785,11 @@
                 if(ign === "-") { showToast("Mohon isi Username Game anda."); return; }
                 let m = document.getElementById('jokgen-matches').value;
                 let i = []; document.querySelectorAll('.jokgen-check:checked').forEach(cb => i.push(cb.dataset.name));
-                msg = `Halo Admin UjayyStore, order Jokgen.\n\n*Map:* ${i.join(', ')}\n*Jumlah Match:* ${m}\n*Total:* Rp ${tot.toLocaleString('id-ID')}\n*Username:* ${ign}\n\nSetuju aturan.`;
+                msg = `Halo Admin Ujayy, order Jokgen.\n\n*Map:* ${i.join(', ')}\n*Jumlah Match:* ${m}\n*Total:* Rp ${tot.toLocaleString('id-ID')}\n*Username:* ${ign}\n\nSetuju aturan.`;
             }
             else if (type === 'acc') {
-                const l = document.getElementById('acc-level-select').value;
-                if(!l) { showToast("Pilih level akun."); return; }
+                const l = _0xSTATE.acc.level;
+                if(!l) { showToast("Pilih level akun terlebih dahulu."); return; }
                 msg = `Halo Admin, saya mau beli Akun Gold And Glory.\n\n*Level:* ${l}\n\nMohon info harganya.`;
             }
             else if (type === 'rekber') {
