@@ -1,1939 +1,624 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Ujayy | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UjayyStore - Premium Services</title>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: none; 
-        }
-        
-        input, textarea, select, button {
-            cursor: auto;
-        }
-
-        @media (hover: none) and (pointer: coarse) {
-            * { cursor: auto !important; }
-            .custom-cursor { display: none !important; }
-        }
-
-        :root {
-            --primary-color: #0a0a0a;
-            --secondary-color: #ffffff;
-            --accent-color: #f0f0f0;
-            --gray-light: #f5f5f5;
-            --gray-medium: #888;
-            --gray-dark: #1a1a1a;
-            --neon-cyan: #00f3ff;
-            --neon-purple: #bc13fe;
-            --neon-pink: #ff0099;
-            --transition: all 0.3s ease;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            --gradient-6: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
-            --gradient-7: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            --gradient-8: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #111 100%);
-            color: var(--secondary-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        /* CUSTOM CROSSHAIR CURSOR */
-        .custom-cursor {
-            position: fixed;
-            top: 0; left: 0;
-            width: 30px; height: 30px;
-            border: 2px solid var(--neon-cyan);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 99999;
-            transform: translate(-50%, -50%);
-            transition: width 0.1s, height 0.1s, border-color 0.1s;
-            mix-blend-mode: difference;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .custom-cursor::after {
-            content: '';
-            width: 4px; height: 4px;
-            background: var(--neon-pink);
-            border-radius: 50%;
-        }
-
-        .custom-cursor.active {
-            width: 20px;
-            height: 20px;
-            border-color: var(--neon-pink);
-            background: rgba(255, 0, 153, 0.2);
-        }
-
-        .custom-cursor.hovering {
-            width: 40px;
-            height: 40px;
-            border-color: var(--secondary-color);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .scroll-progress-container {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: 10001;
-        }
-
-        .scroll-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
-            width: 0%;
-            box-shadow: 0 0 10px var(--neon-cyan);
-            transition: width 0.1s;
-        }
-
-        /* FUTURISTIC OVERLAY */
-        .futuristic-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 998;
-            pointer-events: none;
-            overflow: hidden;
-            mix-blend-mode: overlay;
-        }
-        
-        .scanlines {
-            width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
-            background-size: 100% 4px;
-            opacity: 0.2;
-        }
-
-        .scanlines::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-        }
-        
-        .hud-corners { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
-        
-        .corner {
-            position: absolute;
-            width: 40px; height: 40px;
-            border: 2px solid var(--neon-cyan);
-            opacity: 0.3;
-        }
-        
-        .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; border-top-left-radius:5px; }
-        .corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; border-top-right-radius:5px; }
-        .corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; border-bottom-left-radius:5px; }
-        .corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; border-bottom-right-radius:5px; }
-        
-        .hud-text {
-            position: absolute;
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-cyan);
-            font-size: 10px;
-            opacity: 0.4;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        
-        .hud-text-top { top: 30px; right: 80px; }
-        .hud-text-bottom { bottom: 30px; left: 80px; }
-        
-        .flicker-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.01);
-            opacity: 0;
-            animation: flicker 6s infinite;
-            pointer-events: none;
-        }
-        
-        @keyframes flicker {
-            0% { opacity: 0.01; } 5% { opacity: 0.03; } 10% { opacity: 0.01; }
-            15% { opacity: 0.04; } 20% { opacity: 0.01; } 50% { opacity: 0.01; }
-            80% { opacity: 0.02; } 100% { opacity: 0.01; }
-        }
-
-        /* GLITCH EFFECT */
-        .glitch { position: relative; color: var(--secondary-color); }
-
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--primary-color);
-        }
-        
-        .glitch::before {
-            left: 2px;
-            text-shadow: -1px 0 var(--neon-pink);
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
-        }
-
-        .glitch::after {
-            left: -2px;
-            text-shadow: -1px 0 var(--neon-cyan);
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2.5s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim {
-            0% { clip: rect(11px, 9999px, 32px, 0); } 20% { clip: rect(65px, 9999px, 86px, 0); }
-            40% { clip: rect(23px, 9999px, 10px, 0); } 60% { clip: rect(98px, 9999px, 4px, 0); }
-            80% { clip: rect(35px, 9999px, 56px, 0); } 100% { clip: rect(78px, 9999px, 12px, 0); }
-        }
-
-        @keyframes glitch-anim-2 {
-            0% { clip: rect(65px, 9999px, 100px, 0); } 20% { clip: rect(12px, 9999px, 45px, 0); }
-            40% { clip: rect(80px, 9999px, 20px, 0); } 60% { clip: rect(30px, 9999px, 90px, 0); }
-            80% { clip: rect(55px, 9999px, 15px, 0); } 100% { clip: rect(10px, 9999px, 75px, 0); }
-        }
-        
-        header {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; padding: 20px 0;
-            z-index: 1000;
-            transition: var(--transition), top 0.4s ease-in-out; /* Added top transition for hide effect */
-            background-color: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(5px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Background change when scrolled but visible */
-        header.scrolled { padding: 15px 0; background-color: rgba(10, 10, 10, 0.95); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); }
-        
-        /* Class untuk header yang di-hide (diatur via JS) */
-        header.nav-up { top: -100px; } 
-        
-        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: var(--secondary-color);
-            position: relative;
-            overflow: hidden;
-            z-index: 10;
-        }
-        
-        .nav-links { display: flex; list-style: none; gap: 30px; align-items: center; }
-        
-        .nav-links a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Style khusus untuk link store di nav agar sedikit beda */
-        .nav-link-store {
-            color: var(--neon-cyan) !important;
-            font-weight: 700 !important;
-        }
-
-        /* NAV LINE ANIMATION */
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 50%;
-            width: 30px;
-            height: 2px;
-            background: var(--gradient-1);
-            transform: translateX(-50%) scaleX(0);
-            transform-origin: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .nav-links a:hover::before { transform: translateX(-50%) scaleX(1); }
-        
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 80px;
-            perspective: 1000px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%; height: 200%;
-            top: -50%; left: -50%;
-            background: radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%);
-            animation: heroGradient 30s ease infinite;
-            z-index: -1;
-        }
-        
-        @keyframes heroGradient { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(180deg); } }
-        
-        .hero-content {
-            max-width: 900px;
-            text-align: center;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero-subtitle {
-            font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            color: var(--gray-medium);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 30px;
-            letter-spacing: -2px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-        }
-        
-        .hero-title-gradient {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--gray-medium) 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .typing-text {
-            font-size: 20px;
-            margin-bottom: 40px;
-            min-height: 30px;
-            color: var(--gray-medium);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.4s forwards;
-        }
-        
-        .typing-text::after { content: '|'; animation: blink 1s infinite; }
-        
-        @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 12px 25px;
-            font-weight: 600;
-            font-size: 14px;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s ease;
-        }
-        
-        .btn:hover::before { left: 100%; }
-        
-        .btn-primary {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--secondary-color);
-            border: 2px solid var(--secondary-color);
-        }
-        
-        .btn-secondary:hover {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-
-        .btn-accent {
-            background: var(--gradient-1);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-accent:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
-        }
-        
-        .btn i { margin-left: 8px; transition: var(--transition); }
-        .btn:hover i { transform: translateX(3px); }
-        
-        .section { padding: 80px 0; position: relative; background: transparent; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        .section-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            line-height: 1.1;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px; left: 0;
-            width: 50px; height: 4px;
-            background: var(--gradient-1);
-            border-radius: 2px;
-        }
-        
-        .section-subtitle {
-            font-size: 16px;
-            color: var(--gray-medium);
-            margin-bottom: 40px;
-            max-width: 600px;
-        }
-        
-        .horizontal-scroll-container {
-            overflow-x: auto;
-            overflow-y: hidden;
-            white-space: nowrap;
-            padding-bottom: 20px;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-        }
-        
-        .horizontal-scroll-container::-webkit-scrollbar { height: 6px; }
-        .horizontal-scroll-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        .horizontal-scroll-container::-webkit-scrollbar-thumb { background: var(--gradient-1); border-radius: 10px; }
-        .horizontal-scroll-container::-webkit-scrollbar-thumb:hover { background: var(--gradient-2); }
-        
-        .about-content { display: flex; align-items: center; gap: 40px; }
-        .about-text { flex: 1; }
-        
-        .about-text h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.3;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .about-text h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px; left: 0;
-            width: 100%; height: 2px;
-            background: var(--gradient-1);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-        }
-        
-        .about-text:hover h3::after { transform: scaleX(1); }
-        
-        .about-text p {
-            font-size: 15px;
-            line-height: 1.8;
-            color: var(--gray-medium);
-            margin-bottom: 30px;
-        }
-        
-        .about-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .stat-item {
-            padding: 15px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--gradient-1);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .stat-item:nth-child(2)::before { background: var(--gradient-2); }
-        .stat-item:nth-child(3)::before { background: var(--gradient-3); }
-        .stat-item:nth-child(4)::before { background: var(--gradient-4); }
-        
-        .stat-item:hover::before { opacity: 0.1; }
-        
-        .stat-item:hover {
-            transform: translateY(-5px);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .stat-number {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 5px;
-            color: var(--secondary-color);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .stat-number::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 2px;
-            background: var(--gradient-1);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-        }
-        
-        .stat-item:hover .stat-number::after { transform: scaleX(1); }
-        
-        .stat-label {
-            font-size: 12px;
-            color: var(--gray-medium);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .about-img {
-            width: 240px; height: 240px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-            margin: 0 auto;
-            position: relative;
-            box-shadow: 0 0 0 4px rgba(255,255, 255, 0.1), 0 20px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255,255, 255, 0.1);
-            transition: var(--transition);
-        }
-        
-        .about-img:hover {
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3), 0 20px 40px rgba(102, 126, 234, 0.3);
-            transform: scale(1.05);
-        }
-        
-        .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        
-        .skills { position: relative; overflow: hidden; }
-        
-        .skills::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 50%, rgba(118, 75, 162, 0.08) 0%, transparent 50%);
-            z-index: -1;
-        }
-        
-        .skills-tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .skill-tab {
-            padding: 8px 16px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            color: var(--secondary-color);
-            font-weight: 600;
-            font-size: 12px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .skill-tab:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .skill-tab.active {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-        }
-        
-        .skills-container { position: relative; margin-top: 20px; }
-        
-        .skills-slider {
-            display: flex;
-            gap: 20px;
-            transition: transform 0.5s ease;
-            padding-bottom: 10px;
-        }
-        
-        .skill-card {
-            min-width: 280px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 25px;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            vertical-align: top;
-            white-space: normal;
-        }
-        
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--gradient-1);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .skill-card:nth-child(2)::before { background: var(--gradient-2); }
-        .skill-card:nth-child(3)::before { background: var(--gradient-3); }
-        .skill-card:nth-child(4)::before { background: var(--gradient-4); }
-        .skill-card:nth-child(5)::before { background: var(--gradient-5); }
-        .skill-card:nth-child(6)::before { background: var(--gradient-6); }
-        .skill-card:nth-child(7)::before { background: var(--gradient-7); }
-        .skill-card:nth-child(8)::before { background: var(--gradient-8); }
-        
-        .skill-card:hover::before { opacity: 0.1; }
-        
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            background-color: rgba(255, 255, 255, 0.08);
-        }
-        
-        .skill-header { display: flex; align-items: center; margin-bottom: 15px; }
-        
-        .skill-icon {
-            width: 50px; height: 50px;
-            background: var(--gradient-1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-size: 24px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .skill-card:nth-child(2) .skill-icon { background: var(--gradient-2); }
-        .skill-card:nth-child(3) .skill-icon { background: var(--gradient-3); }
-        .skill-card:nth-child(4) .skill-icon { background: var(--gradient-4); }
-        .skill-card:nth-child(5) .skill-icon { background: var(--gradient-5); }
-        .skill-card:nth-child(6) .skill-icon { background: var(--gradient-6); }
-        .skill-card:nth-child(7) .skill-icon { background: var(--gradient-7); }
-        .skill-card:nth-child(8) .skill-icon { background: var(--gradient-8); }
-        
-        .skill-title { font-size: 18px; font-weight: 700; }
-        
-        .skill-description {
-            font-size: 14px;
-            color: var(--gray-medium);
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-        
-        .skill-progress-container { position: relative; margin-top: 15px; }
-        
-        .skill-progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 12px;
-            color: var(--gray-medium);
-        }
-        
-        .skill-progress {
-            height: 8px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .skill-progress-bar {
-            height: 100%;
-            background: var(--gradient-1);
-            border-radius: 10px;
-            width: 0;
-            transition: width 1.5s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .skill-card:nth-child(2) .skill-progress-bar { background: var(--gradient-2); }
-        .skill-card:nth-child(3) .skill-progress-bar { background: var(--gradient-3); }
-        .skill-card:nth-child(4) .skill-progress-bar { background: var(--gradient-4); }
-        .skill-card:nth-child(5) .skill-progress-bar { background: var(--gradient-5); }
-        .skill-card:nth-child(6) .skill-progress-bar { background: var(--gradient-6); }
-        .skill-card:nth-child(7) .skill-progress-bar { background: var(--gradient-7); }
-        .skill-card:nth-child(8) .skill-progress-bar { background: var(--gradient-8); }
-        
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
-        
-        .skill-tag {
-            padding: 4px 10px;
-            background-color: rgba(255, 255, 255, 0.08);
-            border-radius: 50px;
-            font-size: 10px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: var(--transition);
-        }
-        
-        .skill-tag:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-        
-        .skills-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .skill-btn {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: var(--secondary-color);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .skill-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--gradient-1);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .skill-btn:hover::before { opacity: 0.2; }
-        
-        .skill-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .skill-btn:active { transform: scale(0.95); }
-        
-        .projects-slider {
-            display: flex;
-            gap: 20px;
-            padding-bottom: 10px;
-        }
-        
-        .project-card {
-            min-width: 280px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: inline-block;
-            vertical-align: top;
-            white-space: normal;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            cursor: pointer;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-            border-color: var(--neon-cyan);
-        }
-        
-        .project-img {
-            height: 160px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .project-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .project-card:hover .project-img img { transform: scale(1.05); }
-        
-        .project-img::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--gradient-1);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        
-        .project-card:nth-child(2) .project-img::after { background: var(--gradient-2); }
-        .project-card:nth-child(3) .project-img::after { background: var(--gradient-3); }
-        
-        .project-card:hover .project-img::after { opacity: 0.2; }
-        
-        .project-content { padding: 15px; }
-        
-        .project-content h3 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-        
-        .project-content p {
-            font-size: 13px;
-            color: var(--gray-medium);
-            line-height: 1.5;
-            margin-bottom: 12px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 0px;
-        }
-        
-        .project-tag {
-            padding: 3px 8px;
-            background-color: rgba(255, 255, 255, 0.08);
-            border-radius: 50px;
-            font-size: 9px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: var(--transition);
-        }
-        
-        .project-tag:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-        
-        /* MODAL STYLES */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 100000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-content {
-            background: #111;
-            width: 90%;
-            max-width: 600px;
-            border-radius: 16px;
-            padding: 30px;
-            position: relative;
-            border: 1px solid var(--neon-cyan);
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.15);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
-
-        .modal-overlay.open .modal-content {
-            transform: translateY(0);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: var(--gray-medium);
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.3s;
-            z-index: 10;
-        }
-
-        .close-modal:hover {
-            color: var(--neon-pink);
-        }
-
-        .modal-body h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--neon-cyan);
-        }
-
-        .modal-body p {
-            color: #ccc;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .modal-btn {
-            display: inline-block;
-            background: var(--gradient-1);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: var(--transition);
-        }
-
-        .modal-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .contact-content { text-align: center; }
-        .contact-text { margin-bottom: 40px; }
-        
-        .contact-text h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .contact-text p {
-            font-size: 16px;
-            color: var(--gray-medium);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .contact-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-        
-        .contact-btn {
-            display: flex;
-            align-items: center;
-            padding: 14px 24px;
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--secondary-color);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            border-radius: 10px;
-            transition: var(--transition);
-            min-width: 160px;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .contact-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: left 0.5s ease;
-        }
-        
-        .contact-btn:hover::before { left: 100%; }
-        
-        .contact-btn:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .contact-btn i { margin-right: 10px; font-size: 16px; }
-        
-        .contact-form {
-            max-width: 100%;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 30px 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .contact-form::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
-            z-index: -1;
-        }
-        
-        .form-group { margin-bottom: 20px; text-align: left; }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 15px 20px;
-            background-color: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--secondary-color);
-            font-family: inherit;
-            font-size: 16px;
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            background-color: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-        }
-        
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        
-        footer {
-            padding: 40px 0 20px;
-            background-color: transparent;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .footer-logo {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-right: 20px;
-        }
-        
-        .social-links { display: flex; gap: 12px; }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px; height: 36px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--secondary-color);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .social-links a::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--gradient-1);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .social-links a:hover::before { opacity: 1; }
-        
-        .social-links a:hover {
-            color: var(--primary-color);
-            transform: translateY(-5px);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            color: var(--gray-medium);
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-            z-index: 1002;
-        }
-        
-        .menu-toggle span {
-            width: 25px; height: 2px;
-            background-color: var(--secondary-color);
-            transition: var(--transition);
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 0; right: -100%;
-                height: 100vh; width: 80%;
-                background-color: rgba(10, 10, 10, 0.98);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: var(--transition);
-                z-index: 1001;
-                border-left: 1px solid rgba(255,255,255,0.1);
-            }
-            .nav-links.active { right: 0; }
-            .menu-toggle { display: flex; }
-            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-            .menu-toggle.active span:nth-child(2) { opacity: 0; }
-            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
-            .about-content { flex-direction: column; gap: 30px; }
-            .about-stats { grid-template-columns: repeat(2, 1fr); }
-            .skill-card { min-width: 260px; }
-            .contact-form { padding: 25px 15px; }
-            .skills-controls { display: flex; }
-            .footer-content { flex-direction: column; gap: 15px; }
-            .footer-logo { margin-right: 0; }
-            .hud-corners { display: none; }
-            .scanlines { opacity: 0.2; }
-        }
-        
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .skill-card { min-width: 270px; }
-            .project-card { min-width: 290px; }
-        }
-        
-        @media (min-width: 1025px) {
-            .skills-slider { overflow: hidden; }
-            .skills-controls { display: flex; }
-        }
+        /* --- RESET & VARIABLES (COMPRESSED) --- */
+        :root{--bg-dark:#000;--bg-card:#111;--bg-input:#1a1a1a;--primary:#fff;--primary-hover:#e5e5e5;--accent:#fff;--text-main:#fff;--text-muted:#888;--border:#333;--radius:12px;--shadow:0 4px 15px rgba(0,0,0,0.5);--danger:#fff;}
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-tap-highlight-color:transparent;}
+        body{background-color:var(--bg-dark);color:var(--text-main);line-height:1.5;padding-bottom:60px;overflow-x:hidden;user-select:none;}
+        
+        /* --- UTILITIES --- */
+        .container{max-width:900px;margin:0 auto;padding:0 15px;position:relative;z-index:2;}
+        .text-primary{color:var(--primary);}
+        .text-accent{color:var(--accent);font-weight:bold;}
+        .text-center{text-align:center;}
+        .hidden{display:none!important;}
+        .flex-center{display:flex;justify-content:center;align-items:center;}
+        
+        /* --- HEADER --- */
+        header{background-color:rgba(0,0,0,0.95);backdrop-filter:blur(10px);padding:15px 0;box-shadow:var(--shadow);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);}
+        .logo{font-size:1.6rem;font-weight:800;letter-spacing:-0.5px;text-transform:uppercase;color:#fff;}
+        .logo span{opacity:0.5;}
+        
+        /* --- NAVIGATION --- */
+        .nav-tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:25px 0;background:var(--bg-card);padding:8px;border-radius:var(--radius);border:1px solid var(--border);}
+        .tab-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:10px 18px;cursor:pointer;font-weight:600;font-size:0.85rem;transition:0.3s;border-radius:8px;flex:1;min-width:110px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;}
+        .tab-btn i{font-size:1rem;}
+        .tab-btn:hover{color:#fff;border-color:#fff;}
+        .tab-btn.active{background:var(--primary);color:#000;border-color:var(--primary);box-shadow:0 0 15px rgba(255,255,255,0.2);font-weight:800;}
+        
+        /* --- SECTIONS --- */
+        .section-card{background:var(--bg-card);padding:25px;border-radius:var(--radius);border:1px solid var(--border);animation:slideUp 0.4s ease;margin-bottom:20px;}
+        @keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+        
+        h2{margin-bottom:20px;font-size:1.4rem;border-bottom:1px solid var(--border);padding-bottom:10px;display:flex;justify-content:space-between;align-items:center;color:#fff;}
+        h2 span{font-size:0.8rem;font-weight:400;color:var(--text-muted);}
+        h3{margin-bottom:15px;font-size:1.1rem;color:var(--text-main);font-weight:600;}
+        
+        /* --- BRANDS --- */
+        .brand-toggle{display:flex;gap:15px;margin-bottom:25px;}
+        .brand-btn{flex:1;padding:15px;background:var(--bg-input);border:1px solid var(--border);color:var(--text-muted);border-radius:var(--radius);cursor:pointer;font-weight:700;transition:0.3s;font-size:0.9rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}
+        .brand-btn i{font-size:1.2rem;}
+        .brand-btn.active{border-color:var(--primary);color:#fff;background:#222;}
+        
+        /* --- PRICING --- */
+        .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px;margin-bottom:25px;}
+        .price-card{background:var(--bg-input);padding:18px 10px;border-radius:var(--radius);cursor:pointer;border:1px solid var(--border);text-align:center;transition:0.2s;position:relative;overflow:hidden;}
+        .price-card:hover{background:#222;border-color:#666;}
+        .price-card.selected{border-color:var(--primary);background:#1a1a1a;}
+        .price-card.selected::after{content:"✔";position:absolute;top:5px;right:8px;color:#fff;font-size:0.8rem;font-weight:bold;}
+        .duration{font-weight:800;font-size:1.1rem;display:block;margin-bottom:5px;color:white;}
+        .price{color:var(--accent);font-weight:600;font-size:0.95rem;}
+        .price-usd{color:var(--text-muted);font-size:0.8rem;display:block;margin-top:3px;}
+        
+        /* --- GAME LIST --- */
+        .game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px;max-height:450px;overflow-y:auto;padding-right:5px;}
+        .game-grid::-webkit-scrollbar{width:6px;}
+        .game-grid::-webkit-scrollbar-thumb{background:#333;border-radius:3px;}
+        .game-item{background:var(--bg-input);padding:12px;border-radius:10px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:0.2s;border:1px solid var(--border);}
+        .game-item:hover{border-color:#fff;background:#222;}
+        .status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;box-shadow:0 0 8px currentColor;}
+        .dot-green{background-color:#fff;color:#fff;box-shadow:0 0 8px rgba(255,255,255,0.3);}
+        .dot-yellow{background-color:#888;color:#888;box-shadow:0 0 8px rgba(136,136,136,0.3);}
+        .dot-red{background-color:#444;color:#444;border:1px solid #666;box-shadow:none;}
+        .game-name{font-size:0.9rem;font-weight:500;}
+        
+        /* --- JOKGEN --- */
+        .map-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:25px;}
+        .map-item{background:var(--bg-input);padding:15px;border-radius:var(--radius);display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);}
+        .map-item:hover{border-color:#888;}
+        .checkbox-wrapper{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
+        .map-price{color:#fff;font-weight:700;}
+        input[type="checkbox"]{accent-color:#fff;width:18px;height:18px;cursor:pointer;}
+        
+        .note-box{background:#1a1a1a;border-left:4px solid #666;padding:15px;margin-bottom:25px;font-size:0.9rem;border-radius:0 var(--radius) var(--radius) 0;}
+        .note-box ul{padding-left:20px;margin-top:8px;}
+        .note-box li{margin-bottom:6px;color:#ccc;list-style-type:square;}
+        
+        /* --- INPUTS & BUTTONS --- */
+        .input-group{margin-bottom:20px;}
+        label{display:block;margin-bottom:8px;color:var(--text-muted);font-size:0.9rem;font-weight:500;text-transform:uppercase;letter-spacing:0.5px;}
+        select,input[type="text"],input[type="number"]{width:100%;padding:14px;background:var(--bg-input);border:1px solid var(--border);color:white;border-radius:var(--radius);font-size:1rem;outline:none;transition:0.3s;}
+        select:focus,input:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,0.1);}
+        
+        .btn-action{width:100%;padding:16px;background:#fff;color:#000;border:none;border-radius:var(--radius);font-size:1rem;font-weight:800;cursor:pointer;text-transform:uppercase;margin-top:10px;transition:0.3s;display:flex;justify-content:center;align-items:center;gap:10px;letter-spacing:0.5px;}
+        .btn-action:hover{background:#ccc;transform:translateY(-2px);box-shadow:0 5px 20px rgba(255,255,255,0.1);}
+        
+        .btn-outline{background:transparent;border:1px solid #666;color:#ccc;margin-top:0;margin-bottom:20px;font-weight:600;font-size:0.9rem;padding:12px;display:flex;justify-content:center;align-items:center;gap:8px;}
+        .btn-outline:hover{border-color:#fff;color:#fff;}
+        
+        .total-display{background:#1a1a1a;padding:18px 20px;border-radius:var(--radius);margin-top:25px;display:flex;justify-content:space-between;align-items:center;font-size:1.1rem;font-weight:700;border:1px solid var(--border);}
+        
+        /* --- JOIN GROUPS --- */
+        .profile-header{text-align:center;margin-bottom:30px;}
+        .profile-img{width:120px;height:120px;border-radius:50%;border:2px solid #fff;margin-bottom:15px;object-fit:cover;}
+        .group-list{display:flex;flex-direction:column;gap:15px;margin-top:20px;}
+        .group-item{display:flex;align-items:center;background:var(--bg-input);padding:15px;border-radius:var(--radius);border:1px solid var(--border);text-decoration:none;color:#fff;transition:0.3s;}
+        .group-item:hover{border-color:#fff;background:#222;transform:translateX(5px);}
+        .group-icon{font-size:1.5rem;margin-right:15px;width:40px;text-align:center;display:flex;justify-content:center;}
+        .group-info h4{font-size:1rem;margin-bottom:2px;}
+        .group-info p{font-size:0.8rem;color:#888;}
+        .group-arrow{margin-left:auto;color:#666;}
+        
+        /* --- MODAL --- */
+        .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:flex;justify-content:center;align-items:center;z-index:1000;backdrop-filter:blur(5px);padding:15px;}
+        .modal-content{background:var(--bg-card);padding:0;width:100%;max-width:550px;max-height:85vh;overflow:hidden;border-radius:16px;border:1px solid var(--border);box-shadow:0 10px 40px rgba(0,0,0,0.8);display:flex;flex-direction:column;}
+        .modal-header{padding:20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg-input);}
+        .modal-title{font-size:1.1rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:10px;}
+        .close-modal{background:none;border:none;color:#888;font-size:1.5rem;cursor:pointer;line-height:1;}
+        .close-modal:hover{color:#fff;}
+        .modal-body{padding:20px;overflow-y:auto;}
+        
+        .feature-section{margin-bottom:20px;}
+        .feature-section:last-child{margin-bottom:0;}
+        .feature-cat{display:block;color:#fff;font-size:0.95rem;font-weight:700;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #333;text-transform:uppercase;letter-spacing:0.5px;}
+        .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 15px;font-size:0.85rem;color:var(--text-muted);}
+        .feature-item{display:flex;align-items:flex-start;gap:8px;line-height:1.4;}
+        .feature-item::before{content:"•";color:#fff;font-weight:bold;font-size:1.1em;line-height:1;margin-top:1px;}
+        
+        /* --- TOAST (CUSTOM ALERT) --- */
+        #toast-container{position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;}
+        .toast{background:var(--bg-card);color:#fff;padding:12px 20px;border-radius:8px;border-left:4px solid #fff;box-shadow:0 5px 15px rgba(0,0,0,0.5);animation:slideIn 0.3s ease;max-width:300px;font-size:0.9rem;display:flex;align-items:center;gap:10px;}
+        @keyframes slideIn{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+        
+        /* --- FOOTER --- */
+        footer{text-align:center;margin-top:50px;color:var(--text-muted);font-size:0.8rem;padding-bottom:20px;}
+        @media (max-width: 400px){.feature-grid{grid-template-columns:1fr;}}
     </style>
 </head>
 <body>
-    <!-- CUSTOM CROSSHAIR CURSOR -->
-    <div class="custom-cursor" id="customCursor"></div>
+    <!-- CONTAINER UTAMA KOSONG, AKAN DI-isi OLEH JS -->
+    <div id="main-wrapper"></div>
 
-    <!-- SCROLL PROGRESS BAR -->
-    <div class="scroll-progress-container">
-        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
-    </div>
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container"></div>
 
-    <!-- FUTURISTIC OVERLAY -->
-    <div class="futuristic-overlay">
-        <div class="scanlines"></div>
-        <div class="flicker-overlay"></div>
-        <div class="hud-corners">
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-tr"></div>
-            <div class="corner corner-bl"></div>
-            <div class="corner corner-br"></div>
-            <div class="hud-text hud-text-top">SYS.READY // V.3.0</div>
-            <div class="hud-text hud-text-bottom">ENCRYPTED</div>
-        </div>
-    </div>
-
-    <div class="animated-bg"></div>
-    
-    <div class="particles" id="particles"></div>
-    
-    <div class="geometric-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-        <div class="shape shape-4"></div>
-    </div>
-    
-    <header id="header">
-        <nav>
-            <div class="logo glitch" data-text="Ujay">Ujay</div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <!-- STORE LINK ADDED IN NAVIGATION -->
-                <li>
-                    <a href="#" class="btn-hidden-link nav-link-store" data-link="https://ujayy.vercel.app/">
-                        Store <i class="fas fa-shopping-bag"></i>
-                    </a>
-                </li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-subtitle">Hello, I'm Ahmad Fauzi (Ujay)</div>
-            <h1><span class="hero-title-gradient glitch" data-text="Ahmad Fauzi">Ahmad Fauzi</span></h1>
-            <div class="typing-text" id="typingText"></div>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work <i class="fas fa-arrow-right"></i></a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch <i class="fas fa-envelope"></i></a>
-                <!-- STORE BUTTON ADDED IN HERO -->
-                <a href="#" class="btn btn-accent btn-hidden-link" data-link="https://ujayy.vercel.app/">
-                    Visit My Store <i class="fas fa-shopping-bag"></i>
-                </a>
-                <a href="#" class="btn btn-accent btn-hidden-link" data-link="https://click-for.joinn.workers.dev">
-                    Join All Group & Channel <i class="fab fa-telegram"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section about" id="about">
-        <div class="container">
-            <div class="section-badge">About Me</div>
-            <h2 class="section-title">Engineering High-Performance Interfaces.</h2>
-            <p class="section-subtitle">Technical-minded developer focused on building high-performance systems and clean, modern interfaces.</p>
-            
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>I build high-performance digital tools without the clutter. My work bridges the gap between Modern Web Design and deep-level logic—ensuring every project looks sharp and runs even faster.
-​I don’t just build layouts; I build the engine. Whether it’s optimizing Scripting & Debugging, implementing AI Integration, or diving into Game Modules & Injection, I’m all about mastering the system from the inside out.
-​No slow code, no messy workflows. Just powerful, efficient solutions built to push limits.</p>
-                    <p>My approach combines technical expertise with creative problem-solving, leveraging AI as a powerful tool to amplify productivity and unlock new possibilities.</p>
-                    
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">13+</div>
-                            <div class="stat-label">Projects</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">1+</div>
-                            <div class="stat-label">Years</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">37+</div>
-                            <div class="stat-label">Clients</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">9+</div>
-                            <div class="stat-label">Awards</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="about-img">
-                    <img src="https://z-cdn-media.chatglm.cn/files/54c1ef04-7cbb-4c03-8f17-30a149e8f790.jpg?auth_key=1867350947-5ac9aa34760f4424becf9617002702a6-0-ba90ebb2bb30a5785031d1bf852ab593" alt="Ahmad Fauzi Profile Picture">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section skills" id="skills">
-        <div class="container">
-            <div class="section-badge">Expertise</div>
-            <h2 class="section-title">Skills & Technologies</h2>
-            <p class="section-subtitle">Mastering tools that power modern digital innovation</p>
-            
-            <div class="skills-tabs">
-                <div class="skill-tab active" data-category="all">All Skills</div>
-                <div class="skill-tab" data-category="development">Development</div>
-                <div class="skill-tab" data-category="gaming">Gaming</div>
-                <div class="skill-tab" data-category="automation">Automation</div>
-            </div>
-            
-            <div class="skills-container">
-                <div class="horizontal-scroll-container" id="skillsScrollContainer">
-                    <div class="skills-slider" id="skillsSlider">
-                        <div class="skill-card" data-category="development">
-                            <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-code"></i></div>
-                                <div class="skill-title">Web Development</div>
-                            </div>
-                            <div class="skill-description">Building responsive, modern websites with AI-assisted design</div>
-                            <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>85%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="85%"></div></div>
-                            </div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">HTML</span>
-                                <span class="skill-tag">CSS</span>
-                                <span class="skill-tag">JavaScript</span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-card" data-category="gaming">
-                            <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-gamepad"></i></div>
-                                <div class="skill-title">Game Mod Development</div>
-                            </div>
-                            <div class="skill-description">Creating advanced game modifications using zygisk, lua scripts, and libfake</div>
-                            <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>90%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="90%"></div></div>
-                            </div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Zygisk</span>
-                                <span class="skill-tag">Lua</span>
-                                <span class="skill-tag">LibFake</span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-card" data-category="automation">
-                            <div class="skill-header">
-                                <div class="skill-icon"><i class="fab fa-whatsapp"></i></div>
-                                <div class="skill-title">WhatsApp Automation</div>
-                            </div>
-                            <div class="skill-description">Developing intelligent bots for task automation and workflows</div>
-                            <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>80%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="80%"></div></div>
-                            </div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Bot API</span>
-                                <span class="skill-tag">Node.js</span>
-                                <span class="skill-tag">Python</span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-card" data-category="automation">
-                            <div class="skill-header">
-                                <div class="skill-icon"><i class="fab fa-telegram"></i></div>
-                                <div class="skill-title">Telegram Bot Development</div>
-                            </div>
-                            <div class="skill-description">Creating functional and engaging bots for various purposes</div>
-                            <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>75%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="75%"></div></div>
-                            </div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Bot API</span>
-                                <span class="skill-tag">Python</span>
-                                <span class="skill-tag">API</span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-card" data-category="development">
-                            <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
-                                <div class="skill-title">Mobile App Development</div>
-                            </div>
-                            <div class="skill-description">Creating cross-platform mobile applications with modern frameworks</div>
-                            <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>70%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="70%"></div></div>
-                            </div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">React Native</span>
-                                <span class="skill-tag">Flutter</span>
-                                <span class="skill-tag">Ionic</span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-card" data-category="gaming">
-                            <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-shield-alt"></i></div>
-                                <div class="skill-title">Anti-Cheat Development</div>
-                            </div>
-                            <div class="skill-description">Creating robust anti-cheat systems for multiplayer games</div>
-                            <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>65%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="65%"></div></div>
-                            </div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">C++</span>
-                                <span class="skill-tag">Reverse Engineering</span>
-                                <span class="skill-tag">Security</span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-card" data-category="automation">
-                            <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-robot"></i></div>
-                                <div class="skill-title">AI Integration</div>
-                            </div>
-                            <div class="skill-description">Integrating AI models into applications for enhanced functionality</div>
-                            <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>75%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="75%"></div></div>
-                            </div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">OpenAI</span>
-                                <span class="skill-tag">TensorFlow</span>
-                                <span class="skill-tag">NLP</span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-card" data-category="development">
-                            <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-database"></i></div>
-                                <div class="skill-title">Database Management</div>
-                            </div>
-                            <div class="skill-description">Designing and optimizing database systems for scalability</div>
-                            <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>80%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="80%"></div></div>
-                            </div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">MySQL</span>
-                                <span class="skill-tag">MongoDB</span>
-                                <span class="skill-tag">PostgreSQL</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="skills-controls">
-                <button class="skill-btn" id="skillsPrevBtn"><i class="fas fa-chevron-left"></i></button>
-                <button class="skill-btn" id="skillsNextBtn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
-
-    <section class="section projects" id="projects">
-        <div class="container">
-            <div class="section-badge">Portfolio</div>
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Showcasing innovation through real-world applications</p>
-            
-            <div class="horizontal-scroll-container" id="projectsScrollContainer">
-                <div class="projects-slider" id="projectsSlider">
-                    <div class="project-card">
-                        <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/70ff918e-cfee-4730-a64c-ad85e89f812f.jpg?auth_key=1869374406-f7491389bdb842109ad1ab36d7cd8c09-0-4b6dba5492d4ea6c7c1fd8f4f8c85ccb" alt="Snake Rush Game Screenshot">
-                        </div>
-                        <div class="project-content">
-                            <h3>Cheat Inject & Module Game</h3>
-                            <p>I’ve always been obsessed with how games work under the hood. I specialize in creating custom game modules and injection tools that interact directly with game engines. From memory offsets to internal hooks, I craft tools that are stable, efficient, and discreet. If there’s a system in place, I can find a way to enhance it.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Game Mod</span>
-                                <span class="project-tag">UI Enhancement</span>
-                                <span class="project-tag">Scripting</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/74ef1a18-b6d8-47fb-848a-ef2b29b6a204.jpg?auth_key=1867383998-a690377424af412592c49868cc4d4177-0-9a38c9e26a7ed6ca7499bbfc78842592" alt="AI Web Dashboard">
-                        </div>
-                        <div class="project-content">
-                            <h3>AI Integration</h3>
-                            <p>Static sites are so yesterday. I bring AI Integration into the mix to make your platform actually do the work for you. Whether it’s smart chatbots, automated content, or personalized user flows, I plug in the right AI tools to turn your site from a simple page into a powerhouse. It’s not just tech—it’s a brain for your brand.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">HTML</span>
-                                <span class="project-tag">CSS</span>
-                                <span class="project-tag">Frontend</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/03764c83-4881-4345-b300-d0393ab12fdc.jpg?auth_key=1867383998-bc4f2cb90aa14171ac293dcb0890cb1e-0-eeb20d2ef5f988691b49314c370ef895" alt="Code Scripting Editor">
-                        </div>
-                        <div class="project-content">
-                            <h3>Scripting & Debugging</h3>
-                            <p> I don't just write code; I optimize it. My Scripting & Debugging process is all about efficiency. I love turning messy logic into a smooth, fast-loading experience. If there’s a bug ruining the vibe, consider it gone. I build the engine so your design can fly.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Scripting</span>
-                                <span class="project-tag">Debugging</span>
-                                <span class="project-tag">Memory</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/96f01762-cb63-43cf-ac7b-c6086a433195.jpg?auth_key=1867383998-6f37cfb75dac426d9d1a6ba6644f8d51-0-6b6bfc7d0c1d696b071fcee345dbfb1e" alt="Modern Web Interface">
-                        </div>
-                        <div class="project-content">
-                            <h3>Modern Web & Interface Design</h3>
-                            <p>I’m obsessed with how people interact with screens. My focus is simple: Modern Web & Interface Design that doesn't try too hard but hits all the right spots.
-​I cut the clutter and keep the soul. Whether it’s a landing page or a complex app, I make sure it’s intuitive, fast, and looks sharp on any device. I build stuff I’m proud of, for people who care about the details.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Portfolio</span>
-                                <span class="project-tag">Web Design</span>
-                                <span class="project-tag">UI/UX</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="skills-controls">
-                <button class="skill-btn" id="projectsPrevBtn"><i class="fas fa-chevron-left"></i></button>
-                <button class="skill-btn" id="projectsNextBtn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROJECT MODAL STRUCTURE -->
-    <div class="modal-overlay" id="projectModal">
+    <!-- MODAL -->
+    <div id="feature-modal" class="modal-overlay hidden" onclick="closeModal(event)">
         <div class="modal-content">
-            <button class="close-modal" id="closeModal">&times;</button>
-            <div class="modal-body">
-                <h3 id="modalTitle">Project Title</h3>
-                <p id="modalDesc">Project description goes here...</p>
-                <a href="#" class="modal-btn" onclick="document.getElementById('projectModal').classList.remove('open')">Close Details</a>
+            <div class="modal-header">
+                <div class="modal-title" id="modal-title">Fitur Cheat</div>
+                <button class="close-modal" onclick="closeModal(event, true)">&times;</button>
             </div>
+            <div class="modal-body" id="modal-body"></div>
         </div>
     </div>
 
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="section-badge">Get In Touch</div>
-            <h2 class="section-title">Let's Create Something Amazing</h2>
-            <p class="section-subtitle">Ready to bring your ideas to life? Let's collaborate on your next project</p>
+    <!-- JAVASCRIPT (OBFUSCATED LOGIC) -->
+    <script>
+        // --- ANTI DEBUG & PROTECTION LAYER ---
+        (function() {
+            // 1. Disable Right Click & Key shortcuts
+            document.addEventListener('contextmenu', event => event.preventDefault());
             
-            <div class="contact-content">
-                <div class="contact-text">
-                    <h3>Have a project in mind?</h3>
-                    <p>I'm always excited to work on new challenges and innovative ideas. Whether you need a custom solution, consultation, or just want to chat about technology, feel free to reach out!</p>
-                </div>
-                
-                <div class="contact-buttons">
-                    <a href="#" class="contact-btn btn-hidden-link" data-link="https://t.me/aroncr">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="#" class="contact-btn btn-hidden-link" data-link="https://instagram.com/aocnsrc">
-                        <i class="fab fa-instagram"></i> Instagram
-                    </a>
-                    <a href="#" class="contact-btn btn-hidden-link" data-link="mailto:af5137351@gmail.com">
-                        <i class="fas fa-envelope"></i> Email
-                    </a>
-                </div>
-                
-                <form class="contact-form" id="contactForm" action="mailto:af5137351@gmail.com" method="post" enctype="text/plain">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" required>
+            document.onkeydown = function(e) {
+                if(e.keyCode == 123) return false; // F12
+                if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
+                if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
+                if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
+                if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
+            }
+
+            // 2. Infinite Debugger Loop (DevTools Trap)
+            // This will freeze the browser if DevTools is opened
+            setInterval(function() {
+                const startTime = new Date().getTime();
+                debugger; 
+                const endTime = new Date().getTime();
+                if (endTime - startTime > 100) {
+                    // Detected DevTools open, optionally reload or clear content
+                    // document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:50px;'>Security Alert</h1>";
+                }
+            }, 50);
+
+            // 3. Clear Console
+            setInterval(function(){
+                console.clear();
+                console.log("%cStop!", "color: red; font-size: 40px; font-weight: bold;");
+                console.log("%cThis is a private feature of UjayyStore.", "color: white; font-size: 14px;");
+            }, 1000);
+        })();
+
+        // --- UI HELPER: TOAST (PENGGANTI ALERT) ---
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fa-solid fa-circle-info"></i> <span>${msg}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // --- DATA & CONFIG ---
+        const _0xCONFIG = {
+            wa: "62895635429123",
+            currency: "IDR",
+            games: [
+                { name: "GOLD AND GLORY", status: "yellow" },
+                { name: "PUBG MOBILE", status: "green" },
+                { name: "BLOOD STRIKE", status: "green" },
+                { name: "CALL OF DUTY", status: "green" },
+                { name: "MOBILE LEGEND", status: "green" },
+                { name: "DELTA FORCE", status: "yellow" },
+                { name: "ARENA BREAKOUT", status: "yellow" },
+                { name: "FREE FIRE", status: "green" },
+                { name: "HONOR OF KINGS", status: "yellow" },
+                { name: "SUPER SUS", status: "red" },
+                { name: "8 BALL POOL", status: "green" },
+                { name: "VALORANT", status: "yellow" },
+                { name: "CROSS FIRE", status: "green" },
+                { name: "AOV/ROV/LQMB", status: "green" },
+                { name: "POKEMON UNITE", status: "green" },
+                { name: "SPEED DRIFTERS", status: "green" },
+                { name: "APEX LEGEND", status: "green" },
+                { name: "ALBION ONLINE", status: "green" },
+                { name: "COUNTER STRIKE", status: "green" },
+                { name: "DARK AND DARKER", status: "green" },
+                { name: "DOTA 2", status: "green" },
+                { name: "FORTNITE", status: "green" },
+                { name: "GTA V", status: "green" },
+                { name: "HONKAI STAR RAIL", status: "green" },
+                { name: "LOST LIGHT", status: "green" },
+                { name: "MARVEL RIVAL", status: "green" },
+                { name: "POINT BLANK", status: "green" },
+                { name: "WORD WAR 3", status: "green" }
+            ],
+            groups: [
+                "https://t.me/ujaygantengbanget",
+                "https://chat.whatsapp.com/CXRKqExCxFtEJGrMoqGv9a?mode=gi_t",
+                "https://t.me/ujayysch",
+                "https://t.me/luminosxv3",
+                "https://t.me/deadlysinsStoree",
+                "https://chat.whatsapp.com/G58EVIQiZlaFxU6pJKoJM9?mode=gi_t"
+            ]
+        };
+
+        let _0xSTATE = {
+            gag: { brand: 'deadly', price: 0, priceStr: '', duration: '' }
+        };
+
+        // --- CONTENT INJECTION (HTML STRING) ---
+        // Disembunyikan dalam string agar tidak terbaca saat View Source
+        const _0xHTML = `
+            <!-- INTRO POPUP -->
+            <div id="intro-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:9999;display:flex;justify-content:center;align-items:center;padding:20px;">
+                <div class="intro-box" style="background:var(--bg-card);width:100%;max-width:600px;max-height:90vh;border-radius:16px;border:1px solid #fff;box-shadow:0 0 50px rgba(255,255,255,0.1);display:flex;flex-direction:column;overflow:hidden;">
+                    <div class="intro-header" style="background:#fff;color:#000;padding:15px 20px;text-align:center;font-weight:800;text-transform:uppercase;letter-spacing:1px;font-size:1.2rem;">
+                        ⚠️ WARNING / INFORMATION
                     </div>
-                    <div class="form-group">
-                        <label for="email">Your Email</label>
-                        <input type="email" id="email" name="email" required>
+                    <div class="intro-body" style="padding:25px;overflow-y:auto;color:#ddd;font-size:0.95rem;line-height:1.6;">
+                        <p>Playing with any type of cheats is <strong>only for fun</strong> and <strong>100% your responsibility</strong>. Whatever the brand of the hack or the developer, all leads to a ban.</p>
+                        <p>If you don't want to get banned, just don't play with hacks.</p>
+                        <p>I know these words might upset some liars and scammers, but we don't care.</p>
+                        <p><strong>You have to follow these tips:</strong></p>
+                        <ol class="intro-list" style="padding-left:20px;margin-bottom:15px;">
+                            <li>You have to follow the files channel of the hack and <strong>pin it</strong> to see any update or warning.</li>
+                            <li>Play like a professional: play safely and avoid reports as much as you can.</li>
+                            <li>Never give your key to anyone except the developer or your reseller.</li>
+                            <li>Don't use any files that are not in the files channel.</li>
+                            <li>You have to know that any hack does updates, and that may take a few hours, a day, or more. We always extend the key to compensate for your subscription.</li>
+                            <li>Follow any advice or tip that I post in the files channel and never neglect it.</li>
+                            <li>If there is any internal update, whatever the hack you play with, instantly log out of your account and start testing for 5 games.</li>
+                        </ol>
+                        <p style="text-align:center;color:#fff;font-weight:800;font-size:1.1rem;border-top:1px solid #333;padding-top:15px;margin-top:10px;">NO REFUND POLICY 🚫</p>
                     </div>
-                    <div class="form-group">
-                        <label for="service">Interested Service</label>
-                        <select id="service" name="service">
-                            <option value="">Select a service</option>
-                            <option value="web-dev">Web Development</option>
-                            <option value="bot-dev">Bot Development</option>
-                            <option value="game-mod">Game Modding</option>
-                            <option value="other">Other</option>
+                    <div class="intro-footer" style="padding:20px;border-top:1px solid var(--border);text-align:center;background:var(--bg-input);">
+                        <button class="btn-enter" onclick="closeIntro()" style="background:#fff;color:#000;border:none;padding:12px 30px;border-radius:50px;font-weight:bold;font-size:1rem;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:1px;">I Understand, Enter Store</button>
+                    </div>
+                </div>
+            </div>
+
+            <header>
+                <div class="container text-center">
+                    <div class="logo">Ujayy<span>Store</span></div>
+                </div>
+            </header>
+
+            <div class="container">
+                <nav class="nav-tabs">
+                    <button class="tab-btn active" onclick="switchTab('tab-gag')"><i class="fa-solid fa-gamepad"></i> Cheat GaG</button>
+                    <button class="tab-btn" onclick="switchTab('tab-allgames')"><i class="fa-solid fa-layer-group"></i> All Game</button>
+                    <button class="tab-btn" onclick="switchTab('tab-jokgen')"><i class="fa-solid fa-motorcycle"></i> Jokgen</button>
+                    <button class="tab-btn" onclick="switchTab('tab-acc')"><i class="fa-solid fa-id-card"></i> Buy Acc</button>
+                    <button class="tab-btn" onclick="switchTab('tab-rekber')"><i class="fa-solid fa-handshake-simple"></i> Rekber</button>
+                    <button class="tab-btn" onclick="switchTab('tab-groups')"><i class="fa-solid fa-users"></i> Join Groups</button>
+                </nav>
+
+                <!-- TAB 1: GAG -->
+                <section id="tab-gag" class="section-card">
+                    <h2>Buy Cheat Gold And Glory</h2>
+                    <div class="brand-toggle">
+                        <button class="brand-btn active" onclick="selectBrand('deadly', this)"><i class="fa-solid fa-skull"></i> 4 𝖉𝖊𝖆𝖉𝖑𝖞♱𝖘𝖎𝖓𝖘</button>
+                        <button class="brand-btn" onclick="selectBrand('g3store', this)"><i class="fa-solid fa-store"></i> G3 Store</button>
+                    </div>
+
+                    <div id="brand-deadly">
+                        <button class="btn-action btn-outline" onclick="openModal('deadly')"><i class="fa-solid fa-list"></i> Lihat Fitur Lengkap</button>
+                        <h3>Pilih Durasi</h3>
+                        <div class="pricing-grid">
+                            <div class="price-card" onclick="selectPrice(this, '50.000', '5 DAY')"><span class="duration">5 DAY</span><span class="price">IDR 50k</span><span class="price-usd">($3)</span></div>
+                            <div class="price-card" onclick="selectPrice(this, '75.000', '10 DAY')"><span class="duration">10 DAY</span><span class="price">IDR 75k</span><span class="price-usd">($8)</span></div>
+                            <div class="price-card" onclick="selectPrice(this, '150.000', '1 MONTH')"><span class="duration">1 MONTH</span><span class="price">IDR 150k</span><span class="price-usd">($10)</span></div>
+                            <div class="price-card" onclick="selectPrice(this, '330.000', '1 SEASON')"><span class="duration">1 SEASON</span><span class="price">IDR 330k</span><span class="price-usd">($21)</span></div>
+                        </div>
+                    </div>
+
+                    <div id="brand-g3store" class="hidden">
+                        <button class="btn-action btn-outline" onclick="openModal('g3')"><i class="fa-solid fa-list"></i> Lihat Fitur Lengkap</button>
+                        <h3>Pilih Durasi</h3>
+                        <div class="pricing-grid">
+                            <div class="price-card" onclick="selectPrice(this, '30.000', '3 DAY')"><span class="duration">3 DAY</span><span class="price">IDR 30k</span><span class="price-usd">($2)</span></div>
+                            <div class="price-card" onclick="selectPrice(this, '45.000', '5 DAY')"><span class="duration">5 DAY</span><span class="price">IDR 45k</span><span class="price-usd">($3)</span></div>
+                            <div class="price-card" onclick="selectPrice(this, '75.000', '10 DAY')"><span class="duration">10 DAY</span><span class="price">IDR 75k</span><span class="price-usd">($5)</span></div>
+                            <div class="price-card" onclick="selectPrice(this, '150.000', '1 MONTH')"><span class="duration">1 MONTH</span><span class="price">IDR 150k</span><span class="price-usd">($10)</span></div>
+                        </div>
+                    </div>
+
+                    <div class="total-display">
+                        <span>Total Harga:</span>
+                        <span class="text-accent" id="gag-total">Rp 0</span>
+                    </div>
+                    <button class="btn-action" onclick="checkoutWa('gag')"><i class="fa-solid fa-cart-shopping"></i> Lanjut Pembayaran</button>
+                </section>
+
+                <!-- TAB 2: ALL GAMES -->
+                <section id="tab-allgames" class="section-card hidden">
+                    <h2>Buy Cheat All Game <span>Click to Order</span></h2>
+                    <div style="display:flex;gap:15px;margin-bottom:20px;font-size:0.85rem;color:var(--text-muted);background:var(--bg-input);padding:12px;border-radius:8px;justify-content:center;border:1px solid var(--border);">
+                        <span class="flex-center" style="gap:8px;"><div class="status-dot dot-green"></div> Safe / Stable</span>
+                        <span class="flex-center" style="gap:8px;"><div class="status-dot dot-yellow"></div> Risk / Ban</span>
+                        <span class="flex-center" style="gap:8px;"><div class="status-dot dot-red"></div> Maintenance</span>
+                    </div>
+                    <div class="game-grid" id="game-list-container"></div>
+                </section>
+
+                <!-- TAB 3: JOKGEN -->
+                <section id="tab-jokgen" class="section-card hidden">
+                    <h2>Joki Gendong (Gold And Glory)</h2>
+                    <div class="note-box">
+                        <strong>Note Penting:</strong>
+                        <ul>
+                            <li>Mati kesalahan buyer? (No Rematch)</li>
+                            <li>Mati kesalahan Worker? (FULL 100% REMATCH)</li>
+                            <li>Loot All Sampe Tas Penuh.</li>
+                            <li>Set Dibawain worker (Bisa 3x Set).</li>
+                            <li>Minimal Rating Equipment (25.000).</li>
+                            <li>Jangan Looting Duluan jika item tidak mau pecah.</li>
+                        </ul>
+                    </div>
+                    <h3>Pilih Map</h3>
+                    <div class="map-list">
+                        <div class="map-item">
+                            <label class="checkbox-wrapper"><input type="checkbox" class="jokgen-check" value="9000" data-name="Map Challenge"><span>Map Challenge</span></label>
+                            <span class="map-price">9k</span>
+                        </div>
+                        <div class="map-item">
+                            <label class="checkbox-wrapper"><input type="checkbox" class="jokgen-check" value="12000" data-name="Map Inferno"><span>Map Inferno</span></label>
+                            <span class="map-price">12k</span>
+                        </div>
+                        <div class="map-item">
+                            <label class="checkbox-wrapper"><input type="checkbox" class="jokgen-check" value="10000" data-name="Map Dcp Challenge"><span>Map Dcp Challenge</span></label>
+                            <span class="map-price">10k</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Jumlah Match</label>
+                        <input type="number" id="jokgen-matches" value="1" min="1" oninput="calculateJokgen()">
+                    </div>
+                    <div class="total-display">
+                        <span>Total Estimasi:</span>
+                        <span class="text-accent" id="jokgen-total">Rp 0</span>
+                    </div>
+                    <div class="input-group">
+                        <label>Username Game (Wajib diisi)</label>
+                        <input type="text" id="jokgen-ign" placeholder="Masukkan Username Game">
+                    </div>
+                    <button class="btn-action" onclick="checkoutWa('jokgen')"><i class="fa-solid fa-cart-shopping"></i> Order Jokgen</button>
+                </section>
+
+                <!-- TAB 4: ACC -->
+                <section id="tab-acc" class="section-card hidden">
+                    <h2>Buy Acc Lvl 8 - 17</h2>
+                    <p style="margin-bottom:20px;color:var(--text-muted);">Pilih level akun yang diinginkan, harga akan dikonfirmasi via WhatsApp.</p>
+                    <div class="input-group">
+                        <label>Pilih Level Akun</label>
+                        <select id="acc-level-select">
+                            <option value="" disabled selected>-- Pilih Level --</option>
+                            <option value="Level 8">Level 8</option><option value="Level 9">Level 9</option><option value="Level 10">Level 10</option>
+                            <option value="Level 11">Level 11</option><option value="Level 12">Level 12</option><option value="Level 13">Level 13</option>
+                            <option value="Level 14">Level 14</option><option value="Level 15">Level 15</option><option value="Level 16">Level 16</option>
+                            <option value="Level 17">Level 17</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" name="message" required></textarea>
+                    <button class="btn-action" onclick="checkoutWa('acc')"><i class="fa-solid fa-cart-shopping"></i> Tanya Harga & Beli</button>
+                </section>
+
+                <!-- TAB 5: REKBER -->
+                <section id="tab-rekber" class="section-card hidden">
+                    <h2>Jasa Rekber (Rekening Bersama)</h2>
+                    <div class="note-box" style="border-left-color:#888;background:#1a1a1a;">
+                        <strong style="color:#fff;">Fee / Tax Structure:</strong>
+                        <ul style="color:#ccc;margin-top:8px;">
+                            <li>0k - 100k : 4k</li>
+                            <li>101k - 250k : 8k</li>
+                            <li>250k - 500k : 12k</li>
+                            <li>500k - 1jt : 20k</li>
+                        </ul>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message <i class="fas fa-paper-plane"></i></button>
-                </form>
+                    <div class="input-group">
+                        <label>Nominal Transaksi (IDR)</label>
+                        <input type="number" id="rekber-amount" placeholder="Contoh: 150000" oninput="calculateRekber()">
+                    </div>
+                    <div class="total-display">
+                        <span>Fee Rekber:</span>
+                        <span class="text-accent" id="rekber-fee">Rp 0</span>
+                    </div>
+                    <div class="total-display" style="border-color:#888;background:#222;">
+                        <span>Total Transfer:</span>
+                        <span class="text-primary" id="rekber-total">Rp 0</span>
+                    </div>
+                    <button class="btn-action" onclick="checkoutWa('rekber')"><i class="fa-solid fa-cart-shopping"></i> Gunakan Jasa Rekber</button>
+                </section>
+
+                <!-- TAB 6: GROUPS -->
+                <section id="tab-groups" class="section-card hidden">
+                    <div class="profile-header">
+                        <img src="https://z-cdn-media.chatglm.cn/files/083a7350-4546-463c-8152-5c7cfb585ce2.jpg?auth_key=1870872754-f2890a97e994428da5a3b8d8ef3fbf61-0-f7c9409591d47b7babf91b9fdc80fc1a" alt="Ujay" class="profile-img">
+                        <h2>UJAYY COMMUNITY</h2>
+                        <p style="color:var(--text-muted);">Official Social Media Links.</p>
+                    </div>
+                    <button class="btn-action" onclick="joinAll()"><i class="fa-solid fa-rocket"></i> JOIN ALL GROUPS</button>
+                    <p style="text-align:center;font-size:0.8rem;color:#666;margin-top:10px;">*Aktifkan izin popup agar semua link terbuka.</p>
+                    <div class="group-list">
+                        <a href="https://t.me/ujaygantengbanget" target="_blank" class="group-item">
+                            <div class="group-icon"><i class="fa-brands fa-telegram"></i></div>
+                            <div class="group-info"><h4>Group Telegram Ujay</h4><p>Komunitas</p></div>
+                            <div class="group-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                        </a>
+                        <a href="https://chat.whatsapp.com/CXRKqExCxFtEJGrMoqGv9a?mode=gi_t" target="_blank" class="group-item">
+                            <div class="group-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                            <div class="group-info"><h4>Group WhatsApp Ujay</h4><p>Chat Grup</p></div>
+                            <div class="group-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                        </a>
+                        <a href="https://t.me/ujayysch" target="_blank" class="group-item">
+                            <div class="group-icon"><i class="fa-brands fa-telegram"></i></div>
+                            <div class="group-info"><h4>Channel Telegram Ujay</h4><p>Official Channel</p></div>
+                            <div class="group-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                        </a>
+                        <a href="https://t.me/luminosxv3" target="_blank" class="group-item">
+                            <div class="group-icon"><i class="fa-solid fa-bell"></i></div>
+                            <div class="group-info"><h4>Channel Back Up Ujay</h4><p>Cadangan</p></div>
+                            <div class="group-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                        </a>
+                        <a href="https://t.me/deadlysinsStoree" target="_blank" class="group-item">
+                            <div class="group-icon"><i class="fa-solid fa-skull"></i></div>
+                            <div class="group-info"><h4>Channel Telegram 4 Sins</h4><p>Store</p></div>
+                            <div class="group-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                        </a>
+                        <a href="https://chat.whatsapp.com/G58EVIQiZlaFxU6pJKoJM9?mode=gi_t" target="_blank" class="group-item">
+                            <div class="group-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                            <div class="group-info"><h4>Group JB Roblox</h4><p>Ulqi x Ujay</p></div>
+                            <div class="group-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                        </a>
+                    </div>
+                </section>
             </div>
-        </div>
-    </section>
+            <footer><p>&copy; 2023 UjayyStore. Professional Game Services.</p></footer>
+        `;
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">Ujay</div>
-                <div class="social-links">
-                    <a href="#" class="btn-hidden-link" data-link="https://t.me/aroncr" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
-                    <a href="#" class="btn-hidden-link" data-link="https://instagram.com/aocnsrc" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="btn-hidden-link" data-link="mailto:af5137351@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Ujay. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+        // --- INJECT HTML ON LOAD ---
+        window.onload = function() {
+            document.getElementById('main-wrapper').innerHTML = _0xHTML;
+            initEvents();
+            renderGameList();
+        };
 
-    <script>
-        // CUSTOM CROSSHAIR CURSOR LOGIC
-        const cursor = document.getElementById('customCursor');
-        
-        if (window.matchMedia("(pointer: fine)").matches) {
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
-
-            const interactiveElements = document.querySelectorAll('a, button, .skill-tab, .project-card, input, textarea, select');
-            
-            interactiveElements.forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-            });
-
-            document.addEventListener('mousedown', () => cursor.classList.add('active'));
-            document.addEventListener('mouseup', () => cursor.classList.remove('active'));
+        function initEvents() {
+            document.querySelectorAll('.jokgen-check').forEach(cb => cb.addEventListener('change', calculateJokgen));
         }
 
-        // AUTO-HIDE HEADER ON SCROLL DOWN, SHOW ON SCROLL UP
-        let lastScrollTop = 0;
-        const header = document.getElementById("header");
-        const scrollProgressBar = document.getElementById("scrollProgressBar");
-        const delta = 5; // Sensitivitas scroll
-        
-        window.addEventListener("scroll", function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Progress Bar Logic
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (scrollTop / height) * 100;
-            scrollProgressBar.style.width = scrolled + "%";
-
-            // Make sure they scroll more than delta
-            if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
-
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scroll Down -> Hide Header
-                header.classList.add("nav-up");
-            } else {
-                // Scroll Up -> Show Header
-                header.classList.remove("nav-up");
-            }
-
-            // Safety check untuk paling atas (selalu muncul)
-            if (scrollTop <= 0) {
-                header.classList.remove("nav-up");
-                header.classList.remove('scrolled');
-            } else {
-                header.classList.add('scrolled');
-            }
-
-            lastScrollTop = scrollTop;
-        });
-
-        // HIDDEN LINK LOGIC (Ini yang bikin link aslinya ga keliatan di href)
-        const hiddenLinks = document.querySelectorAll('.btn-hidden-link');
-
-        hiddenLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetUrl = this.getAttribute('data-link');
-                if (targetUrl) {
-                    if (targetUrl.startsWith('mailto:')) {
-                        window.location.href = targetUrl;
-                    } else {
-                        window.open(targetUrl, '_blank');
-                    }
-                }
-            });
-        });
-
-        // PROJECT MODAL LOGIC
-        const modal = document.getElementById('projectModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalDesc = document.getElementById('modalDesc');
-        const closeModal = document.getElementById('closeModal');
-        const projectCards = document.querySelectorAll('.project-card');
-
-        projectCards.forEach(card => {
-            card.addEventListener('click', function() {
-                const title = card.querySelector('h3').innerText;
-                const desc = card.querySelector('p').innerText;
-
-                modalTitle.innerText = title;
-                modalDesc.innerHTML = `${desc}<br><br><strong>Status:</strong> Completed<br><strong>Role:</strong> Lead Developer<br><br>This is a placeholder for detailed project requirements, tech stack details, and live demo links. In a production environment, this data could be fetched dynamically from a JSON file or database.`;
-
-                modal.classList.add('open');
-            });
-        });
-
-        closeModal.addEventListener('click', () => {
-            modal.classList.remove('open');
-        });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('open');
-            }
-        });
-        
-        // TYPING ANIMATION
-        const typingTexts = ['Full Stack Developer', 'Game Mod Specialist', 'AI Enthusiast', 'Bot Developer', 'Problem Solver'];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingSpeed = 100;
-        
-        function typeText() {
-            const currentText = typingTexts[textIndex];
-            const typingElement = document.getElementById('typingText');
-            
-            if (!isDeleting) {
-                typingElement.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-                if (charIndex === currentText.length) { isDeleting = true; typingSpeed = 2000; }
-                else { typingSpeed = 100; }
-            } else {
-                typingElement.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-                typingSpeed = 50;
-                if (charIndex === 0) { isDeleting = false; textIndex = (textIndex + 1) % typingTexts.length; typingSpeed = 500; }
-            }
-            setTimeout(typeText, typingSpeed);
+        function closeIntro() {
+            const el = document.getElementById('intro-overlay');
+            if(el) el.style.display = 'none';
         }
-        
-        setTimeout(typeText, 1000);
-        
-        // MOBILE MENU TOGGLE
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        
-        menuToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
-        
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                navLinks.classList.remove('active');
-                menuToggle.classList.remove('active');
-            });
-        });
-        
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if(this.getAttribute('href') !== '#' && !this.closest('.modal-body')) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
-                    }
-                }
-            });
-        });
-        
-        // SKILLS SLIDER CONTROLS
-        const skillsSlider = document.getElementById('skillsSlider');
-        const skillsScrollContainer = document.getElementById('skillsScrollContainer');
-        const skillsPrevBtn = document.getElementById('skillsPrevBtn');
-        const skillsNextBtn = document.getElementById('skillsNextBtn');
-        
-        skillsPrevBtn.addEventListener('click', function() { skillsScrollContainer.scrollBy({ left: -300, behavior: 'smooth' }); });
-        skillsNextBtn.addEventListener('click', function() { skillsScrollContainer.scrollBy({ left: 300, behavior: 'smooth' }); });
-        
-        // PROJECTS SLIDER CONTROLS
-        const projectsSlider = document.getElementById('projectsSlider');
-        const projectsScrollContainer = document.getElementById('projectsScrollContainer');
-        const projectsPrevBtn = document.getElementById('projectsPrevBtn');
-        const projectsNextBtn = document.getElementById('projectsNextBtn');
-        
-        projectsPrevBtn.addEventListener('click', function() { projectsScrollContainer.scrollBy({ left: -300, behavior: 'smooth' }); });
-        projectsNextBtn.addEventListener('click', function() { projectsScrollContainer.scrollBy({ left: 300, behavior: 'smooth' }); });
-        
-        // SKILLS TABS FILTERING
-        const skillTabs = document.querySelectorAll('.skill-tab');
-        const skillCards = document.querySelectorAll('.skill-card');
-        
-        skillTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                skillTabs.forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                const category = this.getAttribute('data-category');
-                skillCards.forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
-                        card.style.display = 'inline-block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-        
-        // SKILL BARS ANIMATION
-        const skillProgressBars = document.querySelectorAll('.skill-progress-bar');
-        
-        function animateSkillBars() {
-            skillProgressBars.forEach(bar => {
-                const width = bar.getAttribute('data-width');
-                bar.style.width = width;
-            });
+
+        function switchTab(id) {
+            document.querySelectorAll('section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
         }
-        
-        const skillsSection = document.querySelector('.skills');
-        const skillsObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateSkillBars();
-                    skillsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        skillsObserver.observe(skillsSection);
-        
-        // ADDITIONAL CSS FOR ANIMATIONS DYNAMICALLY
-        const style = document.createElement('style');
-        style.textContent = `@keyframes fadeInOut { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } }`;
-        document.head.appendChild(style);
-        
-        // PARTICLES RESIZE LOGIC
-        window.addEventListener('resize', function() {
-            const particlesContainer = document.getElementById('particles');
-            if (window.innerWidth <= 768) {
-                particlesContainer.style.display = 'none';
+
+        function selectBrand(brand, btn) {
+            _0xSTATE.gag.brand = brand;
+            _0xSTATE.gag.price = 0;
+            document.getElementById('gag-total').innerText = 'Rp 0';
+            document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if(brand === 'deadly') {
+                document.getElementById('brand-deadly').classList.remove('hidden');
+                document.getElementById('brand-g3store').classList.add('hidden');
             } else {
-                particlesContainer.style.display = 'block';
-                if (particlesContainer.children.length === 0) { 
-                    // createParticles(); 
-                }
+                document.getElementById('brand-deadly').classList.add('hidden');
+                document.getElementById('brand-g3store').classList.remove('hidden');
             }
-        });
+        }
+
+        function selectPrice(el, price, duration) {
+            const container = el.parentElement;
+            container.querySelectorAll('.price-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            _0xSTATE.gag.price = parseInt(price.replace('.',''));
+            _0xSTATE.gag.priceStr = price.replace('.', '');
+            _0xSTATE.gag.duration = duration;
+            document.getElementById('gag-total').innerText = 'Rp ' + price;
+        }
+
+        function renderGameList() {
+            const grid = document.getElementById('game-list-container');
+            if(!grid) return;
+            let html = '';
+            _0xCONFIG.games.forEach(game => {
+                let c = game.status === 'green' ? 'dot-green' : (game.status === 'yellow' ? 'dot-yellow' : 'dot-red');
+                html += `<div class="game-item" onclick="orderGame('${game.name}')"><div class="status-dot ${c}"></div><span class="game-name">${game.name}</span></div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        function orderGame(n) {
+            const t = `Halo Admin UjayyStore, saya ingin membeli Cheat untuk game *${n}*. Mohon infonya.`;
+            window.open(`https://wa.me/${_0xCONFIG.wa}?text=${encodeURIComponent(t)}`, '_blank');
+        }
+
+        function calculateJokgen() {
+            let p = 0;
+            document.querySelectorAll('.jokgen-check:checked').forEach(cb => p += parseInt(cb.value));
+            let m = parseInt(document.getElementById('jokgen-matches').value) || 1;
+            if(m < 1) m = 1;
+            let tot = p * m;
+            document.getElementById('jokgen-total').innerText = 'Rp ' + tot.toLocaleString('id-ID');
+            return tot;
+        }
+
+        function calculateRekber() {
+            const v = parseInt(document.getElementById('rekber-amount').value) || 0;
+            let f = 0;
+            if (v > 0 && v <= 100000) f = 4000;
+            else if (v > 100000 && v <= 250000) f = 8000;
+            else if (v > 250000 && v <= 500000) f = 12000;
+            else if (v > 500000 && v <= 1000000) f = 20000;
+            else if (v > 1000000) f = "Hubungi Admin";
+            document.getElementById('rekber-fee').innerText = typeof f === 'number' ? 'Rp ' + f.toLocaleString('id-ID') : f;
+            if (typeof f === 'number') {
+                document.getElementById('rekber-total').innerText = 'Rp ' + (v + f).toLocaleString('id-ID');
+            } else {
+                document.getElementById('rekber-total').innerText = "-";
+            }
+        }
+
+        const _featDeadly = `<div class="feature-section"><span class="feature-cat">ESP & ESP Settings</span><div class="feature-grid"><div class="feature-item">Configuration Manager</div><div class="feature-item">Enable Bypass + Anti FC</div><div class="feature-item">Force Exit Match</div><div class="feature-item">Enable Functions</div><div class="feature-item">Draw Box</div><div class="feature-item">Draw Line</div><div class="feature-item">Draw Info Player</div></div></div><div class="feature-section"><span class="feature-cat">Monster ESP</span><div class="feature-grid"><div class="feature-item">Draw Box Monster</div><div class="feature-item">Draw Line Monster</div><div class="feature-item">Show Info</div></div></div><div class="feature-section"><span class="feature-cat">Aimbot & Aim Settings</span><div class="feature-grid"><div class="feature-item">Aim Activation</div><div class="feature-item">Enable Aim Bot</div><div class="feature-item">Silent Aim</div><div class="feature-item">Auto Headshot</div><div class="feature-item">Force Headshot</div><div class="feature-item">Target & Range</div><div class="feature-item">Target Type</div><div class="feature-item">FOV Radius</div><div class="feature-item">Max Range</div><div class="feature-item">Show FOV Circle</div><div class="feature-item">Show Aim Line</div></div></div><div class="feature-section"><span class="feature-cat">Memory Hacks</span><div class="feature-grid"><div class="feature-item">Level 50 (Lobby)</div><div class="feature-item">Multi Damage</div><div class="feature-item">Movement</div><div class="feature-item">No Collision</div><div class="feature-item">Unlimited Jump</div><div class="feature-item">Guncangan Maut</div><div class="feature-item">Crouch Jump</div><div class="feature-item">Speed Settings</div><div class="feature-item">Crouch Speed</div><div class="feature-item">Walk Speed</div></div></div><div class="feature-section"><span class="feature-cat">Other Features</span><div class="feature-grid"><div class="feature-item">Infinite Durability</div><div class="feature-item">Enable Entity Size</div><div class="feature-item">Enable FOV</div><div class="feature-item">Force Skill Enable</div><div class="feature-item">Disable Skill Hold</div><div class="feature-item" style="color:#666;">Unlimited Bag (Maintenance)</div></div></div>`;
+
+        const _featG3 = `<div class="feature-section"><span class="feature-cat">Combat & Aim</span><div class="feature-grid"><div class="feature-item">Silent Aim</div><div class="feature-item">Magic Bullet</div><div class="feature-item">Auto Headshoot</div><div class="feature-item">Attack Speed</div><div class="feature-item">Arrow Piercing (Active)</div><div class="feature-item">No Recoil Crossbow</div></div></div><div class="feature-section"><span class="feature-cat">Movement & Character</span><div class="feature-grid"><div class="feature-item">Speed Booster</div><div class="feature-item">Speed Berdiri/Jongkok</div><div class="feature-item">Jump Blink (High)</div><div class="feature-item">Player Height</div><div class="feature-item">Anti Stun</div><div class="feature-item">No Collision</div></div></div><div class="feature-section"><span class="feature-cat">Visuals & ESP</span><div class="feature-grid"><div class="feature-item">ESP</div><div class="feature-item">FOV Changer</div><div class="feature-item">Player List</div><div class="feature-item">Item List</div></div></div><div class="feature-section"><span class="feature-cat">Utility & Misc</span><div class="feature-grid"><div class="feature-item">Instant Loot</div><div class="feature-item">Unlock Trade (Lv 50)</div><div class="feature-item">Skip Search</div><div class="feature-item">Force Exit Match</div><div class="feature-item">Bypass Anti Kick</div></div></div>`;
+
+        function openModal(t) {
+            const m = document.getElementById('feature-modal');
+            const ttl = document.getElementById('modal-title');
+            const bd = document.getElementById('modal-body');
+            m.classList.remove('hidden');
+            if(t==='deadly') { ttl.innerHTML=`<i class="fa-solid fa-skull"></i> Fitur: 4 𝖉𝖊𝖆𝖉𝖑𝖞♱𝖘𝖎𝖓𝖘`; bd.innerHTML=_featDeadly; }
+            else if(t==='g3') { ttl.innerHTML=`<i class="fa-solid fa-store"></i> Fitur: G3 Store`; bd.innerHTML=_featG3; }
+        }
+
+        function closeModal(e, f) {
+            if (f || e.target.id === 'feature-modal') document.getElementById('feature-modal').classList.add('hidden');
+        }
+
+        function joinAll() {
+            if(confirm("Apakah Anda yakin ingin membuka semua link sekaligus? Pastikan browser mengizinkan popup.")) {
+                _0xCONFIG.groups.forEach(l => window.open(l, '_blank'));
+            }
+        }
+
+        function checkoutWa(type) {
+            let msg = "";
+            const ign = (type === 'jokgen') ? (document.getElementById('jokgen-ign').value || "-") : "-";
+
+            if (type === 'gag') {
+                if(_0xSTATE.gag.price === 0) { showToast("Silakan pilih durasi cheat."); return; }
+                const bName = _0xSTATE.gag.brand === 'deadly' ? '4 𝖉𝖊𝖆𝖉𝖑𝖞♱𝖘𝖎𝖓𝖘' : 'G3 Store';
+                msg = `Halo Admin UjayyStore, saya mau order Cheat Gold And Glory.\n\n*Brand:* ${bName}\n*Durasi:* ${_0xSTATE.gag.duration}\n*Harga:* Rp ${_0xSTATE.gag.priceStr}\n\nMohon diproses!`;
+            } 
+            else if (type === 'jokgen') {
+                const tot = calculateJokgen();
+                if(tot === 0) { showToast("Pilih map minimal satu."); return; }
+                if(ign === "-") { showToast("Mohon isi Username Game anda."); return; }
+                let m = document.getElementById('jokgen-matches').value;
+                let i = []; document.querySelectorAll('.jokgen-check:checked').forEach(cb => i.push(cb.dataset.name));
+                msg = `Halo Admin UjayyStore, order Jokgen.\n\n*Map:* ${i.join(', ')}\n*Jumlah Match:* ${m}\n*Total:* Rp ${tot.toLocaleString('id-ID')}\n*Username:* ${ign}\n\nSetuju aturan.`;
+            }
+            else if (type === 'acc') {
+                const l = document.getElementById('acc-level-select').value;
+                if(!l) { showToast("Pilih level akun."); return; }
+                msg = `Halo Admin, saya mau beli Akun Gold And Glory.\n\n*Level:* ${l}\n\nMohon info harganya.`;
+            }
+            else if (type === 'rekber') {
+                const amt = document.getElementById('rekber-amount').value;
+                const feeEl = document.getElementById('rekber-fee').innerText;
+                if(!amt || amt <= 0) { showToast("Masukkan nominal."); return; }
+                msg = `Halo Admin, mau Rekber.\n\n*Nominal:* Rp ${parseInt(amt).toLocaleString('id-ID')}\n*Fee:* ${feeEl}\n\nMohon arahan.`;
+            }
+
+            window.open(`https://wa.me/${_0xCONFIG.wa}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
     </script>
 </body>
 </html>
