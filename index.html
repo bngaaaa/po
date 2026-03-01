@@ -218,16 +218,13 @@
             top: 0; left: 0;
             width: 100%; padding: 20px 0;
             z-index: 1000;
-            transition: var(--transition), top 0.4s ease-in-out; /* Added top transition for hide effect */
+            transition: var(--transition), top 0.4s ease-in-out; 
             background-color: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(5px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Background change when scrolled but visible */
         header.scrolled { padding: 15px 0; background-color: rgba(10, 10, 10, 0.95); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); }
-        
-        /* Class untuk header yang di-hide (diatur via JS) */
         header.nav-up { top: -100px; } 
         
         nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -254,13 +251,11 @@
             overflow: hidden;
         }
         
-        /* Style khusus untuk link store di nav agar sedikit beda */
         .nav-link-store {
             color: var(--neon-cyan) !important;
             font-weight: 700 !important;
         }
 
-        /* NAV LINE ANIMATION */
         .nav-links a::before {
             content: '';
             position: absolute;
@@ -1303,7 +1298,6 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <!-- STORE LINK ADDED IN NAVIGATION -->
                 <li>
                     <a href="#" class="btn-hidden-link nav-link-store" data-link="https://ujayy.vercel.app/">
                         Store <i class="fas fa-shopping-bag"></i>
@@ -1327,7 +1321,6 @@
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary">View My Work <i class="fas fa-arrow-right"></i></a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch <i class="fas fa-envelope"></i></a>
-                <!-- STORE BUTTON ADDED IN HERO -->
                 <a href="#" class="btn btn-accent btn-hidden-link" data-link="https://ujayy.vercel.app/">
                     Visit My Store <i class="fas fa-shopping-bag"></i>
                 </a>
@@ -1341,31 +1334,30 @@
     <section class="section about" id="about">
         <div class="container">
             <div class="section-badge">About Me</div>
-            <h2 class="section-title">Engineering High-Performance Interfaces.</h2>
-            <p class="section-subtitle">Technical-minded developer focused on building high-performance systems and clean, modern interfaces.</p>
+            <h2 class="section-title">Front End Developer.</h2>
+            <p class="section-subtitle">Passionate about creating beautiful, functional, and user-centered digital experiences.</p>
             
             <div class="about-content">
                 <div class="about-text">
-                    <h3>I build high-performance digital tools without the clutter. My work bridges the gap between Modern Web Design and deep-level logic—ensuring every project looks sharp and runs even faster.
-​I don’t just build layouts; I build the engine. Whether it’s optimizing Scripting & Debugging, implementing AI Integration, or diving into Game Modules & Injection, I’m all about mastering the system from the inside out.
-​No slow code, no messy workflows. Just powerful, efficient solutions built to push limits.</p>
-                    <p>My approach combines technical expertise with creative problem-solving, leveraging AI as a powerful tool to amplify productivity and unlock new possibilities.</p>
+                    <h3>Crafting Digital Experiences</h3>
+                    <p>I am a dedicated Front-End Developer focused on building high-performance, responsive web interfaces. I translate design concepts into clean, semantic code using the latest web technologies.</p>
+                    <p>My expertise lies in the core technologies of the web: HTML5, CSS3, and modern JavaScript (ES6+). I specialize in modern frameworks like React, Vue, and Angular to build scalable applications, and I am proficient in utility-first styling with Tailwind CSS and Bootstrap to ensure pixel-perfect designs across all devices.</p>
                     
                     <div class="about-stats">
                         <div class="stat-item">
-                            <div class="stat-number">13+</div>
+                            <div class="stat-number">15+</div>
                             <div class="stat-label">Projects</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">1+</div>
-                            <div class="stat-label">Years</div>
+                            <div class="stat-number">2+</div>
+                            <div class="stat-label">Years Exp</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">37+</div>
+                            <div class="stat-number">40+</div>
                             <div class="stat-label">Clients</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">9+</div>
+                            <div class="stat-number">10+</div>
                             <div class="stat-label">Awards</div>
                         </div>
                     </div>
@@ -1382,151 +1374,160 @@
         <div class="container">
             <div class="section-badge">Expertise</div>
             <h2 class="section-title">Skills & Technologies</h2>
-            <p class="section-subtitle">Mastering tools that power modern digital innovation</p>
+            <p class="section-subtitle">Mastering the modern web stack to build exceptional interfaces</p>
             
             <div class="skills-tabs">
                 <div class="skill-tab active" data-category="all">All Skills</div>
-                <div class="skill-tab" data-category="development">Development</div>
-                <div class="skill-tab" data-category="gaming">Gaming</div>
-                <div class="skill-tab" data-category="automation">Automation</div>
+                <div class="skill-tab" data-category="core">Core</div>
+                <div class="skill-tab" data-category="frameworks">Frameworks</div>
+                <div class="skill-tab" data-category="styling">Styling</div>
+                <div class="skill-tab" data-category="libraries">Libraries</div>
             </div>
             
             <div class="skills-container">
                 <div class="horizontal-scroll-container" id="skillsScrollContainer">
                     <div class="skills-slider" id="skillsSlider">
-                        <div class="skill-card" data-category="development">
+                        <!-- Card 1: HTML5 & CSS3 -->
+                        <div class="skill-card" data-category="core">
                             <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-code"></i></div>
-                                <div class="skill-title">Web Development</div>
+                                <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                                <div class="skill-title">HTML5 & CSS3</div>
                             </div>
-                            <div class="skill-description">Building responsive, modern websites with AI-assisted design</div>
+                            <div class="skill-description">The backbone of the web. Crafting semantic structure, accessible content, and responsive layouts.</div>
                             <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>85%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="85%"></div></div>
+                                <div class="skill-progress-label"><span>Proficiency</span><span>95%</span></div>
+                                <div class="skill-progress"><div class="skill-progress-bar" data-width="95%"></div></div>
                             </div>
                             <div class="skill-tags">
-                                <span class="skill-tag">HTML</span>
-                                <span class="skill-tag">CSS</span>
-                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">HTML5</span>
+                                <span class="skill-tag">CSS3</span>
+                                <span class="skill-tag">Responsive</span>
                             </div>
                         </div>
                         
-                        <div class="skill-card" data-category="gaming">
+                        <!-- Card 2: JavaScript -->
+                        <div class="skill-card" data-category="core">
                             <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-gamepad"></i></div>
-                                <div class="skill-title">Game Mod Development</div>
+                                <div class="skill-icon"><i class="fab fa-js-square"></i></div>
+                                <div class="skill-title">JavaScript</div>
                             </div>
-                            <div class="skill-description">Creating advanced game modifications using zygisk, lua scripts, and libfake</div>
+                            <div class="skill-description">Bringing websites to life with dynamic logic, DOM manipulation, and asynchronous programming.</div>
                             <div class="skill-progress-container">
                                 <div class="skill-progress-label"><span>Proficiency</span><span>90%</span></div>
                                 <div class="skill-progress"><div class="skill-progress-bar" data-width="90%"></div></div>
                             </div>
                             <div class="skill-tags">
-                                <span class="skill-tag">Zygisk</span>
-                                <span class="skill-tag">Lua</span>
-                                <span class="skill-tag">LibFake</span>
+                                <span class="skill-tag">ES6+</span>
+                                <span class="skill-tag">DOM</span>
+                                <span class="skill-tag">Async</span>
                             </div>
                         </div>
                         
-                        <div class="skill-card" data-category="automation">
+                        <!-- Card 3: React -->
+                        <div class="skill-card" data-category="frameworks">
                             <div class="skill-header">
-                                <div class="skill-icon"><i class="fab fa-whatsapp"></i></div>
-                                <div class="skill-title">WhatsApp Automation</div>
+                                <div class="skill-icon"><i class="fab fa-react"></i></div>
+                                <div class="skill-title">React</div>
                             </div>
-                            <div class="skill-description">Developing intelligent bots for task automation and workflows</div>
+                            <div class="skill-description">Building scalable single-page applications with component-based architecture and state management.</div>
+                            <div class="skill-progress-container">
+                                <div class="skill-progress-label"><span>Proficiency</span><span>85%</span></div>
+                                <div class="skill-progress"><div class="skill-progress-bar" data-width="85%"></div></div>
+                            </div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Hooks</span>
+                                <span class="skill-tag">Redux</span>
+                                <span class="skill-tag">JSX</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 4: Vue.js -->
+                        <div class="skill-card" data-category="frameworks">
+                            <div class="skill-header">
+                                <div class="skill-icon"><i class="fab fa-vuejs"></i></div>
+                                <div class="skill-title">Vue.js</div>
+                            </div>
+                            <div class="skill-description">Progressive framework for building modern user interfaces and single-page applications.</div>
                             <div class="skill-progress-container">
                                 <div class="skill-progress-label"><span>Proficiency</span><span>80%</span></div>
                                 <div class="skill-progress"><div class="skill-progress-bar" data-width="80%"></div></div>
                             </div>
                             <div class="skill-tags">
-                                <span class="skill-tag">Bot API</span>
-                                <span class="skill-tag">Node.js</span>
-                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Vuex</span>
+                                <span class="skill-tag">Vue Router</span>
+                                <span class="skill-tag">Nuxt</span>
                             </div>
                         </div>
                         
-                        <div class="skill-card" data-category="automation">
+                        <!-- Card 5: Angular -->
+                        <div class="skill-card" data-category="frameworks">
                             <div class="skill-header">
-                                <div class="skill-icon"><i class="fab fa-telegram"></i></div>
-                                <div class="skill-title">Telegram Bot Development</div>
+                                <div class="skill-icon"><i class="fab fa-angular"></i></div>
+                                <div class="skill-title">Angular</div>
                             </div>
-                            <div class="skill-description">Creating functional and engaging bots for various purposes</div>
+                            <div class="skill-description">Platform for building mobile and desktop web applications using TypeScript.</div>
                             <div class="skill-progress-container">
                                 <div class="skill-progress-label"><span>Proficiency</span><span>75%</span></div>
                                 <div class="skill-progress"><div class="skill-progress-bar" data-width="75%"></div></div>
                             </div>
                             <div class="skill-tags">
-                                <span class="skill-tag">Bot API</span>
-                                <span class="skill-tag">Python</span>
-                                <span class="skill-tag">API</span>
+                                <span class="skill-tag">TypeScript</span>
+                                <span class="skill-tag">RxJS</span>
+                                <span class="skill-tag">NgRx</span>
                             </div>
                         </div>
                         
-                        <div class="skill-card" data-category="development">
+                        <!-- Card 6: Tailwind CSS -->
+                        <div class="skill-card" data-category="styling">
                             <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
-                                <div class="skill-title">Mobile App Development</div>
+                                <div class="skill-icon"><i class="fas fa-wind"></i></div>
+                                <div class="skill-title">Tailwind CSS</div>
                             </div>
-                            <div class="skill-description">Creating cross-platform mobile applications with modern frameworks</div>
+                            <div class="skill-description">A utility-first CSS framework for rapidly building custom user interfaces.</div>
                             <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>70%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="70%"></div></div>
+                                <div class="skill-progress-label"><span>Proficiency</span><span>90%</span></div>
+                                <div class="skill-progress"><div class="skill-progress-bar" data-width="90%"></div></div>
                             </div>
                             <div class="skill-tags">
-                                <span class="skill-tag">React Native</span>
-                                <span class="skill-tag">Flutter</span>
-                                <span class="skill-tag">Ionic</span>
+                                <span class="skill-tag">Utility-First</span>
+                                <span class="skill-tag">Responsive</span>
+                                <span class="skill-tag">JIT</span>
                             </div>
                         </div>
                         
-                        <div class="skill-card" data-category="gaming">
+                        <!-- Card 7: Bootstrap -->
+                        <div class="skill-card" data-category="styling">
                             <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-shield-alt"></i></div>
-                                <div class="skill-title">Anti-Cheat Development</div>
+                                <div class="skill-icon"><i class="fab fa-bootstrap"></i></div>
+                                <div class="skill-title">Bootstrap</div>
                             </div>
-                            <div class="skill-description">Creating robust anti-cheat systems for multiplayer games</div>
+                            <div class="skill-description">The world's most popular front-end open source toolkit for responsive layouts.</div>
                             <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>65%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="65%"></div></div>
+                                <div class="skill-progress-label"><span>Proficiency</span><span>85%</span></div>
+                                <div class="skill-progress"><div class="skill-progress-bar" data-width="85%"></div></div>
                             </div>
                             <div class="skill-tags">
-                                <span class="skill-tag">C++</span>
-                                <span class="skill-tag">Reverse Engineering</span>
-                                <span class="skill-tag">Security</span>
+                                <span class="skill-tag">Grid System</span>
+                                <span class="skill-tag">Components</span>
+                                <span class="skill-tag">Sass</span>
                             </div>
                         </div>
                         
-                        <div class="skill-card" data-category="automation">
+                        <!-- Card 8: jQuery -->
+                        <div class="skill-card" data-category="libraries">
                             <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-robot"></i></div>
-                                <div class="skill-title">AI Integration</div>
+                                <div class="skill-icon"><i class="fas fa-code"></i></div>
+                                <div class="skill-title">jQuery</div>
                             </div>
-                            <div class="skill-description">Integrating AI models into applications for enhanced functionality</div>
-                            <div class="skill-progress-container">
-                                <div class="skill-progress-label"><span>Proficiency</span><span>75%</span></div>
-                                <div class="skill-progress"><div class="skill-progress-bar" data-width="75%"></div></div>
-                            </div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">OpenAI</span>
-                                <span class="skill-tag">TensorFlow</span>
-                                <span class="skill-tag">NLP</span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-card" data-category="development">
-                            <div class="skill-header">
-                                <div class="skill-icon"><i class="fas fa-database"></i></div>
-                                <div class="skill-title">Database Management</div>
-                            </div>
-                            <div class="skill-description">Designing and optimizing database systems for scalability</div>
+                            <div class="skill-description">Feature-rich JavaScript library for DOM traversal, event handling, and animation.</div>
                             <div class="skill-progress-container">
                                 <div class="skill-progress-label"><span>Proficiency</span><span>80%</span></div>
                                 <div class="skill-progress"><div class="skill-progress-bar" data-width="80%"></div></div>
                             </div>
                             <div class="skill-tags">
-                                <span class="skill-tag">MySQL</span>
-                                <span class="skill-tag">MongoDB</span>
-                                <span class="skill-tag">PostgreSQL</span>
+                                <span class="skill-tag">DOM</span>
+                                <span class="skill-tag">AJAX</span>
+                                <span class="skill-tag">Animation</span>
                             </div>
                         </div>
                     </div>
@@ -1550,61 +1551,60 @@
                 <div class="projects-slider" id="projectsSlider">
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/70ff918e-cfee-4730-a64c-ad85e89f812f.jpg?auth_key=1869374406-f7491389bdb842109ad1ab36d7cd8c09-0-4b6dba5492d4ea6c7c1fd8f4f8c85ccb" alt="Snake Rush Game Screenshot">
+                            <img src="https://z-cdn-media.chatglm.cn/files/70ff918e-cfee-4730-a64c-ad85e89f812f.jpg?auth_key=1869374406-f7491389bdb842109ad1ab36d7cd8c09-0-4b6dba5492d4ea6c7c1fd8f4f8c85ccb" alt="Project 1">
                         </div>
                         <div class="project-content">
-                            <h3>Cheat Inject & Module Game</h3>
-                            <p>I’ve always been obsessed with how games work under the hood. I specialize in creating custom game modules and injection tools that interact directly with game engines. From memory offsets to internal hooks, I craft tools that are stable, efficient, and discreet. If there’s a system in place, I can find a way to enhance it.</p>
+                            <h3>E-Commerce Dashboard</h3>
+                            <p>A comprehensive admin dashboard built with React and Tailwind CSS to manage products, orders, and user analytics.</p>
                             <div class="project-tags">
-                                <span class="project-tag">Game Mod</span>
-                                <span class="project-tag">UI Enhancement</span>
-                                <span class="project-tag">Scripting</span>
+                                <span class="project-tag">React</span>
+                                <span class="project-tag">Tailwind</span>
+                                <span class="project-tag">Redux</span>
                             </div>
                         </div>
                     </div>
                     
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/74ef1a18-b6d8-47fb-848a-ef2b29b6a204.jpg?auth_key=1867383998-a690377424af412592c49868cc4d4177-0-9a38c9e26a7ed6ca7499bbfc78842592" alt="AI Web Dashboard">
+                            <img src="https://z-cdn-media.chatglm.cn/files/74ef1a18-b6d8-47fb-848a-ef2b29b6a204.jpg?auth_key=1867383998-a690377424af412592c49868cc4d4177-0-9a38c9e26a7ed6ca7499bbfc78842592" alt="Project 2">
                         </div>
                         <div class="project-content">
-                            <h3>AI Integration</h3>
-                            <p>Static sites are so yesterday. I bring AI Integration into the mix to make your platform actually do the work for you. Whether it’s smart chatbots, automated content, or personalized user flows, I plug in the right AI tools to turn your site from a simple page into a powerhouse. It’s not just tech—it’s a brain for your brand.</p>
+                            <h3>Social Media App UI</h3>
+                            <p>A modern, responsive social media application interface built using Vue.js and Bootstrap for seamless user experience.</p>
                             <div class="project-tags">
-                                <span class="project-tag">HTML</span>
-                                <span class="project-tag">CSS</span>
-                                <span class="project-tag">Frontend</span>
+                                <span class="project-tag">Vue.js</span>
+                                <span class="project-tag">Bootstrap</span>
+                                <span class="project-tag">Firebase</span>
                             </div>
                         </div>
                     </div>
                     
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/03764c83-4881-4345-b300-d0393ab12fdc.jpg?auth_key=1867383998-bc4f2cb90aa14171ac293dcb0890cb1e-0-eeb20d2ef5f988691b49314c370ef895" alt="Code Scripting Editor">
+                            <img src="https://z-cdn-media.chatglm.cn/files/03764c83-4881-4345-b300-d0393ab12fdc.jpg?auth_key=1867383998-bc4f2cb90aa14171ac293dcb0890cb1e-0-eeb20d2ef5f988691b49314c370ef895" alt="Project 3">
                         </div>
                         <div class="project-content">
-                            <h3>Scripting & Debugging</h3>
-                            <p> I don't just write code; I optimize it. My Scripting & Debugging process is all about efficiency. I love turning messy logic into a smooth, fast-loading experience. If there’s a bug ruining the vibe, consider it gone. I build the engine so your design can fly.</p>
+                            <h3>Portfolio Website</h3>
+                            <p>A sleek, dark-themed personal portfolio website showcasing projects and skills with smooth animations.</p>
                             <div class="project-tags">
-                                <span class="project-tag">Scripting</span>
-                                <span class="project-tag">Debugging</span>
-                                <span class="project-tag">Memory</span>
+                                <span class="project-tag">HTML5</span>
+                                <span class="project-tag">CSS3</span>
+                                <span class="project-tag">JavaScript</span>
                             </div>
                         </div>
                     </div>
                     
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="https://z-cdn-media.chatglm.cn/files/96f01762-cb63-43cf-ac7b-c6086a433195.jpg?auth_key=1867383998-6f37cfb75dac426d9d1a6ba6644f8d51-0-6b6bfc7d0c1d696b071fcee345dbfb1e" alt="Modern Web Interface">
+                            <img src="https://z-cdn-media.chatglm.cn/files/96f01762-cb63-43cf-ac7b-c6086a433195.jpg?auth_key=1867383998-6f37cfb75dac426d9d1a6ba6644f8d51-0-6b6bfc7d0c1d696b071fcee345dbfb1e" alt="Project 4">
                         </div>
                         <div class="project-content">
-                            <h3>Modern Web & Interface Design</h3>
-                            <p>I’m obsessed with how people interact with screens. My focus is simple: Modern Web & Interface Design that doesn't try too hard but hits all the right spots.
-​I cut the clutter and keep the soul. Whether it’s a landing page or a complex app, I make sure it’s intuitive, fast, and looks sharp on any device. I build stuff I’m proud of, for people who care about the details.</p>
+                            <h3>Enterprise Web App</h3>
+                            <p>A scalable enterprise solution developed with Angular, featuring robust authentication and data management.</p>
                             <div class="project-tags">
-                                <span class="project-tag">Portfolio</span>
-                                <span class="project-tag">Web Design</span>
-                                <span class="project-tag">UI/UX</span>
+                                <span class="project-tag">Angular</span>
+                                <span class="project-tag">TypeScript</span>
+                                <span class="project-tag">REST API</span>
                             </div>
                         </div>
                     </div>
@@ -1639,7 +1639,7 @@
             <div class="contact-content">
                 <div class="contact-text">
                     <h3>Have a project in mind?</h3>
-                    <p>I'm always excited to work on new challenges and innovative ideas. Whether you need a custom solution, consultation, or just want to chat about technology, feel free to reach out!</p>
+                    <p>I'm always excited to work on new challenges and innovative ideas. Whether you need a custom website, a web application, or a UI/UX design, feel free to reach out!</p>
                 </div>
                 
                 <div class="contact-buttons">
@@ -1668,8 +1668,8 @@
                         <select id="service" name="service">
                             <option value="">Select a service</option>
                             <option value="web-dev">Web Development</option>
-                            <option value="bot-dev">Bot Development</option>
-                            <option value="game-mod">Game Modding</option>
+                            <option value="ui-design">UI/UX Design</option>
+                            <option value="frontend">Front End Consulting</option>
                             <option value="other">Other</option>
                         </select>
                     </div>
@@ -1724,28 +1724,23 @@
         let lastScrollTop = 0;
         const header = document.getElementById("header");
         const scrollProgressBar = document.getElementById("scrollProgressBar");
-        const delta = 5; // Sensitivitas scroll
+        const delta = 5; 
         
         window.addEventListener("scroll", function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Progress Bar Logic
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (scrollTop / height) * 100;
             scrollProgressBar.style.width = scrolled + "%";
 
-            // Make sure they scroll more than delta
             if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
 
             if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scroll Down -> Hide Header
                 header.classList.add("nav-up");
             } else {
-                // Scroll Up -> Show Header
                 header.classList.remove("nav-up");
             }
 
-            // Safety check untuk paling atas (selalu muncul)
             if (scrollTop <= 0) {
                 header.classList.remove("nav-up");
                 header.classList.remove('scrolled');
@@ -1756,7 +1751,7 @@
             lastScrollTop = scrollTop;
         });
 
-        // HIDDEN LINK LOGIC (Ini yang bikin link aslinya ga keliatan di href)
+        // HIDDEN LINK LOGIC
         const hiddenLinks = document.querySelectorAll('.btn-hidden-link');
 
         hiddenLinks.forEach(link => {
@@ -1786,7 +1781,7 @@
                 const desc = card.querySelector('p').innerText;
 
                 modalTitle.innerText = title;
-                modalDesc.innerHTML = `${desc}<br><br><strong>Status:</strong> Completed<br><strong>Role:</strong> Lead Developer<br><br>This is a placeholder for detailed project requirements, tech stack details, and live demo links. In a production environment, this data could be fetched dynamically from a JSON file or database.`;
+                modalDesc.innerHTML = `${desc}<br><br><strong>Status:</strong> Completed<br><strong>Role:</strong> Front-End Developer<br><br>This project showcases modern front-end capabilities and responsive design principles.`;
 
                 modal.classList.add('open');
             });
@@ -1803,7 +1798,7 @@
         });
         
         // TYPING ANIMATION
-        const typingTexts = ['Full Stack Developer', 'Game Mod Specialist', 'AI Enthusiast', 'Bot Developer', 'Problem Solver'];
+        const typingTexts = ['Front End Developer', 'UI/UX Designer', 'React Enthusiast', 'Web Architect', 'Problem Solver'];
         let textIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
