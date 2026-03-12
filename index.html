@@ -506,7 +506,7 @@
         
         .about-stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 10);
             gap: 15px;
             margin-top: 30px;
         }
@@ -961,6 +961,7 @@
             height: 180px;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
         .project-image-container img {
@@ -1261,7 +1262,7 @@
         
         .social-links { display: flex; gap: 12px; }
         
-        .social-links a, .social-links span {
+        .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1276,7 +1277,7 @@
             cursor: pointer;
         }
         
-        .social-links a::before, .social-links span::before {
+        .social-links a::before {
             content: '';
             position: absolute;
             top: 0; left: 0;
@@ -1287,9 +1288,9 @@
             z-index: -1;
         }
         
-        .social-links a:hover::before, .social-links span:hover::before { opacity: 1; }
+        .social-links a:hover::before { opacity: 1; }
         
-        .social-links a:hover, .social-links span:hover {
+        .social-links a:hover {
             color: var(--primary-color);
             transform: translateY(-5px);
         }
@@ -1652,7 +1653,7 @@
                     <div class="project-flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <div class="project-image-container">
+                                <div class="project-image-container" data-project-link="aHR0cHM6Ly91amF5eS52ZXJjZWwuYXBw">
                                     <img src="https://z-cdn-media.chatglm.cn/files/4e0a3a9a-506c-4eac-80d7-dda33d8a246f.jpg?auth_key=1873325488-1bdd031c83e34afc922e9b5c85dc194d-0-c001923c3d67c64cad54dc112ed38a8f" alt="Ujay Store">
                                     <div class="project-image-overlay"></div>
                                 </div>
@@ -1685,9 +1686,9 @@
                                         <div class="project-back-detail-text"><strong>Features</strong>Live countdown, promo banner, product catalog</div>
                                     </div>
                                 </div>
-                                <span class="project-back-btn secret-link" data-target="aHR0cHM6Ly91amF5eS52ZXJjZWwuYXBwLw==">
+                                <a href="https://ujayy.vercel.app" target="_blank" rel="noopener noreferrer" class="project-back-btn">
                                     Visit Site <i class="fas fa-external-link-alt"></i>
-                                </span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1696,7 +1697,7 @@
                     <div class="project-flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <div class="project-image-container">
+                                <div class="project-image-container" data-project-link="aHR0cHM6Ly9kZWF0bHlzaW5zc3RvcmUudmVyY2VsLmFwcA==">
                                     <img src="https://z-cdn-media.chatglm.cn/files/2b91b915-ec5c-4f52-9109-18cb19d329cf.jpg?auth_key=1873325488-a9519e982e304824b35efab53e8cd66d-0-f06c5ed2ab9ccb32278df728998a1691" alt="Deadlysins Store">
                                     <div class="project-image-overlay"></div>
                                 </div>
@@ -1725,9 +1726,9 @@
                                         <div class="project-back-detail-text"><strong>Features</strong>Order tracking, pricing list, responsive design</div>
                                     </div>
                                 </div>
-                                <span class="project-back-btn secret-link" data-target="aHR0cHM6Ly9kZWF0bHlzaW5zc3RvcmUudmVyY2VsLmFwcC8=">
+                                <a href="https://deatlysinsstore.vercel.app" target="_blank" rel="noopener noreferrer" class="project-back-btn">
                                     Visit Site <i class="fas fa-external-link-alt"></i>
-                                </span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1736,7 +1737,7 @@
                     <div class="project-flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <div class="project-image-container">
+                                <div class="project-image-container" data-project-link="aHR0cHM6Ly91amF5eS5teS5pZA==">
                                     <img src="https://z-cdn-media.chatglm.cn/files/dd9169ea-2e33-4e7e-8fc6-fd227632e7b8.jpg?auth_key=1873325488-c4c096702a47403bb35ec434f9565af4-0-8be029ecb25740ce16abd7fe8900600c" alt="Personal Portfolio">
                                     <div class="project-image-overlay"></div>
                                 </div>
@@ -1769,9 +1770,9 @@
                                         <div class="project-back-detail-text"><strong>Actions</strong>VIEW MY WORK, GET IN TOUCH, VISIT MY STORE, JOIN ALL GROUP</div>
                                     </div>
                                 </div>
-                                <span class="project-back-btn secret-link" data-target="aHR0cHM6Ly91amF5eS5teS5pZC8=">
+                                <a href="https://ujayy.my.id" target="_blank" rel="noopener noreferrer" class="project-back-btn">
                                     Visit Site <i class="fas fa-home"></i>
-                                </span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1780,7 +1781,7 @@
                     <div class="project-flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <div class="project-image-container">
+                                <div class="project-image-container" data-project-link="aHR0cHM6Ly9qZ25leHZ2aXBwLm5ldGxpZnkuYXBw">
                                     <img src="https://z-cdn-media.chatglm.cn/files/f31cceb1-9ca3-466d-a0d1-31480d979bcd.jpg?auth_key=1873325488-d08e8b6eb0f54a27b56717918e14223b-0-09180815552d83efbe5a540062a84bf9" alt="ExvvStore">
                                     <div class="project-image-overlay"></div>
                                 </div>
@@ -1809,9 +1810,9 @@
                                         <div class="project-back-detail-text"><strong>Status</strong>Tersedia / Belum Tersedia dengan tombol "Pesan Sekarang"</div>
                                     </div>
                                 </div>
-                                <span class="project-back-btn secret-link" data-target="aHR0cHM6Ly9qZ25leHZ2aXBwLm5ldGxpZnkuYXBwLw==">
+                                <a href="https://jgnexvvipp.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-back-btn">
                                     Visit Site <i class="fas fa-external-link-alt"></i>
-                                </span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1820,7 +1821,7 @@
                     <div class="project-flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <div class="project-image-container">
+                                <div class="project-image-container" data-project-link="aHR0cHM6Ly9hYm91dGV4dnYubmV0bGlmeS5hcHA=">
                                     <img src="https://z-cdn-media.chatglm.cn/files/8d37be3d-f944-4e89-b39b-ed39796d5c88.jpg?auth_key=1873325488-7c24c64c436748d78ae2a70a2afcb889-0-b99abbf36f2824fa3353d898ab726c25" alt="Portfolio Exvv">
                                     <div class="project-image-overlay"></div>
                                 </div>
@@ -1853,9 +1854,9 @@
                                         <div class="project-back-detail-text"><strong>Navigation</strong>Home, About, Projects, Contact</div>
                                     </div>
                                 </div>
-                                <span class="project-back-btn secret-link" data-target="aHR0cHM6Ly9hYm91dGV4dnYubmV0bGlmeS5hcHAv">
+                                <a href="https://aboutexvv.netlify.app" target="_blank" rel="noopener noreferrer" class="project-back-btn">
                                     Visit Site <i class="fas fa-external-link-alt"></i>
-                                </span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1864,7 +1865,7 @@
                     <div class="project-flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <div class="project-image-container">
+                                <div class="project-image-container" data-project-link="aHR0cHM6Ly9iZW5na2VsbXRvci52ZXJjZWwuYXBw">
                                     <img src="https://z-cdn-media.chatglm.cn/files/51d2f2d4-1419-4494-a70f-4c6faa5bd682.jpg?auth_key=1873325488-a4d4748b803f40fa9c5fd22268104f4c-0-29b985a9526275e510c5900f54f1abee" alt="Bengkel Opan">
                                     <div class="project-image-overlay"></div>
                                 </div>
@@ -1897,9 +1898,9 @@
                                         <div class="project-back-detail-text"><strong>Navigation</strong>OPAN, Layanan, Galeri, Kontak, Hubungi Kami</div>
                                     </div>
                                 </div>
-                                <span class="project-back-btn secret-link" data-target="aHR0cHM6Ly9iZW5na2VsbXR0b3IudmVyY2VsLmFwcC8=">
+                                <a href="https://bengkelmtor.vercel.app" target="_blank" rel="noopener noreferrer" class="project-back-btn">
                                     Visit Site <i class="fas fa-external-link-alt"></i>
-                                </span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1908,7 +1909,7 @@
                     <div class="project-flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <div class="project-image-container">
+                                <div class="project-image-container" data-project-link="aHR0cHM6Ly90aXRpcGluYWpheXVrLm5ldGxpZnkuYXBw">
                                     <img src="https://z-cdn-media.chatglm.cn/files/fb9054a3-a02e-4693-ba78-fcb10ab678a8.jpg?auth_key=1873325488-3ec13b31758949cca5d9e4ac0d73b2a4-0-2b2cff9c946594f909048ef06dec685a" alt="Titipin Aja Yuk">
                                     <div class="project-image-overlay"></div>
                                 </div>
@@ -1941,9 +1942,9 @@
                                         <div class="project-back-detail-text"><strong>Services</strong>Lihat Layanan Jastip, Lihat Perabotan, Lihat Layanan Jasa</div>
                                     </div>
                                 </div>
-                                <span class="project-back-btn secret-link" data-target="aHR0cHM6Ly90aXRpcGluYWpheXVrLm5ldGxpZnkuYXBwLw==">
+                                <a href="https://titipinajayuk.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-back-btn">
                                     Visit Site <i class="fas fa-external-link-alt"></i>
-                                </span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1952,7 +1953,7 @@
                     <div class="project-flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <div class="project-image-container">
+                                <div class="project-image-container" data-project-link="aHR0cHM6Ly90Lm1lL2RlYWRseXNpbnNTdG9yZWU=">
                                     <img src="https://z-cdn-media.chatglm.cn/files/df0fd6fd-78fa-4a83-8c51-3fae36cff266.jpg?auth_key=1873325488-ce0742e8d8ce45c3b6fe2ddf1553836e-0-3e0fc6623373ae47a0f9cf2348ee06ab" alt="Big Thanks">
                                     <div class="project-image-overlay"></div>
                                 </div>
@@ -1985,9 +1986,9 @@
                                         <div class="project-back-detail-text"><strong>Action</strong>Tombol "MASUK STORE" berwarna merah</div>
                                     </div>
                                 </div>
-                                <span class="project-back-btn secret-link" data-target="aHR0cHM6Ly9iZWF0bHlzaW5zc3RvcmUudmVyY2VsLmFwcC8=">
+                                <a href="https://t.me/deadlysinsStoree" target="_blank" rel="noopener noreferrer" class="project-back-btn">
                                     Visit Link <i class="fas fa-external-link-alt"></i>
-                                </span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -2064,7 +2065,7 @@
                 cursor.style.top = e.clientY + 'px';
             });
 
-            const interactiveElements = document.querySelectorAll('a, button, .skill-tab, input, textarea, select, .secret-link');
+            const interactiveElements = document.querySelectorAll('a, button, .skill-tab, input, textarea, select, .secret-link, .project-image-container');
             
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
@@ -2134,6 +2135,22 @@
             // Prevent drag
             link.addEventListener('dragstart', function(e) {
                 e.preventDefault();
+            });
+        });
+        
+        // PROJECT IMAGE CLICK HANDLER - Encoded link on image click
+        const projectImageContainers = document.querySelectorAll('.project-image-container');
+        
+        projectImageContainers.forEach(container => {
+            container.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent card flip
+                const encodedData = this.getAttribute('data-project-link');
+                if (encodedData) {
+                    const targetUrl = decodeLink(encodedData);
+                    if (targetUrl) {
+                        window.open(targetUrl, '_blank', 'noopener,noreferrer');
+                    }
+                }
             });
         });
         
@@ -2233,8 +2250,8 @@
         
         allFlipCards.forEach(card => {
             card.addEventListener('click', function(e) {
-                // Prevent flipping when clicking on a link inside the card
-                if (e.target.closest('.secret-link')) return;
+                // Prevent flipping when clicking on image container or a link inside the card
+                if (e.target.closest('.project-image-container') || e.target.closest('.project-back-btn')) return;
                 this.classList.toggle('flipped');
             });
         });
