@@ -506,7 +506,7 @@
         
         .about-stats {
             display: grid;
-            grid-template-columns: repeat(2, 10);
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             margin-top: 30px;
         }
@@ -1261,7 +1261,7 @@
         
         .social-links { display: flex; gap: 12px; }
         
-        .social-links a {
+        .social-links a, .social-links span {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1276,7 +1276,7 @@
             cursor: pointer;
         }
         
-        .social-links a::before {
+        .social-links a::before, .social-links span::before {
             content: '';
             position: absolute;
             top: 0; left: 0;
@@ -1287,9 +1287,9 @@
             z-index: -1;
         }
         
-        .social-links a:hover::before { opacity: 1; }
+        .social-links a:hover::before, .social-links span:hover::before { opacity: 1; }
         
-        .social-links a:hover {
+        .social-links a:hover, .social-links span:hover {
             color: var(--primary-color);
             transform: translateY(-5px);
         }
@@ -1897,7 +1897,7 @@
                                         <div class="project-back-detail-text"><strong>Navigation</strong>OPAN, Layanan, Galeri, Kontak, Hubungi Kami</div>
                                     </div>
                                 </div>
-                                <span class="project-back-btn secret-link" data-target="aHR0cHM6Ly9iZW5na2VsbWRtdmVyY2VsLmFwcC8=">
+                                <span class="project-back-btn secret-link" data-target="aHR0cHM6Ly9iZW5na2VsbXR0b3IudmVyY2VsLmFwcC8=">
                                     Visit Site <i class="fas fa-external-link-alt"></i>
                                 </span>
                             </div>
