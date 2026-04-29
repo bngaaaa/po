@@ -1,2280 +1,507 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Ujayy | Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700&family=Playfair+Display:wght@700;900&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: none; 
-        }
-        
-        input, textarea, select, button {
-            cursor: auto;
-        }
-
-        @media (hover: none) and (pointer: coarse) {
-            * { cursor: auto !important; }
-            .custom-cursor { display: none !important; }
-        }
-
-        :root {
-            --primary-color: #0a0a0a;
-            --secondary-color: #ffffff;
-            --accent-color: #f0f0f0;
-            --gray-light: #f5f5f5;
-            --gray-medium: #888;
-            --gray-dark: #1a1a1a;
-            --neon-cyan: #00f3ff;
-            --neon-purple: #bc13fe;
-            --neon-pink: #ff0099;
-            --neon-gold: #ffd700;
-            --neon-red: #dc143c;
-            --transition: all 0.3s ease;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            --gradient-6: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
-            --gradient-7: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            --gradient-8: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            --card-red: #c41e3a;
-            --card-black: #1a1a2e;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #111 100%);
-            color: var(--secondary-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        /* CUSTOM CROSSHAIR CURSOR */
-        .custom-cursor {
-            position: fixed;
-            top: 0; left: 0;
-            width: 30px; height: 30px;
-            border: 2px solid var(--neon-cyan);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 99999;
-            transform: translate(-50%, -50%);
-            transition: width 0.1s, height 0.1s, border-color 0.1s;
-            mix-blend-mode: difference;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .custom-cursor::after {
-            content: '';
-            width: 4px; height: 4px;
-            background: var(--neon-pink);
-            border-radius: 50%;
-        }
-
-        .custom-cursor.active {
-            width: 20px;
-            height: 20px;
-            border-color: var(--neon-pink);
-            background: rgba(255, 0, 153, 0.2);
-        }
-
-        .custom-cursor.hovering {
-            width: 40px;
-            height: 40px;
-            border-color: var(--secondary-color);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .scroll-progress-container {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: 10001;
-        }
-
-        .scroll-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
-            width: 0%;
-            box-shadow: 0 0 10px var(--neon-cyan);
-            transition: width 0.1s;
-        }
-
-        /* FUTURISTIC OVERLAY */
-        .futuristic-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 998;
-            pointer-events: none;
-            overflow: hidden;
-            mix-blend-mode: overlay;
-        }
-        
-        .scanlines {
-            width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
-            background-size: 100% 4px;
-            opacity: 0.2;
-        }
-        
-        .hud-corners { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
-        
-        .corner {
-            position: absolute;
-            width: 40px; height: 40px;
-            border: 2px solid var(--neon-cyan);
-            opacity: 0.3;
-        }
-        
-        .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; border-top-left-radius:5px; }
-        .corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; border-top-right-radius:5px; }
-        .corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; border-bottom-left-radius:5px; }
-        .corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; border-bottom-right-radius:5px; }
-        
-        .hud-text {
-            position: absolute;
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-cyan);
-            font-size: 10px;
-            opacity: 0.4;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        
-        .hud-text-top { top: 30px; right: 80px; }
-        .hud-text-bottom { bottom: 30px; left: 80px; }
-        
-        .flicker-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.01);
-            opacity: 0;
-            animation: flicker 6s infinite;
-            pointer-events: none;
-        }
-        
-        @keyframes flicker {
-            0% { opacity: 0.01; } 5% { opacity: 0.03; } 10% { opacity: 0.01; }
-            15% { opacity: 0.04; } 20% { opacity: 0.01; } 50% { opacity: 0.01; }
-            80% { opacity: 0.02; } 100% { opacity: 0.01; }
-        }
-
-        /* GLITCH EFFECT */
-        .glitch { position: relative; color: var(--secondary-color); }
-
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--primary-color);
-        }
-        
-        .glitch::before {
-            left: 2px;
-            text-shadow: -1px 0 var(--neon-pink);
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
-        }
-
-        .glitch::after {
-            left: -2px;
-            text-shadow: -1px 0 var(--neon-cyan);
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2.5s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim {
-            0% { clip: rect(11px, 9999px, 32px, 0); } 20% { clip: rect(65px, 9999px, 86px, 0); }
-            40% { clip: rect(23px, 9999px, 10px, 0); } 60% { clip: rect(98px, 9999px, 4px, 0); }
-            80% { clip: rect(35px, 9999px, 56px, 0); } 100% { clip: rect(78px, 9999px, 12px, 0); }
-        }
-
-        @keyframes glitch-anim-2 {
-            0% { clip: rect(65px, 9999px, 100px, 0); } 20% { clip: rect(12px, 9999px, 45px, 0); }
-            40% { clip: rect(80px, 9999px, 20px, 0); } 60% { clip: rect(30px, 9999px, 90px, 0); }
-            80% { clip: rect(55px, 9999px, 15px, 0); } 100% { clip: rect(10px, 9999px, 75px, 0); }
-        }
-        
-        header {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; padding: 20px 0;
-            z-index: 1000;
-            transition: var(--transition), top 0.4s ease-in-out; 
-            background-color: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(5px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        header.scrolled { padding: 15px 0; background-color: rgba(10, 10, 10, 0.95); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); }
-        header.nav-up { top: -100px; } 
-        
-        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: var(--secondary-color);
-            position: relative;
-            overflow: hidden;
-            z-index: 10;
-        }
-        
-        .nav-links { display: flex; list-style: none; gap: 30px; align-items: center; }
-        
-        .nav-links a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-link-store {
-            color: var(--neon-cyan) !important;
-            font-weight: 700 !important;
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 50%;
-            width: 30px;
-            height: 2px;
-            background: var(--gradient-1);
-            transform: translateX(-50%) scaleX(0);
-            transform-origin: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .nav-links a:hover::before { transform: translateX(-50%) scaleX(1); }
-        
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 80px;
-            perspective: 1000px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%; height: 200%;
-            top: -50%; left: -50%;
-            background: radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%);
-            animation: heroGradient 30s ease infinite;
-            z-index: -1;
-        }
-        
-        @keyframes heroGradient { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(180deg); } }
-        
-        .hero-content {
-            max-width: 900px;
-            text-align: center;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero-subtitle {
-            font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            color: var(--gray-medium);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 30px;
-            letter-spacing: -2px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-        }
-        
-        .hero-title-gradient {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--gray-medium) 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .typing-text {
-            font-size: 20px;
-            margin-bottom: 40px;
-            min-height: 30px;
-            color: var(--gray-medium);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.4s forwards;
-        }
-        
-        .typing-text::after { content: '|'; animation: blink 1s infinite; }
-        
-        @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 12px 25px;
-            font-weight: 600;
-            font-size: 14px;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s ease;
-        }
-        
-        .btn:hover::before { left: 100%; }
-        
-        .btn-primary {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--secondary-color);
-            border: 2px solid var(--secondary-color);
-        }
-        
-        .btn-secondary:hover {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-
-        .btn-accent {
-            background: var(--gradient-1);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-accent:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
-        }
-        
-        .btn i { margin-left: 8px; transition: var(--transition); }
-        .btn:hover i { transform: translateX(3px); }
-        
-        .section { padding: 80px 0; position: relative; background: transparent; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        .section-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            line-height: 1.1;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px; left: 0;
-            width: 50px; height: 4px;
-            background: var(--gradient-1);
-            border-radius: 2px;
-        }
-        
-        .section-subtitle {
-            font-size: 16px;
-            color: var(--gray-medium);
-            margin-bottom: 40px;
-            max-width: 600px;
-        }
-        
-        .horizontal-scroll-container {
-            overflow-x: auto;
-            overflow-y: hidden;
-            white-space: nowrap;
-            padding-bottom: 20px;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-        }
-        
-        .horizontal-scroll-container::-webkit-scrollbar { height: 6px; }
-        .horizontal-scroll-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        .horizontal-scroll-container::-webkit-scrollbar-thumb { background: var(--gradient-1); border-radius: 10px; }
-        .horizontal-scroll-container::-webkit-scrollbar-thumb:hover { background: var(--gradient-2); }
-        
-        .about-content { display: flex; align-items: center; gap: 40px; }
-        .about-text { flex: 1; }
-        
-        .about-text h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.3;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .about-text h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px; left: 0;
-            width: 100%; height: 2px;
-            background: var(--gradient-1);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-        }
-        
-        .about-text:hover h3::after { transform: scaleX(1); }
-        
-        .about-text p {
-            font-size: 15px;
-            line-height: 1.8;
-            color: var(--gray-medium);
-            margin-bottom: 30px;
-        }
-        
-        .about-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 10);
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .stat-item {
-            padding: 15px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--gradient-1);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .stat-item:nth-child(2)::before { background: var(--gradient-2); }
-        .stat-item:nth-child(3)::before { background: var(--gradient-3); }
-        .stat-item:nth-child(4)::before { background: var(--gradient-4); }
-        
-        .stat-item:hover::before { opacity: 0.1; }
-        
-        .stat-item:hover {
-            transform: translateY(-5px);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .stat-number {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 5px;
-            color: var(--secondary-color);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .stat-number::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 2px;
-            background: var(--gradient-1);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-        }
-        
-        .stat-item:hover .stat-number::after { transform: scaleX(1); }
-        
-        .stat-label {
-            font-size: 12px;
-            color: var(--gray-medium);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .about-img {
-            width: 240px; height: 240px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-            margin: 0 auto;
-            position: relative;
-            box-shadow: 0 0 0 4px rgba(255,255, 255, 0.1), 0 20px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255,255, 255, 0.1);
-            transition: var(--transition);
-        }
-        
-        .about-img:hover {
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3), 0 20px 40px rgba(102, 126, 234, 0.3);
-            transform: scale(1.05);
-        }
-        
-        .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        
-        .skills { position: relative; overflow: hidden; }
-        
-        .skills::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 50%, rgba(118, 75, 162, 0.08) 0%, transparent 50%);
-            z-index: -1;
-        }
-        
-        .skills-tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .skill-tab {
-            padding: 8px 16px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            color: var(--secondary-color);
-            font-weight: 600;
-            font-size: 12px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .skill-tab:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .skill-tab.active {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-        }
-        
-        .skills-container { position: relative; margin-top: 20px; }
-        
-        .skills-slider {
-            display: flex;
-            gap: 20px;
-            transition: transform 0.5s ease;
-            padding-bottom: 10px;
-        }
-        
-        /* ========================================
-           FLIP CARD STYLES - KARTU REMI
-           ======================================== */
-        
-        .flip-card {
-            min-width: 280px;
-            height: 380px;
-            perspective: 1500px;
-            display: inline-block;
-            vertical-align: top;
-            white-space: normal;
-            cursor: pointer;
-        }
-        
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-        }
-        
-        .flip-card.flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        
-        .flip-card-front,
-        .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .flip-card-front {
-            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-        
-        .flip-card-front::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 10px,
-                    rgba(255, 255, 255, 0.02) 10px,
-                    rgba(255, 255, 255, 0.02) 20px
-                );
-            pointer-events: none;
-        }
-        
-        .card-suit-corner {
-            position: absolute;
-            font-family: 'Playfair Display', serif;
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 1;
-            opacity: 0.9;
-        }
-        
-        .card-suit-corner.top-left {
-            top: 12px;
-            left: 12px;
-        }
-        
-        .card-suit-corner.bottom-right {
-            bottom: 12px;
-            right: 12px;
-            transform: rotate(180deg);
-        }
-        
-        .card-suit-corner .suit-symbol {
-            font-size: 18px;
-            display: block;
-            margin-top: 2px;
-        }
-        
-        .card-suit-red { color: var(--card-red); }
-        .card-suit-black { color: var(--secondary-color); }
-        
-        .skill-card-content {
-            padding: 50px 20px 20px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        
-        .skill-icon-large {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            color: white;
-            margin-bottom: 20px;
-            position: relative;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .skill-icon-large::after {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .skill-title-large {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-        }
-        
-        .skill-category-badge {
-            padding: 4px 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--gray-medium);
-        }
-        
-        .flip-hint {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 11px;
-            color: var(--gray-medium);
-            opacity: 0.6;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .flip-hint i {
-            animation: pulse-hint 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse-hint {
-            0%, 100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
-        
-        .flip-card-back {
-            background: linear-gradient(145deg, #0d0d1a 0%, #1a1a2e 100%);
-            border: 2px solid;
-            transform: rotateY(180deg);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .flip-card-back.gradient-1 { border-color: #667eea; }
-        .flip-card-back.gradient-2 { border-color: #f093fb; }
-        .flip-card-back.gradient-3 { border-color: #4facfe; }
-        .flip-card-back.gradient-4 { border-color: #43e97b; }
-        .flip-card-back.gradient-5 { border-color: #fa709a; }
-        .flip-card-back.gradient-6 { border-color: #30cfd0; }
-        .flip-card-back.gradient-7 { border-color: #a8edea; }
-        .flip-card-back.gradient-8 { border-color: #ff9a9e; }
-        
-        .back-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .back-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: white;
-        }
-        
-        .back-title {
-            font-size: 16px;
-            font-weight: 700;
-        }
-        
-        .back-subtitle {
-            font-size: 11px;
-            color: var(--gray-medium);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .back-description {
-            font-size: 13px;
-            color: var(--gray-medium);
-            line-height: 1.6;
-            margin-bottom: 15px;
-            flex-grow: 0;
-        }
-        
-        .back-progress-section {
-            margin-bottom: 15px;
-        }
-        
-        .back-progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-            font-size: 12px;
-        }
-        
-        .back-progress-label span:last-child {
-            font-weight: 700;
-        }
-        
-        .back-progress-bar {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .back-progress-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 1s ease-out;
-        }
-        
-        .back-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: auto;
-        }
-        
-        .back-tag {
-            padding: 4px 10px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 15px;
-            font-size: 10px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: var(--transition);
-        }
-        
-        .back-tag:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        /* PROJECT FLIP CARDS */
-        .project-flip-card {
-            min-width: 300px;
-            height: 420px;
-            perspective: 1500px;
-            display: inline-block;
-            vertical-align: top;
-            white-space: normal;
-            cursor: pointer;
-        }
-        
-        .project-flip-card .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-        }
-        
-        .project-flip-card.flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        
-        .project-flip-card .flip-card-front,
-        .project-flip-card .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .project-flip-card .flip-card-front {
-            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .project-image-container {
-            height: 180px;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        
-        .project-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .project-flip-card:hover .project-image-container img {
-            transform: scale(1.05);
-        }
-        
-        .project-image-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
-        }
-        
-        .project-front-content {
-            padding: 20px;
-            height: calc(100% - 180px);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-front-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
-        .project-front-desc {
-            font-size: 12px;
-            color: var(--gray-medium);
-            line-height: 1.5;
-            flex-grow: 1;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .project-front-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-top: 12px;
-        }
-        
-        .project-front-tag {
-            padding: 3px 8px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            font-size: 9px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .project-flip-card .flip-card-back {
-            background: linear-gradient(145deg, #0d0d1a 0%, #1a1a2e 100%);
-            border: 2px solid var(--neon-cyan);
-            transform: rotateY(180deg);
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-back-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 15px;
-            position: relative;
-        }
-        
-        .project-back-icon::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            animation: rotate-border 20s linear infinite;
-        }
-        
-        @keyframes rotate-border {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .project-back-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .project-back-type {
-            font-size: 11px;
-            color: var(--neon-cyan);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-        
-        .project-back-details {
-            flex-grow: 1;
-        }
-        
-        .project-back-detail-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-        
-        .project-back-detail-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            flex-shrink: 0;
-        }
-        
-        .project-back-detail-text {
-            font-size: 12px;
-            color: var(--gray-medium);
-            line-height: 1.5;
-        }
-        
-        .project-back-detail-text strong {
-            color: var(--secondary-color);
-            display: block;
-            margin-bottom: 2px;
-        }
-        
-        .project-back-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            background: var(--gradient-1);
-            color: white;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-            margin-top: auto;
-            cursor: pointer;
-        }
-        
-        .project-back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        .project-back-btn i {
-            margin-left: 8px;
-        }
-        
-        .skills-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .skill-btn {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: var(--secondary-color);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .skill-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--gradient-1);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .skill-btn:hover::before { opacity: 0.2; }
-        
-        .skill-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .skill-btn:active { transform: scale(0.95); }
-
-        .contact-content { text-align: center; }
-        .contact-text { margin-bottom: 40px; }
-        
-        .contact-text h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .contact-text p {
-            font-size: 16px;
-            color: var(--gray-medium);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .contact-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-        
-        .contact-btn {
-            display: flex;
-            align-items: center;
-            padding: 14px 24px;
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--secondary-color);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            border-radius: 10px;
-            transition: var(--transition);
-            min-width: 160px;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        
-        .contact-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: left 0.5s ease;
-        }
-        
-        .contact-btn:hover::before { left: 100%; }
-        
-        .contact-btn:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .contact-btn i { margin-right: 10px; font-size: 16px; }
-        
-        footer {
-            padding: 40px 0 20px;
-            background-color: transparent;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .footer-logo {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-right: 20px;
-        }
-        
-        .social-links { display: flex; gap: 12px; }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px; height: 36px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--secondary-color);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        
-        .social-links a::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--gradient-1);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .social-links a:hover::before { opacity: 1; }
-        
-        .social-links a:hover {
-            color: var(--primary-color);
-            transform: translateY(-5px);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            color: var(--gray-medium);
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-            z-index: 1002;
-        }
-        
-        .menu-toggle span {
-            width: 25px; height: 2px;
-            background-color: var(--secondary-color);
-            transition: var(--transition);
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 0; right: -100%;
-                height: 100vh; width: 80%;
-                background-color: rgba(10, 10, 10, 0.98);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: var(--transition);
-                z-index: 1001;
-                border-left: 1px solid rgba(255,255,255,0.1);
+    <title>HALOCOKO - Chocolate Ice Cream</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 
+                            50:'#fff7ed', 100:'#ffedd5', 200:'#fed7aa', 300:'#fdba74', 
+                            400:'#fb923c', 500:'#f97316', 600:'#ea580c', 700:'#c2410c', 
+                            800:'#9a3412', 900:'#7c2d12' 
+                        },
+                        coco: { 
+                            50:'#fffbeb', 100:'#fef3c7', 200:'#fde68a', 300:'#fcd34d', 
+                            400:'#fbbf24', 500:'#f59e0b', 600:'#d97706', 700:'#b45309', 
+                            800:'#92400e', 900:'#78350f', 950:'#451a03'
+                        }
+                    },
+                    fontFamily: { jakarta:['Plus Jakarta Sans','sans-serif'] }
+                }
             }
-            .nav-links.active { right: 0; }
-            .menu-toggle { display: flex; }
-            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-            .menu-toggle.active span:nth-child(2) { opacity: 0; }
-            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
-            .about-content { flex-direction: column; gap: 30px; }
-            .about-stats { grid-template-columns: repeat(2, 1fr); }
-            .flip-card, .project-flip-card { min-width: 260px; }
-            .skills-controls { display: flex; }
-            .footer-content { flex-direction: column; gap: 15px; }
-            .footer-logo { margin-right: 0; }
-            .hud-corners { display: none; }
-            .scanlines { opacity: 0.2; }
+        }
+    </script>
+    <style>
+        body{font-family:'Plus Jakarta Sans',sans-serif;background-color:#fffbeb; color:#451a03;}
+        .scrollbar-hide::-webkit-scrollbar{display:none}
+        .scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+        
+        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes slideR{from{transform:translateX(100%)}to{transform:translateX(0)}}
+        @keyframes slideOut{from{transform:translateX(0)}to{transform:translateX(100%)}}
+        @keyframes toastIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes toastOut{from{opacity:1}to{opacity:0;transform:translateY(-20px)}}
+        @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+        @keyframes bounce-slow{0%, 100%{transform:translateY(-5%);} 50%{transform:translateY(0);}}
+
+        .anim-up{animation:fadeUp .45s ease-out both}
+        .slide-r{animation:slideR .3s cubic-bezier(.16,1,.3,1) forwards}
+        .slide-out{animation:slideOut .25s ease-in forwards}
+        .toast-in{animation:toastIn .3s cubic-bezier(.175,.885,.32,1.275) forwards}
+        .toast-out{animation:toastOut .2s ease-in forwards}
+        .pop{animation:pop .2s ease}
+        
+        .card{transition:all .3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid #fde68a;}
+        .card:hover{transform:translateY(-4px);box-shadow:0 12px 24px -8px rgba(180, 83, 9, 0.15); border-color:#fb923c;}
+        
+        .tab-b{transition:all .2s}
+        .tab-b.on{background:rgba(249, 115, 22, 0.15);color:#ea580c;border-color:#fdba74; background-color: #fff7ed;}
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        /* CSS untuk melindungi gambar dari di-drag atau di-select */
+        .img-secure {
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+            pointer-events: auto; /* Pastikan klik pada tombol di bawahnya tetap jalan jika overlap */
         }
         
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .flip-card { min-width: 270px; }
-            .project-flip-card { min-width: 290px; }
-        }
-        
-        @media (min-width: 1025px) {
-            .skills-slider { overflow: hidden; }
-            .skills-controls { display: flex; }
-        }
+        .prod-img{object-fit:cover;transition:transform .4s ease-in-out; width: 100%; height: 100%;}
+        .card:hover .prod-img{transform:scale(1.08);}
     </style>
 </head>
-<body>
-    <div class="custom-cursor" id="customCursor"></div>
-    <div class="scroll-progress-container">
-        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
-    </div>
-    <div class="futuristic-overlay">
-        <div class="scanlines"></div>
-        <div class="flicker-overlay"></div>
-        <div class="hud-corners">
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-tr"></div>
-            <div class="corner corner-bl"></div>
-            <div class="corner corner-br"></div>
-            <div class="hud-text hud-text-top">SYS.READY // V.3.0</div>
-            <div class="hud-text hud-text-bottom">ENCRYPTED</div>
+<body class="text-coco-900 font-jakarta min-h-screen selection:bg-brand-200 selection:text-coco-900">
+
+<!-- Toast Container -->
+<div id="toasts" class="fixed top-4 left-1/2 -translate-x-1/2 z-[200] flex flex-col gap-2 pointer-events-none w-full max-w-xs px-4"></div>
+
+<!-- Navbar -->
+<nav class="fixed top-0 w-full z-50 glass-panel shadow-sm">
+    <div class="max-w-xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 p-0.5 shadow-md">
+                <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO" class="w-full h-full object-contain bg-white rounded-full p-1 img-secure">
+            </div>
+            <div class="block overflow-hidden">
+                <p id="displayNavName" class="text-brand-600 font-extrabold text-base leading-tight truncate transition-colors">H A L O C O K O</p>
+                <p id="displayNavLoc" class="text-coco-500 text-[11px] font-medium tracking-wide truncate transition-colors">CABANG INKA 3 INDRAMAYU/p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="#menu" class="hidden sm:block text-xs font-semibold text-coco-500 hover:text-brand-500 transition-colors">Menu</a>
+            <button onclick="openCart()" class="relative w-10 h-10 rounded-full bg-white border border-coco-200 text-coco-700 hover:text-brand-500 hover:border-brand-300 shadow-sm flex items-center justify-center transition-all">
+                <i class="fas fa-bag-shopping"></i>
+                <span id="nBadge" class="hidden absolute -top-1 -right-1 min-w-[18px] h-5 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center px-1 shadow-sm">0</span>
+            </button>
         </div>
     </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="pt-24 pb-8 px-4 bg-gradient-to-b from-brand-50 to-coco-50">
+    <div class="max-w-xl mx-auto text-center py-8">
+        <div class="flex justify-center mb-6 anim-up" style="animation-delay:0.1s">
+            <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="HALOCOKO Logo" class="w-48 h-auto drop-shadow-xl img-secure" style="animation: bounce-slow 3s infinite ease-in-out;">
+        </div>
+        
+        <h1 id="displayHeroName" class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400 mb-2 anim-up leading-tight" style="animation-delay:0.2s">H A L O C O K O</h1>
+        <p id="displayHeroLoc" class="text-coco-500 text-sm font-semibold mb-4 anim-up" style="animation-delay:0.25s">CABANG INKA 3 INDRAMAYU/p>
+        
+        <p class="text-coco-700/80 text-sm mb-8 max-w-md mx-auto anim-up leading-relaxed" style="animation-delay:0.3s">
+            Es krim cokelat premium pilihan keluarga. Lembut, nikmat, halal, dan membuat momen bahagia Anda lebih manis.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 anim-up" style="animation-delay:0.35s">
+            <a href="#menu" class="w-full sm:w-auto px-8 py-3 bg-brand-500 hover:bg-brand-600 text-white rounded-full font-bold text-base shadow-lg shadow-brand-500/30 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
+                <i class="fas fa-ice-cream"></i> Pesan Sekarang
+            </a>
+            <a href="https://wa.me/6282241489084" target="_blank" class="w-full sm:w-auto px-8 py-3 bg-white border-2 border-coco-200 text-coco-700 hover:border-brand-400 hover:text-brand-600 rounded-full font-bold text-base transition-all flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp text-green-500 text-lg"></i> Chat Kami
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Menu Section -->
+<section id="menu" class="max-w-xl mx-auto px-4 pb-24">
+    <div class="flex items-center justify-between mb-5">
+        <h2 class="text-xl font-bold text-coco-900 flex items-center gap-2">
+            <span class="w-1.5 h-6 bg-brand-500 rounded-full"></span>
+            Daftar Menu Favorit
+        </h2>
+        <div class="text-[10px] bg-brand-100 text-brand-700 px-2 py-1 rounded-md font-bold">Ketuk + untuk pesan</div>
+    </div>
+
+    <!-- Tabs -->
+    <div id="tabs" class="flex gap-2 overflow-x-auto pb-4 mb-4 scrollbar-hide -mx-4 px-4 sticky top-16 z-10 py-2 bg-coco-50/95 backdrop-blur-sm"></div>
     
-    <header id="header">
-        <nav>
-            <div class="logo glitch" data-text="Ujay">Ujay</div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li>
-                    <span class="nav-link-store secret-link" data-target="aHR0cHM6Ly91amF5eS52ZXJjZWwuYXBwLw==">
-                        Store <i class="fas fa-shopping-bag"></i>
-                    </span>
-                </li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
+    <!-- Grid -->
+    <div id="grid" class="grid grid-cols-2 gap-4"></div>
+</section>
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-subtitle">Hello, I'm Ahmad Fauzi (Ujay)</div>
-            <h1><span class="hero-title-gradient glitch" data-text="Ahmad Fauzi">Ahmad Fauzi</span></h1>
-            <div class="typing-text" id="typingText"></div>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work <i class="fas fa-arrow-right"></i></a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch <i class="fas fa-envelope"></i></a>
-                <span class="btn btn-accent secret-link" data-target="aHR0cHM6Ly91amF5eS52ZXJjZWwuYXBwLw==">
-                    Visit My Store <i class="fas fa-shopping-bag"></i>
-                </span>
-                <span class="btn btn-accent secret-link" data-target="aHR0cHM6Ly9jbGljay1mb3Iuam9pbm4ud29ya2Vycy5kZXY=">
-                    Join All Group & Channel <i class="fab fa-telegram"></i>
-                </span>
-            </div>
+<!-- Footer -->
+<footer class="bg-white border-t border-coco-100 py-8 px-4 mt-8">
+    <div class="max-w-xl mx-auto flex flex-col items-center justify-center gap-4 text-center">
+        <div class="w-12 h-12 mb-2">
+             <img src="https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889" alt="Logo" class="w-full h-full object-contain opacity-80 img-secure">
         </div>
-    </section>
+        <h3 id="displayFooterName" class="font-bold text-coco-900">Masukan Nama Toko Anda</h3>
+        <p class="text-coco-400 text-xs">© 2026 Halocoko INKA3 - All right reserved.</p>
+    </div>
+</footer>
 
-    <section class="section about" id="about">
-        <div class="container">
-            <div class="section-badge">About Me</div>
-            <h2 class="section-title">Front End Developer.</h2>
-            <p class="section-subtitle">Passionate about creating beautiful, functional, and user-centered digital experiences.</p>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Crafting Digital Experiences</h3>
-                    <p>I am a dedicated Front-End Developer focused on building high-performance, responsive web interfaces. I translate design concepts into clean, semantic code using the latest web technologies.</p>
-                    <p>My expertise lies in the core technologies of the web: HTML5, CSS3, and modern JavaScript (ES6+). I specialize in modern frameworks like React, Vue, and Angular to build scalable applications, and I am proficient in utility-first styling with Tailwind CSS and Bootstrap to ensure pixel-perfect designs across all devices.</p>
-                    <div class="about-stats">
-                        <div class="stat-item"><div class="stat-number">15+</div><div class="stat-label">Projects</div></div>
-                        <div class="stat-item"><div class="stat-number">2+</div><div class="stat-label">Years Exp</div></div>
-                        <div class="stat-item"><div class="stat-number">40+</div><div class="stat-label">Clients</div></div>
-                        <div class="stat-item"><div class="stat-number">10+</div><div class="stat-label">Awards</div></div>
+<!-- FAB -->
+<button id="fab" onclick="openCart()" class="fixed bottom-6 right-6 z-50 hidden w-14 h-14 rounded-full bg-brand-600 text-white shadow-xl shadow-brand-600/40 flex items-center justify-center hover:bg-brand-500 hover:scale-110 transition-all duration-300">
+    <i class="fas fa-shopping-bag text-xl"></i>
+    <span id="fBadge" class="hidden absolute -top-1 -right-1 min-w-[18px] h-5 rounded-full bg-white text-brand-600 text-[10px] font-bold flex items-center justify-center px-1 border border-brand-100">0</span>
+</button>
+
+<!-- Cart Overlay -->
+<div id="cartOv" class="fixed inset-0 z-[60] hidden">
+    <div class="absolute inset-0 bg-coco-900/40 backdrop-blur-sm transition-opacity" onclick="closeCart()"></div>
+    
+    <div id="cartP" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col transform transition-transform duration-300">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-coco-100 bg-coco-50">
+            <div class="w-8 h-8 rounded-lg bg-brand-100 flex items-center justify-center text-brand-600">
+                <i class="fas fa-shopping-bag"></i>
+            </div>
+            <h3 class="font-bold text-coco-900 text-lg flex-1">Keranjang Belanja</h3>
+            <button onclick="closeCart()" class="w-8 h-8 rounded-full bg-white border border-coco-200 flex items-center justify-center text-coco-400 hover:text-red-500 hover:border-red-200 transition-colors shadow-sm"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div class="px-5 py-5 border-b border-coco-100 bg-white">
+            <div class="grid grid-cols-1 gap-4">
+                <div class="relative">
+                    <label class="text-[10px] text-brand-500 font-bold uppercase tracking-widest mb-1 block">Nama Toko</label>
+                    <div class="flex items-center">
+                        <i class="fas fa-store absolute left-3 text-coco-300 text-sm"></i>
+                        <input type="text" id="inputStoreName" placeholder="Masukan Nama Toko Anda" class="w-full bg-coco-50 border border-coco-200 rounded-xl pl-9 pr-4 py-3 text-sm text-coco-900 placeholder-coco-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-100 focus:outline-none transition-all font-medium">
                     </div>
                 </div>
-                <div class="about-img">
-                    <img src="https://z-cdn-media.chatglm.cn/files/54c1ef04-7cbb-4c03-8f17-30a149e8f790.jpg?auth_key=1867350947-5ac9aa34760f4424becf9617002702a6-0-ba90ebb2bb30a5785031d1bf852ab593" alt="Ahmad Fauzi Profile Picture">
+                <div class="relative">
+                    <label class="text-[10px] text-brand-500 font-bold uppercase tracking-widest mb-1 block">Lokasi Toko</label>
+                    <div class="flex items-center">
+                        <i class="fas fa-map-marker-alt absolute left-3 text-coco-300 text-sm"></i>
+                        <input type="text" id="inputStoreLoc" placeholder="Masukan Lokasi Toko Anda" class="w-full bg-coco-50 border border-coco-200 rounded-xl pl-9 pr-4 py-3 text-sm text-coco-900 placeholder-coco-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-100 focus:outline-none transition-all font-medium">
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section class="section skills" id="skills">
-        <div class="container">
-            <div class="section-badge">Expertise</div>
-            <h2 class="section-title">Skills and Technologies</h2>
-            <p class="section-subtitle">Mastering the modern web stack to build exceptional interfaces</p>
-            <div class="skills-tabs">
-                <div class="skill-tab active" data-category="all">All Skills</div>
-                <div class="skill-tab" data-category="core">Core</div>
-                <div class="skill-tab" data-category="frameworks">Frameworks</div>
-                <div class="skill-tab" data-category="styling">Styling</div>
-                <div class="skill-tab" data-category="libraries">Libraries</div>
-            </div>
-            <div class="skills-container">
-                <div class="horizontal-scroll-container" id="skillsScrollContainer">
-                    <div class="skills-slider" id="skillsSlider">
-                        <!-- SKILL CARDS -->
-                        <div class="flip-card" data-category="core">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card-suit-corner top-left card-suit-red">A<span class="suit-symbol"><i class="fab fa-html5"></i></span></div>
-                                    <div class="card-suit-corner bottom-right card-suit-red">A<span class="suit-symbol"><i class="fab fa-html5"></i></span></div>
-                                    <div class="skill-card-content">
-                                        <div class="skill-icon-large" style="background: var(--gradient-1);"><i class="fab fa-html5"></i></div>
-                                        <div class="skill-title-large">HTML5 and CSS3</div>
-                                        <div class="skill-category-badge">Core Technology</div>
-                                    </div>
-                                    <div class="flip-hint"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                                </div>
-                                <div class="flip-card-back gradient-1">
-                                    <div class="back-header"><div class="back-icon" style="background: var(--gradient-1);"><i class="fab fa-html5"></i></div><div><div class="back-title">HTML5 and CSS3</div><div class="back-subtitle">Core Technology</div></div></div>
-                                    <div class="back-description">The backbone of the web. Crafting semantic structure, accessible content, and responsive layouts with modern CSS features.</div>
-                                    <div class="back-progress-section"><div class="back-progress-label"><span>Proficiency</span><span style="color: #667eea;">95%</span></div><div class="back-progress-bar"><div class="back-progress-fill" style="width: 95%; background: var(--gradient-1);"></div></div></div>
-                                    <div class="back-tags"><span class="back-tag">HTML5</span><span class="back-tag">CSS3</span><span class="back-tag">Responsive</span><span class="back-tag">Flexbox</span><span class="back-tag">Grid</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flip-card" data-category="core">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card-suit-corner top-left card-suit-black">K<span class="suit-symbol"><i class="fab fa-js-square"></i></span></div>
-                                    <div class="card-suit-corner bottom-right card-suit-black">K<span class="suit-symbol"><i class="fab fa-js-square"></i></span></div>
-                                    <div class="skill-card-content">
-                                        <div class="skill-icon-large" style="background: var(--gradient-2);"><i class="fab fa-js-square"></i></div>
-                                        <div class="skill-title-large">JavaScript</div>
-                                        <div class="skill-category-badge">Core Technology</div>
-                                    </div>
-                                    <div class="flip-hint"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                                </div>
-                                <div class="flip-card-back gradient-2">
-                                    <div class="back-header"><div class="back-icon" style="background: var(--gradient-2);"><i class="fab fa-js-square"></i></div><div><div class="back-title">JavaScript</div><div class="back-subtitle">Core Technology</div></div></div>
-                                    <div class="back-description">Bringing websites to life with dynamic logic, DOM manipulation, and asynchronous programming. Modern ES6+ syntax mastery.</div>
-                                    <div class="back-progress-section"><div class="back-progress-label"><span>Proficiency</span><span style="color: #f093fb;">90%</span></div><div class="back-progress-bar"><div class="back-progress-fill" style="width: 90%; background: var(--gradient-2);"></div></div></div>
-                                    <div class="back-tags"><span class="back-tag">ES6+</span><span class="back-tag">DOM</span><span class="back-tag">Async</span><span class="back-tag">Promises</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flip-card" data-category="frameworks">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card-suit-corner top-left card-suit-red">Q<span class="suit-symbol"><i class="fab fa-react"></i></span></div>
-                                    <div class="card-suit-corner bottom-right card-suit-red">Q<span class="suit-symbol"><i class="fab fa-react"></i></span></div>
-                                    <div class="skill-card-content">
-                                        <div class="skill-icon-large" style="background: var(--gradient-3);"><i class="fab fa-react"></i></div>
-                                        <div class="skill-title-large">React</div>
-                                        <div class="skill-category-badge">Framework</div>
-                                    </div>
-                                    <div class="flip-hint"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                                </div>
-                                <div class="flip-card-back gradient-3">
-                                    <div class="back-header"><div class="back-icon" style="background: var(--gradient-3);"><i class="fab fa-react"></i></div><div><div class="back-title">React</div><div class="back-subtitle">Framework</div></div></div>
-                                    <div class="back-description">Building scalable single-page applications with component-based architecture, hooks, and modern state management solutions.</div>
-                                    <div class="back-progress-section"><div class="back-progress-label"><span>Proficiency</span><span style="color: #4facfe;">85%</span></div><div class="back-progress-bar"><div class="back-progress-fill" style="width: 85%; background: var(--gradient-3);"></div></div></div>
-                                    <div class="back-tags"><span class="back-tag">Hooks</span><span class="back-tag">Redux</span><span class="back-tag">JSX</span><span class="back-tag">Next.js</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flip-card" data-category="frameworks">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card-suit-corner top-left card-suit-black">J<span class="suit-symbol"><i class="fab fa-vuejs"></i></span></div>
-                                    <div class="card-suit-corner bottom-right card-suit-black">J<span class="suit-symbol"><i class="fab fa-vuejs"></i></span></div>
-                                    <div class="skill-card-content">
-                                        <div class="skill-icon-large" style="background: var(--gradient-4);"><i class="fab fa-vuejs"></i></div>
-                                        <div class="skill-title-large">Vue.js</div>
-                                        <div class="skill-category-badge">Framework</div>
-                                    </div>
-                                    <div class="flip-hint"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                                </div>
-                                <div class="flip-card-back gradient-4">
-                                    <div class="back-header"><div class="back-icon" style="background: var(--gradient-4);"><i class="fab fa-vuejs"></i></div><div><div class="back-title">Vue.js</div><div class="back-subtitle">Framework</div></div></div>
-                                    <div class="back-description">Progressive framework for building modern user interfaces and single-page applications with reactive data binding.</div>
-                                    <div class="back-progress-section"><div class="back-progress-label"><span>Proficiency</span><span style="color: #43e97b;">80%</span></div><div class="back-progress-bar"><div class="back-progress-fill" style="width: 80%; background: var(--gradient-4);"></div></div></div>
-                                    <div class="back-tags"><span class="back-tag">Vuex</span><span class="back-tag">Vue Router</span><span class="back-tag">Nuxt</span><span class="back-tag">Composition API</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flip-card" data-category="frameworks">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card-suit-corner top-left card-suit-red">10<span class="suit-symbol"><i class="fab fa-angular"></i></span></div>
-                                    <div class="card-suit-corner bottom-right card-suit-red">10<span class="suit-symbol"><i class="fab fa-angular"></i></span></div>
-                                    <div class="skill-card-content">
-                                        <div class="skill-icon-large" style="background: var(--gradient-5);"><i class="fab fa-angular"></i></div>
-                                        <div class="skill-title-large">Angular</div>
-                                        <div class="skill-category-badge">Framework</div>
-                                    </div>
-                                    <div class="flip-hint"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                                </div>
-                                <div class="flip-card-back gradient-5">
-                                    <div class="back-header"><div class="back-icon" style="background: var(--gradient-5);"><i class="fab fa-angular"></i></div><div><div class="back-title">Angular</div><div class="back-subtitle">Framework</div></div></div>
-                                    <div class="back-description">Platform for building mobile and desktop web applications using TypeScript with dependency injection and modular architecture.</div>
-                                    <div class="back-progress-section"><div class="back-progress-label"><span>Proficiency</span><span style="color: #fa709a;">75%</span></div><div class="back-progress-bar"><div class="back-progress-fill" style="width: 75%; background: var(--gradient-5);"></div></div></div>
-                                    <div class="back-tags"><span class="back-tag">TypeScript</span><span class="back-tag">RxJS</span><span class="back-tag">NgRx</span><span class="back-tag">Services</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flip-card" data-category="styling">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card-suit-corner top-left card-suit-black">9<span class="suit-symbol"><i class="fas fa-wind"></i></span></div>
-                                    <div class="card-suit-corner bottom-right card-suit-black">9<span class="suit-symbol"><i class="fas fa-wind"></i></span></div>
-                                    <div class="skill-card-content">
-                                        <div class="skill-icon-large" style="background: var(--gradient-6);"><i class="fas fa-wind"></i></div>
-                                        <div class="skill-title-large">Tailwind CSS</div>
-                                        <div class="skill-category-badge">Styling</div>
-                                    </div>
-                                    <div class="flip-hint"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                                </div>
-                                <div class="flip-card-back gradient-6">
-                                    <div class="back-header"><div class="back-icon" style="background: var(--gradient-6);"><i class="fas fa-wind"></i></div><div><div class="back-title">Tailwind CSS</div><div class="back-subtitle">Styling</div></div></div>
-                                    <div class="back-description">A utility-first CSS framework for rapidly building custom user interfaces with consistent design systems.</div>
-                                    <div class="back-progress-section"><div class="back-progress-label"><span>Proficiency</span><span style="color: #30cfd0;">90%</span></div><div class="back-progress-bar"><div class="back-progress-fill" style="width: 90%; background: var(--gradient-6);"></div></div></div>
-                                    <div class="back-tags"><span class="back-tag">Utility-First</span><span class="back-tag">Responsive</span><span class="back-tag">JIT</span><span class="back-tag">Dark Mode</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flip-card" data-category="styling">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card-suit-corner top-left card-suit-red">8<span class="suit-symbol"><i class="fab fa-bootstrap"></i></span></div>
-                                    <div class="card-suit-corner bottom-right card-suit-red">8<span class="suit-symbol"><i class="fab fa-bootstrap"></i></span></div>
-                                    <div class="skill-card-content">
-                                        <div class="skill-icon-large" style="background: var(--gradient-7);"><i class="fab fa-bootstrap"></i></div>
-                                        <div class="skill-title-large">Bootstrap</div>
-                                        <div class="skill-category-badge">Styling</div>
-                                    </div>
-                                    <div class="flip-hint"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                                </div>
-                                <div class="flip-card-back gradient-7">
-                                    <div class="back-header"><div class="back-icon" style="background: var(--gradient-7);"><i class="fab fa-bootstrap"></i></div><div><div class="back-title">Bootstrap</div><div class="back-subtitle">Styling</div></div></div>
-                                    <div class="back-description">The world's most popular front-end open source toolkit for responsive layouts with pre-built components.</div>
-                                    <div class="back-progress-section"><div class="back-progress-label"><span>Proficiency</span><span style="color: #a8edea;">85%</span></div><div class="back-progress-bar"><div class="back-progress-fill" style="width: 85%; background: var(--gradient-7);"></div></div></div>
-                                    <div class="back-tags"><span class="back-tag">Grid System</span><span class="back-tag">Components</span><span class="back-tag">Sass</span><span class="back-tag">RTL</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flip-card" data-category="libraries">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card-suit-corner top-left card-suit-black">7<span class="suit-symbol"><i class="fas fa-code"></i></span></div>
-                                    <div class="card-suit-corner bottom-right card-suit-black">7<span class="suit-symbol"><i class="fas fa-code"></i></span></div>
-                                    <div class="skill-card-content">
-                                        <div class="skill-icon-large" style="background: var(--gradient-8);"><i class="fas fa-code"></i></div>
-                                        <div class="skill-title-large">jQuery</div>
-                                        <div class="skill-category-badge">Library</div>
-                                    </div>
-                                    <div class="flip-hint"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                                </div>
-                                <div class="flip-card-back gradient-8">
-                                    <div class="back-header"><div class="back-icon" style="background: var(--gradient-8);"><i class="fas fa-code"></i></div><div><div class="back-title">jQuery</div><div class="back-subtitle">Library</div></div></div>
-                                    <div class="back-description">Feature-rich JavaScript library for DOM traversal, event handling, animation, and Ajax interactions.</div>
-                                    <div class="back-progress-section"><div class="back-progress-label"><span>Proficiency</span><span style="color: #ff9a9e;">80%</span></div><div class="back-progress-bar"><div class="back-progress-fill" style="width: 80%; background: var(--gradient-8);"></div></div></div>
-                                    <div class="back-tags"><span class="back-tag">DOM</span><span class="back-tag">AJAX</span><span class="back-tag">Animation</span><span class="back-tag">Plugins</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="skills-controls">
-                <button class="skill-btn" id="skillsPrevBtn"><i class="fas fa-chevron-left"></i></button>
-                <button class="skill-btn" id="skillsNextBtn"><i class="fas fa-chevron-right"></i></button>
-            </div>
+        <div id="cartList" class="flex-1 overflow-y-auto px-5 py-4 scrollbar-hide bg-coco-50/30"></div>
+        <div id="cartEmpty" class="flex-1 flex flex-col items-center justify-center text-coco-300">
+            <i class="fas fa-ice-cream text-5xl mb-4 opacity-30"></i>
+            <p class="text-sm font-medium">Keranjang masih kosong</p>
+            <p class="text-xs mt-1 opacity-60">Yuk pilih es krim favoritmu!</p>
         </div>
-    </section>
-
-    <section class="section projects" id="projects">
-        <div class="container">
-            <div class="section-badge">Portfolio</div>
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Showcasing innovation through real-world applications</p>
-            
-            <div class="horizontal-scroll-container" id="projectsScrollContainer">
-                <div class="projects-slider" id="projectsSlider">
-                    
-                    <!-- 1. Ujay.Store -->
-                    <div class="project-flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="project-image-container" data-project-link="aHR0cHM6Ly91amF5eS52ZXJjZWwuYXBw">
-                                    <img src="https://z-cdn-media.chatglm.cn/files/4e0a3a9a-506c-4eac-80d7-dda33d8a246f.jpg?auth_key=1873325488-1bdd031c83e34afc922e9b5c85dc194d-0-c001923c3d67c64cad54dc112ed38a8f" alt="Ujay Store">
-                                    <div class="project-image-overlay"></div>
-                                </div>
-                                <div class="project-front-content">
-                                    <div class="project-front-title">Ujay.Store</div>
-                                    <div class="project-front-desc">Official store dengan promo spesial Ramadhan 2026 diskon 10%. Fitur countdown event berakhir 31 Maret 2026 dengan live progress.</div>
-                                    <div class="project-front-tags">
-                                        <span class="project-front-tag">E-Commerce</span>
-                                        <span class="project-front-tag">Countdown</span>
-                                        <span class="project-front-tag">Promo</span>
-                                    </div>
-                                </div>
-                                <div class="flip-hint" style="bottom: 8px;"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="project-back-icon" style="background: var(--gradient-1);"><i class="fas fa-shopping-bag"></i></div>
-                                <div class="project-back-title">Ujay.Store</div>
-                                <div class="project-back-type">E-Commerce & Landing Page</div>
-                                <div class="project-back-details">
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-tag"></i></div>
-                                        <div class="project-back-detail-text"><strong>Promo Spesial</strong>Ramadhan 2026 - DISKON 10%</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-clock"></i></div>
-                                        <div class="project-back-detail-text"><strong>Countdown Event</strong>Berakhir 31 Maret 2026 (WIB), Progress: 38.35%</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-star"></i></div>
-                                        <div class="project-back-detail-text"><strong>Features</strong>Live countdown, promo banner, product catalog</div>
-                                    </div>
-                                </div>
-                                <a href="https://ujayy.vercel.app" target="_blank" rel="noopener noreferrer" class="project-back-btn">
-                                    Visit Site <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 2. Deadlysins Store -->
-                    <div class="project-flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="project-image-container" data-project-link="aHR0cHM6Ly9kZWF0bHlzaW5zc3RvcmUudmVyY2VsLmFwcA==">
-                                    <img src="https://z-cdn-media.chatglm.cn/files/2b91b915-ec5c-4f52-9109-18cb19d329cf.jpg?auth_key=1873325488-a9519e982e304824b35efab53e8cd66d-0-f06c5ed2ab9ccb32278df728998a1691" alt="Deadlysins Store">
-                                    <div class="project-image-overlay"></div>
-                                </div>
-                                <div class="project-front-content">
-                                    <div class="project-front-title">DeatlySins Store</div>
-                                    <div class="project-front-desc">Platform joki game dengan berbagai mode layanan: Challenge, Inferno, dan DarkCave Port dengan harga kompetitif.</div>
-                                    <div class="project-front-tags">
-                                        <span class="project-front-tag">Gaming</span>
-                                        <span class="project-front-tag">Joki Service</span>
-                                        <span class="project-front-tag">Dark Theme</span>
-                                    </div>
-                                </div>
-                                <div class="flip-hint" style="bottom: 8px;"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="project-back-icon" style="background: var(--gradient-2);"><i class="fas fa-gamepad"></i></div>
-                                <div class="project-back-title">DeatlySins Store</div>
-                                <div class="project-back-type">Gaming Service Platform</div>
-                                <div class="project-back-details">
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-list"></i></div>
-                                        <div class="project-back-detail-text"><strong>Daftar Harga Layanan</strong>Mode Challenge: Rp12.000/M, Mode Inferno: Rp15.000/M, DarkCave Port: Rp9.500/M</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-star"></i></div>
-                                        <div class="project-back-detail-text"><strong>Features</strong>Order tracking, pricing list, responsive design</div>
-                                    </div>
-                                </div>
-                                <a href="https://deatlysinsstore.vercel.app" target="_blank" rel="noopener noreferrer" class="project-back-btn">
-                                    Visit Site <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 3. Personal Portfolio Website -->
-                    <div class="project-flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="project-image-container" data-project-link="aHR0cHM6Ly91amF5eS5teS5pZA==">
-                                    <img src="https://z-cdn-media.chatglm.cn/files/dd9169ea-2e33-4e7e-8fc6-fd227632e7b8.jpg?auth_key=1873325488-c4c096702a47403bb35ec434f9565af4-0-8be029ecb25740ce16abd7fe8900600c" alt="Personal Portfolio">
-                                    <div class="project-image-overlay"></div>
-                                </div>
-                                <div class="project-front-content">
-                                    <div class="project-front-title">Personal Portfolio Website</div>
-                                    <div class="project-front-desc">Website portofolio personal Ahmad Fauzi (Ujay) dengan navigasi modern dan tombol aksi lengkap.</div>
-                                    <div class="project-front-tags">
-                                        <span class="project-front-tag">Portfolio</span>
-                                        <span class="project-front-tag">Personal</span>
-                                        <span class="project-front-tag">Modern</span>
-                                    </div>
-                                </div>
-                                <div class="flip-hint" style="bottom: 8px;"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="project-back-icon" style="background: var(--gradient-3);"><i class="fas fa-user-circle"></i></div>
-                                <div class="project-back-title">Personal Portfolio</div>
-                                <div class="project-back-type">Personal Branding</div>
-                                <div class="project-back-details">
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-heading"></i></div>
-                                        <div class="project-back-detail-text"><strong>Greeting</strong>HELLO, I'M AHMAD FAUZI (UJAY)</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-bars"></i></div>
-                                        <div class="project-back-detail-text"><strong>Navigation</strong>Ujay, Home, About, Store (with shopping bag icon)</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-mouse-pointer"></i></div>
-                                        <div class="project-back-detail-text"><strong>Actions</strong>VIEW MY WORK, GET IN TOUCH, VISIT MY STORE, JOIN ALL GROUP</div>
-                                    </div>
-                                </div>
-                                <a href="https://ujayy.my.id" target="_blank" rel="noopener noreferrer" class="project-back-btn">
-                                    Visit Site <i class="fas fa-home"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 4. ExvvStore -->
-                    <div class="project-flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="project-image-container" data-project-link="aHR0cHM6Ly9qZ25leHZ2aXBwLm5ldGxpZnkuYXBw">
-                                    <img src="https://z-cdn-media.chatglm.cn/files/f31cceb1-9ca3-466d-a0d1-31480d979bcd.jpg?auth_key=1873325488-d08e8b6eb0f54a27b56717918e14223b-0-09180815552d83efbe5a540062a84bf9" alt="ExvvStore">
-                                    <div class="project-image-overlay"></div>
-                                </div>
-                                <div class="project-front-content">
-                                    <div class="project-front-title">ExvvStore</div>
-                                    <div class="project-front-desc">Platform "EXVV 999 Open Joki All Game" dengan layanan Gold & Glory, Fisch It Roblox, dan Grow A Garden.</div>
-                                    <div class="project-front-tags">
-                                        <span class="project-front-tag">AI Chat</span>
-                                        <span class="project-front-tag">Gaming</span>
-                                        <span class="project-front-tag">Store</span>
-                                    </div>
-                                </div>
-                                <div class="flip-hint" style="bottom: 8px;"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="project-back-icon" style="background: var(--gradient-4);"><i class="fas fa-store"></i></div>
-                                <div class="project-back-title">ExvvStore</div>
-                                <div class="project-back-type">Digital Store & AI Chat Space</div>
-                                <div class="project-back-details">
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-gamepad"></i></div>
-                                        <div class="project-back-detail-text"><strong>Services</strong>GOLD AND GLORY (Rp.1000/2500 Gold), FISCH IT ROBLOX, GROW A GARDEN</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-check-circle"></i></div>
-                                        <div class="project-back-detail-text"><strong>Status</strong>Tersedia / Belum Tersedia dengan tombol "Pesan Sekarang"</div>
-                                    </div>
-                                </div>
-                                <a href="https://jgnexvvipp.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-back-btn">
-                                    Visit Site <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 5. Portfolio Exvv -->
-                    <div class="project-flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="project-image-container" data-project-link="aHR0cHM6Ly9hYm91dGV4dnYubmV0bGlmeS5hcHA=">
-                                    <img src="https://z-cdn-media.chatglm.cn/files/8d37be3d-f944-4e89-b39b-ed39796d5c88.jpg?auth_key=1873325488-7c24c64c436748d78ae2a70a2afcb889-0-b99abbf36f2824fa3353d898ab726c25" alt="Portfolio Exvv">
-                                    <div class="project-image-overlay"></div>
-                                </div>
-                                <div class="project-front-content">
-                                    <div class="project-front-title">Portofolio Exvv</div>
-                                    <div class="project-front-desc">Website portofolio "Exvvlippp" untuk Full Stack Developer & Digital Marketer dengan desain elegan.</div>
-                                    <div class="project-front-tags">
-                                        <span class="project-front-tag">Full Stack</span>
-                                        <span class="project-front-tag">Digital Marketing</span>
-                                        <span class="project-front-tag">Portfolio</span>
-                                    </div>
-                                </div>
-                                <div class="flip-hint" style="bottom: 8px;"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="project-back-icon" style="background: var(--gradient-5);"><i class="fas fa-id-card"></i></div>
-                                <div class="project-back-title">Portofolio Exvv</div>
-                                <div class="project-back-type">Personal Portfolio</div>
-                                <div class="project-back-details">
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-user-tie"></i></div>
-                                        <div class="project-back-detail-text"><strong>Profile</strong>Exvvlippp - Full Stack Developer & Digital Marketer</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-quote-left"></i></div>
-                                        <div class="project-back-detail-text"><strong>Tagline</strong>"Creating digital experiences that drive results"</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-bars"></i></div>
-                                        <div class="project-back-detail-text"><strong>Navigation</strong>Home, About, Projects, Contact</div>
-                                    </div>
-                                </div>
-                                <a href="https://aboutexvv.netlify.app" target="_blank" rel="noopener noreferrer" class="project-back-btn">
-                                    Visit Site <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 6. Bengkel Opan -->
-                    <div class="project-flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="project-image-container" data-project-link="aHR0cHM6Ly9iZW5na2VsbXRvci52ZXJjZWwuYXBw">
-                                    <img src="https://z-cdn-media.chatglm.cn/files/51d2f2d4-1419-4494-a70f-4c6faa5bd682.jpg?auth_key=1873325488-a4d4748b803f40fa9c5fd22268104f4c-0-29b985a9526275e510c5900f54f1abee" alt="Bengkel Opan">
-                                    <div class="project-image-overlay"></div>
-                                </div>
-                                <div class="project-front-content">
-                                    <div class="project-front-title">Bengkel Opan</div>
-                                    <div class="project-front-desc">Solusi lengkap untuk motor, sepeda, dan peralatan rumah tangga. Buka 24/7 dengan layanan profesional.</div>
-                                    <div class="project-front-tags">
-                                        <span class="project-front-tag">Service</span>
-                                        <span class="project-front-tag">Motorcycle</span>
-                                        <span class="project-front-tag">24/7</span>
-                                    </div>
-                                </div>
-                                <div class="flip-hint" style="bottom: 8px;"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="project-back-icon" style="background: var(--gradient-8);"><i class="fas fa-tools"></i></div>
-                                <div class="project-back-title">Bengkel Opan</div>
-                                <div class="project-back-type">Service Business</div>
-                                <div class="project-back-details">
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-motorcycle"></i></div>
-                                        <div class="project-back-detail-text"><strong>Services</strong>Motor, Sepeda, Peralatan Rumah Tangga - Solusi Lengkap</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-clock"></i></div>
-                                        <div class="project-back-detail-text"><strong>Jam Operasional</strong>9AM - BUKA, 11PM - TUTUP, 24/7 ALL DAY</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-bars"></i></div>
-                                        <div class="project-back-detail-text"><strong>Navigation</strong>OPAN, Layanan, Galeri, Kontak, Hubungi Kami</div>
-                                    </div>
-                                </div>
-                                <a href="https://bengkelmtor.vercel.app" target="_blank" rel="noopener noreferrer" class="project-back-btn">
-                                    Visit Site <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 7. Titipin Aja Yuk -->
-                    <div class="project-flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="project-image-container" data-project-link="aHR0cHM6Ly90aXRpcGluYWpheXVrLm5ldGxpZnkuYXBw">
-                                    <img src="https://z-cdn-media.chatglm.cn/files/fb9054a3-a02e-4693-ba78-fcb10ab678a8.jpg?auth_key=1873325488-3ec13b31758949cca5d9e4ac0d73b2a4-0-2b2cff9c946594f909048ef06dec685a" alt="Titipin Aja Yuk">
-                                    <div class="project-image-overlay"></div>
-                                </div>
-                                <div class="project-front-content">
-                                    <div class="project-front-title">Titipin Aja Yuk</div>
-                                    <div class="project-front-desc">Platform jasa titip (Jastip) untuk makanan, belanja, dan pengiriman barang. "Males Keluar? Yuk Titipin Aja!"</div>
-                                    <div class="project-front-tags">
-                                        <span class="project-front-tag">Jastip</span>
-                                        <span class="project-front-tag">Service</span>
-                                        <span class="project-front-tag">5.0 Rating</span>
-                                    </div>
-                                </div>
-                                <div class="flip-hint" style="bottom: 8px;"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="project-back-icon" style="background: var(--gradient-6);"><i class="fas fa-box-open"></i></div>
-                                <div class="project-back-title">Titipin Aja Yuk</div>
-                                <div class="project-back-type">Service Platform</div>
-                                <div class="project-back-details">
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-quote-left"></i></div>
-                                        <div class="project-back-detail-text"><strong>Tagline</strong>"Males Keluar? Atau Males Ribet? Yuk Titipin Aja!"</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-star"></i></div>
-                                        <div class="project-back-detail-text"><strong>Rating</strong>5.0 Rating - Terpercaya</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-bars"></i></div>
-                                        <div class="project-back-detail-text"><strong>Services</strong>Lihat Layanan Jastip, Lihat Perabotan, Lihat Layanan Jasa</div>
-                                    </div>
-                                </div>
-                                <a href="https://titipinajayuk.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-back-btn">
-                                    Visit Site <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 8. Big Thanks -->
-                    <div class="project-flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="project-image-container" data-project-link="aHR0cHM6Ly90Lm1lL2RlYWRseXNpbnNTdG9yZWU=">
-                                    <img src="https://z-cdn-media.chatglm.cn/files/df0fd6fd-78fa-4a83-8c51-3fae36cff266.jpg?auth_key=1873325488-ce0742e8d8ce45c3b6fe2ddf1553836e-0-3e0fc6623373ae47a0f9cf2348ee06ab" alt="Big Thanks">
-                                    <div class="project-image-overlay"></div>
-                                </div>
-                                <div class="project-front-content">
-                                    <div class="project-front-title">Big Thanks</div>
-                                    <div class="project-front-desc">Halaman apresiasi dengan desain minimalis untuk memberikan penghargaan kepada semua supporter dan kontributor.</div>
-                                    <div class="project-front-tags">
-                                        <span class="project-front-tag">Appreciation</span>
-                                        <span class="project-front-tag">Dark Theme</span>
-                                        <span class="project-front-tag">Minimalist</span>
-                                    </div>
-                                </div>
-                                <div class="flip-hint" style="bottom: 8px;"><i class="fas fa-hand-pointer"></i> Click to flip</div>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="project-back-icon" style="background: var(--gradient-7);"><i class="fas fa-heart"></i></div>
-                                <div class="project-back-title">Big Thanks</div>
-                                <div class="project-back-type">Appreciation Page</div>
-                                <div class="project-back-details">
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-users"></i></div>
-                                        <div class="project-back-detail-text"><strong>Thanks To</strong>Daftar supporter: VENDORA (Debt Collector), ANEH (The Raja Ibelis), dan lainnya</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-quote-left"></i></div>
-                                        <div class="project-back-detail-text"><strong>Message</strong>"Terimakasih telah men support kami, semoga hidup mu sengsara."</div>
-                                    </div>
-                                    <div class="project-back-detail-item">
-                                        <div class="project-back-detail-icon"><i class="fas fa-door-open"></i></div>
-                                        <div class="project-back-detail-text"><strong>Action</strong>Tombol "MASUK STORE" berwarna merah</div>
-                                    </div>
-                                </div>
-                                <a href="https://t.me/deadlysinsStoree" target="_blank" rel="noopener noreferrer" class="project-back-btn">
-                                    Visit Link <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
+        <div id="cartFoot" class="hidden border-t border-coco-100 px-5 py-5 bg-white rounded-t-3xl shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
+            <div class="flex justify-between items-end mb-3">
+                <span class="text-coco-500 text-sm font-medium">Total Pembayaran</span>
+                <span id="cTotal" class="text-coco-900 font-extrabold text-2xl">Rp 0</span>
             </div>
-            
-            <div class="skills-controls">
-                <button class="skill-btn" id="projectsPrevBtn"><i class="fas fa-chevron-left"></i></button>
-                <button class="skill-btn" id="projectsNextBtn"><i class="fas fa-chevron-right"></i></button>
-            </div>
+            <button onclick="sendWA()" class="w-full py-3.5 bg-green-500 hover:bg-green-600 text-white rounded-xl font-bold text-base transition-all shadow-lg shadow-green-500/30 flex items-center justify-center gap-2 transform active:scale-95">
+                <i class="fab fa-whatsapp text-xl"></i> Kirim ke WhatsApp
+            </button>
+            <button onclick="clearCart()" class="w-full py-3 text-coco-400 hover:text-red-400 text-xs font-semibold mt-2 transition-colors">Hapus Semua Item</button>
         </div>
-    </section>
+    </div>
+</div>
 
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="section-badge">Get In Touch</div>
-            <h2 class="section-title">Let's Create Something Amazing</h2>
-            <p class="section-subtitle">Ready to bring your ideas to life? Let's collaborate on your next project</p>
-            
-            <div class="contact-content">
-                <div class="contact-text">
-                    <h3>Have a project in mind?</h3>
-                    <p>I'm always excited to work on new challenges and innovative ideas. Whether you need a custom website, a web application, or a UI/UX design, feel free to reach out!</p>
-                </div>
+<script>
+// --- CONFIG & DATA ---
+const LOGO='https://z-cdn-media.chatglm.cn/files/4eb3eae2-a8b3-4ba2-91b0-38f754547d86.png?auth_key=1876332664-95accd10cf2c4881aeec879f19c643cf-0-174c0c0e8e2ee162413e913b884b8889';
+
+const CATS=[
+    {id:'all',n:'Semua',ic:'fa-th-large'},
+    {id:'premium',n:'Premium',ic:'fa-crown',t:'5rb'},
+    {id:'deluxe',n:'Deluxe',ic:'fa-gem',t:'4rb'},
+    {id:'classic',n:'Classic',ic:'fa-star',t:'3rb'},
+    {id:'special',n:'Special',ic:'fa-heart',t:'2rb'},
+    {id:'kastiles',n:'KastilEs',ic:'fa-chess-rook',t:'2rb'}
+];
+
+const PROD=[
+    {id:1,n:'HaloChoco',p:158000,c:'premium',t:'Rp 5.000/pcs', d:'1 Dus Isi 40 Pcs | 5.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/a08848e8-2403-4954-9bd2-79d6b2adaeb5.jpg?auth_key=1876334364-189b4bffdea547c58d2605cadf49dc03-0-3a8d201e3d37f30a05badaeab877a900'},
+    {id:2,n:'HaloCookies',p:158000,c:'premium',t:'Rp 5.000/pcs', d:'1 Dus Isi 40 Pcs | 5.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/581e0a9e-a7fc-4184-9466-55bb4e31c8da.jpg?auth_key=1876335412-f7625ff55c40419fb7a5447a51f41056-0-ee1c339eff0ede587fe340dccb250499'},
+    {id:3,n:'Joycup Coklat',p:94800,c:'premium',t:'Rp 5.000/pcs', d:'1 Dus Isi 24 Pcs | 5.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/a460e636-0607-4502-8555-0bb7ffc94d19.jpg?auth_key=1876334364-a96f662de9c54c38b0a5fbd09e04c3db-0-c24b6ba341926f2eec8dd77fb90e24d9'},
+    {id:4,n:'23° Choco Cone',p:143000,c:'deluxe',t:'1 Dus Isi 42 | Rp 4.000/pcs', img:'https://z-cdn-media.chatglm.cn/files/472618ef-1a38-4232-9ecd-26b0045c677d.jpg?auth_key=1876334608-517189765afd463c8a6c0ef6d6f6fd2a-0-0c9c207409d26e65f4fed1997bf4f78a'},
+    {id:5,n:'Fantasy Almond',p:124800,c:'deluxe',t:'1 Dus Isi 40 | Rp 4.000/pcs', img:'https://z-cdn-media.chatglm.cn/files/f8aaee6b-396c-4c6d-b541-2792fb5e0dc4.jpg?auth_key=1876334975-78f6621623b84b25919bedd8090ae629-0-722f8a3eab3edf61e6d0d8580e6deeba'},
+    {id:6,n:'Fantasy Caramel Malt',p:124800,c:'deluxe',t:'1 Dus Isi 40 | Rp 4.000/pcs', img:'https://z-cdn-media.chatglm.cn/files/98a267de-a04e-4976-a7d9-2efcdb8f0863.jpg?auth_key=1876334364-b1c1bcdb0b6b48999f173915b02ebebb-0-e45be24418f1ffd60bc0d806771ab679'},
+    {id:7,n:'Tiramisu Cookies',p:124000,c:'deluxe',t:'1 Dus Isi 40 | Rp 4.000 Pe/ Pcs', img:'https://z-cdn-media.chatglm.cn/files/bb643af1-c631-46fe-bb6a-24f46f80cb28.jpg?auth_key=1876335412-ba2693ea72f14b91a577e1b97d0c6c26-0-06913ebc79a8f6030b11d7f6cad5a994'},
+    {id:8,n:'143 Cup Strawberry',p:93000,c:'classic',t:'1 Dus Isi 36 | Rp 3.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/07363091-6b17-4803-9880-1c312ab1b731.jpg?auth_key=1876334364-65da03e916f549049a2381e779556dfd-0-8b47c2fa4b821e9d644cbc610d6ff113'},
+    {id:9,n:'KaKaKres Cokelat',p:92800,c:'classic',t:'1 Dus Isi 40 | Rp 3.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/cabf45ec-7fbf-4842-83bc-1beebf1d3261.jpg?auth_key=1876333067-b63f6b52de904252939281f30bd65fa4-0-17b85dfefc88766a7a45706bbafc9622'},
+    {id:10,n:'PisCok Krispi',p:92800,c:'classic',t:'1 Dus Isi 40 | Rp 3.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/9230fe43-7ab5-4abf-b1f8-7850e467b239.jpg?auth_key=1877384969-4484a0ab44114a2793bdf80a5926e249-0-6fbb4baae63d2a9fe11e8d39dcad2a99'},
+    {id:11,n:'Tiger Choco',p:92800,c:'classic',t:'1 Dus Isi 40 | Rp 3.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/665cda64-8ea9-4b7d-b2b5-b738ac84cf5f.jpg?auth_key=1876333067-df24c5f11ca744d9a7cfd76b117f2e54-0-7bdea144aebbd6bacb04c4cfb5a5ed6e'},
+    {id:12,n:'Red Zebra Choco',p:92800,c:'classic',t:'1 Dus Isi 40 | Rp 3.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/b8f0857c-4a5a-411e-8c5b-7ea7a7273d1b.jpg?auth_key=1876335412-d077e1940ec14e17bc1ce9d5903f7d54-0-4914a0730bc79fe01655b29554504d34'},
+    {id:13,n:'SuKoCo Kopi',p:93000,c:'special',t:'Rp 2.000/pcs', d:'1 Dus Isi 60 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/0da0039b-6de6-49f6-83c2-2d2d0a081d56.jpg?auth_key=1876333067-c0f8f56ae397442bbfc77f89dc5ae9be-0-da3a577601d5e11972684bc502a89d11'},
+    {id:14,n:'SuTaCo Taro',p:93000,c:'special',t:'Rp 2.000/pcs', d:'1 Dus Isi 60 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/46ec782d-26ec-40f3-8595-2d2d675cea22.jpg?auth_key=1877384969-ed320ffebc254916875f273fa426cfeb-0-f03896e6f93a6521d4ec0fc740ee0129'},
+    {id:15,n:'SuMiCo Milo',p:93000,c:'special',t:'Rp 2.000/pcs', d:'1 Dus Isi 60 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/6d4ef0c0-ef40-4711-bf38-10de72c1c399.jpg?auth_key=1876333067-52e5a6e5b2d648b6a76c3b5d15cc214a-0-4359cd3c75d7cfb7cbfa5ea96b42a427'},
+    {id:16,n:'Yogurt Krispi',p:93000,c:'special',t:'Rp 2.000/pcs', d:'1 Dus Isi 60 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/179412c4-2e65-435a-9fdf-c5b652585c8f.jpg?auth_key=1876335412-f9f5e37a6b724d3a830c4b659a6e08ba-0-b966d94bf52554f32b4a33cfdf5f76f5'},
+    {id:17,n:'KastilEs Yogurt',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/36ebfa1c-f771-4672-b035-2b8f9d9b8cac.jpg?auth_key=1876334364-4e5aceb699ed40cbb620f1944a162ecd-0-d4e5a4a5b23a7eec95aaa50a19f54b8f'},
+    {id:18,n:'KastilEs Cokelat',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/b392f29c-8793-4369-87ae-61f6386f590b.jpg?auth_key=1876334364-4cf82553550d43cc86c5726f711dd2db-0-691b61ee87124a2b8ed63df9a428fc58'},
+    {id:19,n:'KastilEs Gula Kelapa',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/ad6627f9-cba8-412d-b0b6-2d8473273be4.jpg?auth_key=1877384969-9812e23e97a74176aa4e6fed43cd4ef9-0-f390976ef0444e7651fd22af8db1693b'},
+    {id:20,n:'KastilEs Anggur Melon',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/02495293-c24a-41b3-bf3a-8ba132d32add.jpg?auth_key=1877384969-42f96e7b898c494faaf96ebf5f8de632-0-e03d1d048b0f5322d9b44096004434ba'},
+    {id:21,n:'KastilEs Kopi',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/18a317c0-6ce2-4483-9ff2-693c0a7d6292.jpg?auth_key=1876333067-a2cfdea788df485ca62d6e56c1e00a36-0-71764f67dc7fa1e92ad6d6090ab48635'},
+    {id:22,n:'KastilEs Teh',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/482f7abd-a011-4415-9eb3-0b680b3a2df6.jpg?auth_key=1876334364-edb9a2ba5b924fb99d7fb56dbebc4a5b-0-7f002127ed9536c3daf40d4144e4f3e9'},
+    {id:23,n:'KastilEs Semangka + Nanas',p:77500,c:'kastiles',t:'Rp 2.000/pcs', d:'1 Dus Isi 50 Pcs | 2.000 / Pcs', img:'https://z-cdn-media.chatglm.cn/files/e61eed31-520a-4e98-87b8-0edbf81f4592.jpg?auth_key=1877385572-0a3f1c386ad449dfa98524447001e976-0-d8633cf953cad4a0a2201ced3cba333a'}
+];
+
+const META={
+    premium:{e:'🏆',l:'Premium'},deluxe:{e:'💎',l:'Deluxe'},
+    classic:{e:'⭐',l:'Classic'},special:{e:'💜',l:'Special'},
+    kastiles:{e:'🏰',l:'KastilEs'}
+};
+
+const fmt=n=>'Rp '+n.toLocaleString('id-ID');
+let cart={},curCat='all';
+
+// --- LOGIC ---
+
+// 1. Toast Notification
+function toast(m){
+    const c=document.getElementById('toasts'),d=document.createElement('div');
+    d.className='toast-in pointer-events-auto px-4 py-3 bg-white border border-brand-100 rounded-xl shadow-lg text-sm text-coco-800 flex items-center gap-3';
+    d.innerHTML=`<i class="fas fa-check-circle text-green-500 text-sm"></i><span class="font-medium">${m}</span>`;
+    c.appendChild(d);
+    setTimeout(()=>{d.classList.replace('toast-in','toast-out');setTimeout(()=>d.remove(),200)},2000);
+}
+
+// 2. Placeholder Sync Logic
+const defaultStoreName = "H A L O C O K O";
+const defaultStoreLoc = "CABANG INKA 3 INDRAMAYU";
+
+function updatePlaceholders() {
+    const nameVal = document.getElementById('inputStoreName').value.trim();
+    const locVal = document.getElementById('inputStoreLoc').value.trim();
+    const displayName = nameVal ? nameVal : defaultStoreName;
+    const displayLoc = locVal ? locVal : defaultStoreLoc;
+
+    const elName = ['displayNavName', 'displayHeroName', 'displayFooterName'];
+    const elLoc = ['displayNavLoc', 'displayHeroLoc'];
+
+    elName.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) {
+            el.textContent = displayName;
+            el.classList.toggle('text-brand-600', !!nameVal);
+            el.classList.toggle('text-coco-300', !nameVal);
+        }
+    });
+
+    elLoc.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) {
+            el.textContent = displayLoc;
+            el.classList.toggle('text-coco-600', !!locVal);
+            el.classList.toggle('text-coco-400', !locVal);
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updatePlaceholders();
+    document.getElementById('inputStoreName').addEventListener('input', updatePlaceholders);
+    document.getElementById('inputStoreLoc').addEventListener('input', updatePlaceholders);
+    
+    // SECURITY SCRIPT: Mencegah Klik Kanan pada Semua Gambar
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+            return false;
+        }
+    });
+});
+
+// 3. Render Functions
+function renderTabs(){
+    document.getElementById('tabs').innerHTML=CATS.map(c=>
+        `<button onclick="setCat('${c.id}')" class="tab-b flex-shrink-0 flex items-center gap-2 px-5 py-2 rounded-full border border-transparent text-xs font-bold text-coco-500 hover:bg-white hover:shadow-sm transition-all ${curCat===c.id?'on shadow-sm':''}">
+            <i class="fas ${c.ic}"></i>${c.n} ${c.t?`<span class="ml-1 opacity-50 font-normal">${c.t}</span>`:''}
+        </button>`).join('');
+}
+function setCat(id){curCat=id;renderTabs();renderGrid();}
+
+function imgHTML(p){
+    // PERUBAHAN: Menambahkan class 'img-secure', draggable="false", dan oncontextmenu="return false"
+    if(p.img) return `<img src="${p.img}" alt="${p.n}" class="prod-img img-secure w-full h-full" loading="lazy" draggable="false" oncontextmenu="return false;">`;
+    return `<div class="w-full h-full flex flex-col items-center justify-center bg-white"><i class="fas fa-image text-4xl text-gray-200 mb-1"></i><span class="text-[10px] text-gray-300">No Img</span></div>`;
+}
+
+function renderGrid(){
+    const g=document.getElementById('grid');
+    const list=curCat==='all'?PROD:PROD.filter(p=>p.c===curCat);
+    g.innerHTML=list.map((p,i)=>{
+        const q=cart[p.id]||0,sel=q>0,m=META[p.c];
+        const detailText = p.d ? p.d : p.t;
+        
+        return `<div id="c${p.id}" class="card bg-white rounded-2xl overflow-hidden relative flex flex-col ${sel?'ring-2 ring-brand-400 ring-offset-2':''} anim-up" style="animation-delay:${i*30}ms">
+            <div class="aspect-[4/3] overflow-hidden bg-white relative border-b border-coco-50">
+                ${imgHTML(p)}
+                <span class="absolute top-2 left-2 text-[10px] px-2 py-0.5 rounded-md bg-white/90 backdrop-blur-sm shadow-sm text-coco-600 font-bold tracking-wide select-none">${m.e} ${m.l}</span>
+                <span id="cb${p.id}" class="${sel?'absolute top-2 right-2 min-w-[20px] h-5 px-1 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center shadow-md':'hidden'}">${sel?q:''}</span>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-bold text-coco-900 text-sm leading-tight mb-1 line-clamp-1">${p.n}</h3>
+                <p class="text-xs text-coco-500 mb-2 font-medium leading-snug ${p.d ? 'font-semibold' : ''}">${detailText}</p>
                 
-                <div class="contact-buttons">
-                    <span class="contact-btn secret-link" data-target="aHR0cHM6Ly90Lm1lL2Fyb25jcg==">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </span>
-                    <span class="contact-btn secret-link" data-target="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL2FvY25zcmM=">
-                        <i class="fab fa-instagram"></i> Instagram
-                    </span>
-                    <span class="contact-btn secret-link" data-target="bWFpbHRvOmFmNTEzNzM1MUBnbWFpbC5jb20=">
-                        <i class="fas fa-envelope"></i> Email
-                    </span>
+                <div class="mt-auto flex items-center justify-between gap-2">
+                    <span class="text-brand-600 font-extrabold text-base">${fmt(p.p)}</span>
+                    <div class="flex items-center bg-coco-100 rounded-lg p-0.5">
+                        <button id="mn${p.id}" onclick="chg(${p.id},-1)" class="w-7 h-7 rounded-md flex items-center justify-center text-coco-500 hover:bg-white hover:text-red-500 transition-colors"><i class="fas fa-minus text-xs"></i></button>
+                        <span id="q${p.id}" class="text-coco-900 font-bold text-xs w-5 text-center">${q}</span>
+                        <button onclick="chg(${p.id},1)" class="w-7 h-7 rounded-md flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition-colors"><i class="fas fa-plus text-xs"></i></button>
+                    </div>
                 </div>
+                <p id="s${p.id}" class="text-right text-[10px] text-brand-500 font-bold mt-1.5 ${sel?'':'hidden'}">${sel?fmt(p.p*q):''}</p>
             </div>
-        </div>
-    </section>
+        </div>`;
+    }).join('');
+}
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">Ujay</div>
-                <div class="social-links">
-                    <span class="secret-link" data-target="aHR0cHM6Ly90Lm1lL2Fyb25jcg=="><i class="fab fa-telegram"></i></span>
-                    <span class="secret-link" data-target="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL2FvY25zcmM="><i class="fab fa-instagram"></i></span>
-                    <span class="secret-link" data-target="bWFpbHRvOmFmNTEzNzM1MUBnbWFpbC5jb20="><i class="fas fa-envelope"></i></span>
+function chg(id,d){
+    const cur=cart[id]||0,nxt=Math.max(0,cur+d);
+    if(nxt===0) delete cart[id]; else cart[id]=nxt;
+    const p=PROD.find(x=>x.id===id),q=cart[id]||0,has=q>0;
+    const qEl=document.getElementById('q'+id);
+    const sEl=document.getElementById('s'+id);
+    const card=document.getElementById('c'+id);
+    const badge=document.getElementById('cb'+id);
+    const mn=document.getElementById('mn'+id);
+    
+    if(!qEl)return;
+    qEl.textContent=q;
+    qEl.classList.add('pop');setTimeout(()=>qEl.classList.remove('pop'),200);
+    sEl.classList.toggle('hidden',!has);
+    if(has)sEl.textContent=fmt(p.p*q);
+    
+    if(has){
+        badge.className='absolute top-2 right-2 min-w-[20px] h-5 px-1 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center shadow-md animate-bounce';
+        badge.textContent=q;
+        setTimeout(()=>badge.classList.remove('animate-bounce'), 1000);
+    } else {
+        badge.className='hidden';
+    }
+    
+    card.classList.toggle('ring-2',has);
+    card.classList.toggle('ring-offset-2',has);
+    card.classList.toggle('ring-brand-400',has);
+    
+    mn.className=`w-7 h-7 rounded-md flex items-center justify-center ${has?'text-coco-500 hover:text-red-500':'text-coco-300 cursor-not-allowed'} transition-colors`;
+    
+    updBadge();
+    
+    if(has && d > 0) {
+        toast('Pesanan anda telah dimasukkan ke keranjang.');
+    }
+}
+
+function updBadge(){
+    const cnt=Object.values(cart).reduce((a,b)=>a+b,0);
+    ['nBadge','fBadge'].forEach(id=>{
+        const el=document.getElementById(id);
+        if(cnt>0){el.classList.remove('hidden');el.classList.add('flex');el.textContent=cnt>99?'99+':cnt;}
+        else{el.classList.add('hidden');el.classList.remove('flex');}
+    });
+    document.getElementById('fab').classList.toggle('hidden',cnt===0);
+}
+
+function clearCart(){cart={};updBadge();renderGrid();renderCartList();toast('Keranjang dibersihkan');}
+
+function openCart(){
+    const o=document.getElementById('cartOv'),p=document.getElementById('cartP');
+    o.classList.remove('hidden');
+    requestAnimationFrame(()=>{
+        p.classList.remove('translate-x-full');
+        p.classList.add('translate-x-0');
+    });
+    renderCartList();
+}
+
+function closeCart(){
+    const p=document.getElementById('cartP');
+    p.classList.remove('translate-x-0');
+    p.classList.add('translate-x-full');
+    setTimeout(()=>document.getElementById('cartOv').classList.add('hidden'),300);
+}
+
+function renderCartList(){
+    const list=document.getElementById('cartList'),empty=document.getElementById('cartEmpty'),foot=document.getElementById('cartFoot');
+    const entries=Object.entries(cart);
+    if(!entries.length){list.classList.add('hidden');empty.classList.remove('hidden');foot.classList.add('hidden');return;}
+    list.classList.remove('hidden');empty.classList.add('hidden');foot.classList.remove('hidden');
+    
+    const grouped={};
+    entries.forEach(([id,qty])=>{const p=PROD.find(x=>x.id===+id);if(!p)return;if(!grouped[p.c])grouped[p.c]=[];grouped[p.c].push({...p,qty});});
+    
+    let html='',total=0;
+    Object.entries(grouped).forEach(([cat,items])=>{
+        const m=META[cat];
+        html+=`<div class="mb-4 last:mb-0"><p class="text-[11px] font-bold text-coco-400 uppercase tracking-wider mb-2 pl-1 border-l-2 border-brand-200">${m.e} ${m.l}</p>`;
+        items.forEach(it=>{
+            total+=it.p*it.qty;
+            html+=`<div class="flex items-center gap-3 p-3 rounded-xl bg-white border border-coco-100 shadow-sm mb-2">
+                ${it.img?`<img src="${it.img}" alt="" class="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-white img-secure" draggable="false" oncontextmenu="return false;">`:`<div class="w-12 h-12 rounded-lg bg-white flex items-center justify-center flex-shrink-0"><i class="fas fa-ice-cream text-coco-300"></i></div>`}
+                <div class="flex-1 min-w-0">
+                    <p class="text-coco-900 text-sm font-bold truncate">${it.n}</p>
+                    <p class="text-coco-400 text-xs">${fmt(it.p)} x ${it.qty}</p>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Ujay. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+                <div class="flex flex-col items-end gap-1">
+                    <span class="text-coco-900 text-sm font-bold">${fmt(it.p*it.qty)}</span>
+                    <div class="flex items-center bg-coco-100 rounded-md">
+                        <button onclick="cChg(${it.id},-1)" class="w-6 h-6 flex items-center justify-center text-coco-400 hover:text-red-500 text-xs"><i class="fas fa-minus"></i></button>
+                        <span class="text-xs font-bold w-4 text-center text-coco-700">${it.qty}</span>
+                        <button onclick="cChg(${it.id},1)" class="w-6 h-6 flex items-center justify-center text-brand-500 hover:text-brand-600 text-xs"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>`;
+        });
+        html+='</div>';
+    });
+    list.innerHTML=html;
+    document.getElementById('cTotal').textContent=fmt(total);
+}
 
-    <script>
-        // Base64 decode function
-        function decodeLink(encoded) {
-            try {
-                return atob(encoded);
-            } catch (e) {
-                return '';
-            }
+function cChg(id,d){chg(id,d);renderCartList();}
+
+function sendWA(){
+    const entries=Object.entries(cart);
+    if(!entries.length)return;
+    const namaToko = document.getElementById('inputStoreName').value.trim() || defaultStoreName;
+    const lokasiToko = document.getElementById('inputStoreLoc').value.trim() || defaultStoreLoc;
+    
+    let message = `*NOTA PEMESANAN ICE CREAM*\n`;
+    message += `--------------------------------\n`;
+    message += `*Toko :* ${namaToko}\n`;
+    message += `*Lokasi :* ${lokasiToko}\n`;
+    message += `--------------------------------\n`;
+    message += `*Detail Pesanan :*\n`;
+
+    let totalHarga = 0;
+    const sortedEntries = entries.sort((a, b) => parseInt(a[0]) - parseInt(b[0]));
+
+    sortedEntries.forEach(([id, qty]) => {
+        const p = PROD.find(x => x.id == id);
+        if(p) {
+            const sub = p.p * qty;
+            totalHarga += sub;
+            message += `➖ ${p.n} (${qty}x)\n   ${fmt(sub)}\n`;
         }
+    });
 
-        // CUSTOM CROSSHAIR CURSOR LOGIC
-        const cursor = document.getElementById('customCursor');
-        
-        if (window.matchMedia("(pointer: fine)").matches) {
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
+    message += `\n`; 
+    message += `--------------------------------\n`;
+    message += `*TOTAL BAYAR :* ${fmt(totalHarga)}\n`;
+    message += `--------------------------------\n`;
+    message += `*Mohon diproses ya! Terimakasih🙏*`;
 
-            const interactiveElements = document.querySelectorAll('a, button, .skill-tab, input, textarea, select, .secret-link, .project-image-container');
-            
-            interactiveElements.forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-            });
+    window.open('https://wa.me/6282241489084?text='+encodeURIComponent(message),'_blank');
+    setTimeout(()=>closeCart(),400);
+}
 
-            document.addEventListener('mousedown', () => cursor.classList.add('active'));
-            document.addEventListener('mouseup', () => cursor.classList.remove('active'));
-        }
-
-        // AUTO-HIDE HEADER ON SCROLL DOWN, SHOW ON SCROLL UP
-        let lastScrollTop = 0;
-        const header = document.getElementById("header");
-        const scrollProgressBar = document.getElementById("scrollProgressBar");
-        const delta = 5; 
-        
-        window.addEventListener("scroll", function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (scrollTop / height) * 100;
-            scrollProgressBar.style.width = scrolled + "%";
-
-            if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
-
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                header.classList.add("nav-up");
-            } else {
-                header.classList.remove("nav-up");
-            }
-
-            if (scrollTop <= 0) {
-                header.classList.remove("nav-up");
-                header.classList.remove('scrolled');
-            } else {
-                header.classList.add('scrolled');
-            }
-
-            lastScrollTop = scrollTop;
-        });
-
-        // SECRET LINK HANDLER - Link tersembunyi dengan Base64
-        const secretLinks = document.querySelectorAll('.secret-link');
-
-        secretLinks.forEach(link => {
-            // Prevent context menu (right click)
-            link.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-            });
-
-            // Handle click
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const encodedData = this.getAttribute('data-target');
-                if (encodedData) {
-                    const targetUrl = decodeLink(encodedData);
-                    if (targetUrl) {
-                        if (targetUrl.startsWith('mailto:')) {
-                            window.location.href = targetUrl;
-                        } else {
-                            window.open(targetUrl, '_blank', 'noopener,noreferrer');
-                        }
-                    }
-                }
-            });
-
-            // Prevent drag
-            link.addEventListener('dragstart', function(e) {
-                e.preventDefault();
-            });
-        });
-        
-        // PROJECT IMAGE CLICK HANDLER - Encoded link on image click
-        const projectImageContainers = document.querySelectorAll('.project-image-container');
-        
-        projectImageContainers.forEach(container => {
-            container.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent card flip
-                const encodedData = this.getAttribute('data-project-link');
-                if (encodedData) {
-                    const targetUrl = decodeLink(encodedData);
-                    if (targetUrl) {
-                        window.open(targetUrl, '_blank', 'noopener,noreferrer');
-                    }
-                }
-            });
-        });
-        
-        // TYPING ANIMATION
-        const typingTexts = ['Front End Developer', 'UI/UX Designer', 'React Enthusiast', 'Web Architect', 'Problem Solver'];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingSpeed = 100;
-        
-        function typeText() {
-            const currentText = typingTexts[textIndex];
-            const typingElement = document.getElementById('typingText');
-            
-            if (!isDeleting) {
-                typingElement.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-                if (charIndex === currentText.length) { isDeleting = true; typingSpeed = 2000; }
-                else { typingSpeed = 100; }
-            } else {
-                typingElement.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-                typingSpeed = 50;
-                if (charIndex === 0) { isDeleting = false; textIndex = (textIndex + 1) % typingTexts.length; typingSpeed = 500; }
-            }
-            setTimeout(typeText, typingSpeed);
-        }
-        
-        setTimeout(typeText, 1000);
-        
-        // MOBILE MENU TOGGLE
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        
-        menuToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
-        
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                navLinks.classList.remove('active');
-                menuToggle.classList.remove('active');
-            });
-        });
-        
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if(this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
-                    }
-                }
-            });
-        });
-        
-        // SKILLS SLIDER CONTROLS
-        const skillsScrollContainer = document.getElementById('skillsScrollContainer');
-        const skillsPrevBtn = document.getElementById('skillsPrevBtn');
-        const skillsNextBtn = document.getElementById('skillsNextBtn');
-        
-        skillsPrevBtn.addEventListener('click', function() { skillsScrollContainer.scrollBy({ left: -300, behavior: 'smooth' }); });
-        skillsNextBtn.addEventListener('click', function() { skillsScrollContainer.scrollBy({ left: 300, behavior: 'smooth' }); });
-        
-        // PROJECTS SLIDER CONTROLS
-        const projectsScrollContainer = document.getElementById('projectsScrollContainer');
-        const projectsPrevBtn = document.getElementById('projectsPrevBtn');
-        const projectsNextBtn = document.getElementById('projectsNextBtn');
-        
-        projectsPrevBtn.addEventListener('click', function() { projectsScrollContainer.scrollBy({ left: -320, behavior: 'smooth' }); });
-        projectsNextBtn.addEventListener('click', function() { projectsScrollContainer.scrollBy({ left: 320, behavior: 'smooth' }); });
-        
-        // SKILLS TABS FILTERING
-        const skillTabs = document.querySelectorAll('.skill-tab');
-        const flipCards = document.querySelectorAll('.flip-card');
-        
-        skillTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                skillTabs.forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                const category = this.getAttribute('data-category');
-                flipCards.forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
-                        card.style.display = 'inline-block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-        
-        // CLICK TO FLIP LOGIC FOR ALL CARDS
-        const allFlipCards = document.querySelectorAll('.flip-card, .project-flip-card');
-        
-        allFlipCards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                // Prevent flipping when clicking on image container or a link inside the card
-                if (e.target.closest('.project-image-container') || e.target.closest('.project-back-btn')) return;
-                this.classList.toggle('flipped');
-            });
-        });
-        
-        // ANIMATE PROGRESS BARS ON SCROLL
-        const progressBars = document.querySelectorAll('.back-progress-fill');
-        
-        const progressObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bar = entry.target;
-                    const width = bar.style.width;
-                    bar.style.width = '0%';
-                    setTimeout(() => {
-                        bar.style.width = width;
-                    }, 100);
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        progressBars.forEach(bar => {
-            progressObserver.observe(bar);
-        });
-    </script>
+renderTabs();renderGrid();updBadge();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCart();});
+</script>
 </body>
 </html>
